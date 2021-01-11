@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Important Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Title -->
+    <title>Notes-MarketPlace</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+
+</head>
+
+<body>
+
+    
+    
+    
+    <!-- NavBar -->
+    <header>
+
+
+        <nav class="navbar navbar-expand-lg white-nav-top fixed-top">
+
+            <div class="container top-navbar-container">
+                <a href="./homepage.html" class="navbar-brand nav-image img-responsive"><img src="images/logo/logo.png" class="img-fluid"></a>
+
+                <button type="button" class="navbar-toggler navbar-brand" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"><i class="fa fa-bars toggle-bar-style"></i></span>
+                </button>
+
+
+
+                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-items nav-link" href="#">Search Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-items nav-link" href="#">Sell Your Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-items nav-link" href="../BM/buyerrequests.html"><span>Buyer Requests</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-items nav-link" href="../BM/FAQ.html"><span>FAQ</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-items nav-link" href="../BM/contactus.html"><span>Contact Us</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="profile-btn-style nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="images/customers/user-1.jpg" class="nav-user-image">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="../BM/userprofile.html">My Profile</a>
+                                    <a class="dropdown-item" href="../BM/mydownloads.html">My Downloads</a>
+                                    <a class="dropdown-item" href="../BM/mysoldnotes.html">My Sold Notes</a>
+                                    <a class="dropdown-item" href="../BM/myrejectednotes.html">My Rejected Notes</a>
+                                    <a class="dropdown-item" href="../BM/change-password.html">Change Password</a>
+                                    <a class="dropdown-item" href="#">LOGOUT</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <button type="submit" class="btn log-btn nav-link">Logout</button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+
+    <!-- Note Detail Section -->
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12 note-detail-heading margintop">
+
+                Notes Details
+
+            </div>
+
+            <div class="col-xl-3 col-md-6 paddingbottom-20">
+
+                <img src="images/logo/notesetail.jpg" class="img-responsive image-size" alt="bookimage">
+
+            </div>
+
+            <div class="col-xl-4 col-md-6 paddingbottom-20">
+
+                <div class="book-name">Computer Science</div>
+                <div class="book-type">Sciences</div>
+                <div class="book-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto sapiente voluptas sed neque quis excepturi explicabo omnis commodi doloribus eveniet, ipsa, possimus accusantium.</div>
+                <button class="btn download-btn" data-toggle="modal" data-target="#exampleModal">Download/$15</button>
+
+            </div>
+
+            <div class="col-xl-5 col-md-12 paddingbottom-20">
+
+                <div>
+
+                    <span class="q-type">Institution:</span>
+                    <span class="answer">University of California</span>
+
+                </div>
+
+
+                <div>
+
+                    <span class="q-type">Country:</span>
+                    <span class="answer">United States</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">Course Name:</span>
+                    <span class="answer">Computer Engineering</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">Course Code:</span>
+                    <span class="answer">248705</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">Professor:</span>
+                    <span class="answer">Mr. Richard Brown</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">No Of Pages:</span>
+                    <span class="answer">277</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">Approved Date:</span>
+                    <span class="answer">November 25 2020</span>
+
+                </div>
+
+                <div>
+
+                    <span class="q-type">Rating</span>
+                    <span class="star-float"><i class="fa fa-star checked f-size"></i>
+                        <i class="fa fa-star checked f-size"></i>
+                        <i class="fa fa-star checked f-size"></i>
+                        <i class="fa fa-star-o f-size"></i>
+                        <i class="fa fa-star-o f-size"></i>
+                        <span class="answer-review">100 Reviews</span>
+                    </span>
+
+                </div>
+
+                <div class="inappropriate-message">
+                    5 users marked this note as inappropriate.
+                </div>
+
+            </div>
+
+            <div class="col-xl-12">
+                <div class="separate-line"></div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-xl-6 note-detail-heading">
+
+                Notes preview
+
+                <div class="ptop">
+
+                    <div class="iframe-pdf">
+                        <iframe src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf" width="600px" height="450px"></iframe>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-6 note-detail-heading">
+
+                Customer Reviews
+
+                <div class="ptop">
+
+                    <div class="customer-box">
+
+                        <div class="container">
+
+                            <div class="row customer-padding">
+
+                                <img src="images/customers/user-1.jpg" class="customer-image">
+                                <span class="customer-name">
+                                    Richard Brown<br>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+
+                                <div>
+                                    <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
+                                </div>
+
+                            </div>
+
+                            <div class="container">
+                                <div class="row customer-review-line">
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        
+                        <div class="container">
+
+                            <div class="row customer-padding">
+
+                                <img src="images/customers/user-1.jpg" class="customer-image">
+                                <span class="customer-name">
+                                    Richard Brown<br>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+
+                                <div>
+                                    <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
+                                </div>
+
+                            </div>
+
+                            <div class="container">
+                                <div class="row customer-review-line">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        
+                        <div class="container">
+
+                            <div class="row customer-padding">
+
+                                <img src="images/customers/user-1.jpg" class="customer-image">
+                                <span class="customer-name">
+                                    Richard Brown<br>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star checked"></i>
+                                    <i class="fa fa-star-o"></i>
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+
+                                <div>
+                                    <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Footer Section -->
+    <div class="footer-border"></div>
+    <div class="container">
+        <div class="row footer-padding">
+
+            <div class="social-icons-alignment">
+
+                <span>
+                    <ul class="social-list">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="cc-p">Copyright &#169; Tatvasoft All rights reserved.</div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <!-- popup -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                   
+                    <div class="center">
+                        <div class="tick-al">
+                            <p class="tick-tick">&#10003;</p>
+                        </div>
+                    </div>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="container modal-body">
+
+                    <div class="popup-title">
+                        Thank you for purchasing!
+                    </div>
+
+                    <div class="name-r">
+                        Dear Smith,
+                    </div>
+                    <div class="">
+                        <p class="message"><br>As this is a paid note you need to pay to sellerRahil Shah offline. We will send him an email that you want to download this note. He may contact you frther for payment process completion.<br><br>In case you have urgency.<br>Please contact us on +9195377345959.<br><br>Once he acknowledge us - selected notes you can see over my downloads tab for download.<br><br>Have a good day.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
