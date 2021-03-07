@@ -14,7 +14,6 @@ namespace notesplace.Controllers
     {
 
         [HttpGet]
-        [Route("Contact")]
         public ActionResult contactus()
         {
             return View();
@@ -41,6 +40,7 @@ namespace notesplace.Controllers
                     context.contact.Add(cc);
                     context.SaveChanges();
                 }
+                return RedirectToAction("faq","faq");
             }
             return View();
         }

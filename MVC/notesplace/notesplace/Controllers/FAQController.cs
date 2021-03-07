@@ -10,7 +10,6 @@ namespace notesplace.Controllers
     public class FAQController : Controller
     {
         // GET: FAQ
-        [Route("FAQ")]
         public ActionResult faq()
         {
             return View();
