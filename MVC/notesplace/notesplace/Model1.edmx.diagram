@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bd8d97f89dda435782e2c4fa88e04db1" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="notesmarketplaceModel.category" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.country" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.noteattachment" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.notedetails" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.notetype" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.statustype" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.userroles" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.users" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__category__create__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__category__modifi__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__categ__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__country__created__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__country__modifie__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__count__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__noteattac__creat__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__noteattac__modif__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__noteattac__notei__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__actio__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__creat__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__modif__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__statu__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__typei__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notedetai__useri__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notetype__create__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__notetype__modifi__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__statustyp__creat__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__statustyp__modif__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__userroles__creat__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__userroles__modif__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK_usrerole" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__users__createdby__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__users__modifiedb__267ABA7A" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="notesmarketplaceModel.download" Width="1.5" PointX="12.75" PointY="9.125" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__download__buyeri__73BA3083" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__download__create__778AC167" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__download__modifi__787EE5A0" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__download__noteid__71D1E811" />
+        <AssociationConnector Association="notesmarketplaceModel.FK__download__seller__72C60C4A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

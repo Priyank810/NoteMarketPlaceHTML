@@ -1,0 +1,85 @@
+﻿@model notesplace.Models.contactus
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container-fluid bg-image-user img-responsive">
+
+        <div class="in-image user-profile-tag pp">Contact Us</div>
+
+    </div>
+
+    <div class="container">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-container">
+
+                <div class="row padding-im">
+
+                    <div class="col-md-12 all-heading">
+                        Get In Touch
+
+                        <div class="form-label ph">Let us know how to get back to you</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+
+                            <label class="form-label re">Full Name</label>
+
+                            @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your full name", @id = "fname" } })
+                            @Html.ValidationMessageFor(model => model.fullname, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group ph">
+
+                            <label class="form-label re">Email Address</label>
+
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your email address" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="form-label re">Subject</label>
+
+                            @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter subject" } })
+                            @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+
+                            <label class="form-label re">Comments/Questions</label>
+
+                            @Html.TextAreaFor(model => model.comment, new {  @class = "form-control comment-box", @placeholder = "Comments...", @rows = "10"  })
+                            @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6 col-sm-6 col-6">
+
+                        <button type="submit" class="btn user-submit-btn-style">SUBMIT</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+      

@@ -1,0 +1,315 @@
+﻿@model notesplace.Models.merge
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc
+@using PagedList
+
+<!-- Dashboard Section -->
+<div class="container">
+
+    <div class="row space-padding">
+
+        <div class="col-md-6 col-sm-12 col-12 dash-heading">
+
+            Dashboard
+
+        </div>
+
+        <div class="col-md-6 col-sm-12 col-12 btn-center">
+            <button class="btn add-notes-btn-style" onclick="window.location.href = '@Url.Action("add","addnotes")'">Add Note</button>
+            
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+
+        <div class="container">
+
+            <div class="row">
+
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4 padding-r">
+
+                    <div class="box padding-0">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12"><img src="~/Content/Front/images/dashboard/earning-icon.svg"></div>
+                                <div class="col-12 dash-text">My earning</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4 padding-0">
+
+                    <div class="box2 padding-0">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 number-text">@Model.DM0.notessold</div>
+                                <div class="col-12 number-description">Number of Notes Sold</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4 padding-l">
+
+                    <div class="box1 padding-l">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 number-text">$@Model.DM0.moneyearned</div>
+                                <div class="col-12 number-description">Money Earned</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4">
+
+                    <div class="box padding-0">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 number-text">@Model.DM0.mydownloads</div>
+                                <div class="col-12 number-description">My Downloads</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4">
+
+                    <div class="box padding-0">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 number-text">@Model.DM0.myrejected</div>
+                                <div class="col-12 number-description">My Rejected Notes</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2 col-md-2 col-sm-4 col-4">
+
+                    <div class="box padding-0">
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 number-text">@Model.DM0.buyerrequests</div>
+                                <div class="col-12 number-description">Buyer Requests</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="container" id="nos">
+
+    <div class="row">
+
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 dash-heading-inner">In Progress Notes</div>
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 bbt" align="right">
+
+            @using (Html.BeginForm("dashboard", "dashboard", FormMethod.Get))
+            {
+                <input type="text" class="search-box-style" placeholder="Search" name="search1">
+            <span class="padding-bt-se"><button class="search-btn-style">Search</button></span>
+
+            }
+        </div>
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <table>
+
+                <table class="table table-border table-responsive-md table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date","dashboard", new { sortBy = ViewBag.SortByDate, search1 = Request["search1"], search=Request["search"]})</th>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy = ViewBag.SortByTitle, search1 = Request["search1"], search = Request["search"] })</th>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy = ViewBag.SortByCategory, search1 = Request["search1"], search = Request["search"] })</th>
+                            <th scope="col" class="table-row-heading">Status</th>
+                            <th scope="col" class="table-row-heading">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var book in Model.DM1)
+                        {
+                            if (@book.status == "draft")
+                            {
+                                <tr>
+                                    <td class="table-content">@book.addeddate</td>
+                                    <td class="table-content">@book.title</td>
+                                    <td class="table-content">@book.category</td>
+                                    <td class="table-content">@book.status</td>
+                                    <td class="table-content">
+                                        <button type="submit" class="btn ev-btn-style" onclick="window.location.href = '@Url.Action("editnotes","editnotes",new { nid = book.noteid })'"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;
+                                        <a href="@Url.Action("delete", "dashboard", new { id = book.noteid})" onclick="return confirm('Are You sure you want to delete this book?');"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+
+                                </tr>
+                                }
+                                else
+                                {
+
+                                <tr>
+                                    <td class="table-content">@book.addeddate</td>
+                                    <td class="table-content">@book.title</td>
+                                    <td class="table-content">@book.category</td>
+                                    <td class="table-content">@book.status</td>
+                                    <td class="table-content"><button type="submit" class="btn ev-btn-style" onclick="window.location.href = '@Url.Action("display","bookdetails",new { nid = book.noteid})'"><i class="fa fa-eye"></i></button></td>
+
+                                </tr>
+
+                                }
+                                }
+                            </tbody>
+                </table>
+
+            </table>
+
+
+        </div>
+
+
+        <div class="container">
+
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                @Html.PagedListPager(Model.DM1, i => Url.Action("dashboard", "dashboard", new
+                {
+                   i,
+                   search1 = Request.QueryString["search1"],
+                   search2 = Request.QueryString["search2"],
+                   sortBy = Request["sortBy"],
+                }))
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container margintop-60">
+
+    <div class="row">
+
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 dash-heading-inner">Published Notes</div>
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 bbt" align="right">
+            @using (Html.BeginForm("dashboard", "dashboard", FormMethod.Get))
+            {
+                <input type="text" class="search-box-style" placeholder="Search" name="search2">
+                <span class="padding-bt-se"><button class="search-btn-style">Search</button></span>
+            }
+        </div>
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12">
+            <table>
+
+                <table class="table table-border table-responsive-md table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date", "dashboard", new { sortBy2 = ViewBag.SortByDate2, search2 = Request["search2"], search = Request["search"] })</th>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy2 = ViewBag.SortByTitle2, search2 = Request["search2"], search = Request["search"] })</th>
+                            <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy2 = ViewBag.SortByCategory2, search2 = Request["search2"], search = Request["search"] })</th>
+                            <th scope="col" class="table-row-heading">IsPaid</th>
+                            <th scope="col" class="table-row-heading">Price</th>
+                            <th scope="col" class="table-row-heading">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var book in Model.DM2)
+                        {
+                        <tr>
+                            <td class="table-content">@book.addeddate</td>
+                            <td class="table-content">@book.title</td>
+                            <td class="table-content">@book.category</td>
+                            <td class="table-content">@book.ispaid</td>
+                            <td class="table-content">@book.sellprice</td>
+                            <td class="table-content"><button type="submit" class="btn ev-btn-style" onclick="window.location.href = '@Url.Action("display","bookdetails",new { nid = book.noteid})'"><i class="fa fa-eye"></i></button></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </table>
+
+
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.DM2, j => Url.Action("dashboard", "dashboard", new
+             {
+                 j,
+                 search1 = Request.QueryString["search1"],
+                 search2 = Request.QueryString["search2"],
+                 sortBy = Request["sortBy"],
+                 
+             }))
+
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+

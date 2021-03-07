@@ -1,0 +1,1544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="notesmarketplaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="subject" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="countryname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="countrycode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="download">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="noteid" Type="int" />
+          <Property Name="sellerid" Type="int" Nullable="false" />
+          <Property Name="buyerid" Type="int" Nullable="false" />
+          <Property Name="requesteddate" Type="datetime" Nullable="false" />
+          <Property Name="ispaid" Type="bit" />
+          <Property Name="isapproved" Type="bit" />
+          <Property Name="approveddate" Type="datetime" />
+          <Property Name="isdownloaded" Type="bit" />
+          <Property Name="downloadedate" Type="datetime" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="purchaseprice" Type="int" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="noteattachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="noteid" Type="int" />
+          <Property Name="filename" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="filepath" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="notedetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="statusid" Type="int" Nullable="false" />
+          <Property Name="actionby" Type="int" />
+          <Property Name="remarks" Type="varchar(max)" />
+          <Property Name="approveddate" Type="datetime" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="categoryid" Type="int" />
+          <Property Name="displaypicture" Type="varchar" MaxLength="500" />
+          <Property Name="typeid" Type="int" />
+          <Property Name="numberofpages" Type="int" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="countryid" Type="int" />
+          <Property Name="universityname" Type="varchar" MaxLength="200" />
+          <Property Name="coursename" Type="varchar" MaxLength="100" />
+          <Property Name="coursecode" Type="varchar" MaxLength="100" />
+          <Property Name="professor" Type="varchar" MaxLength="100" />
+          <Property Name="ispaid" Type="bit" Nullable="false" />
+          <Property Name="sellprice" Type="int" />
+          <Property Name="notepreviewfile" Type="varchar" MaxLength="500" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="notetype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typename" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="statustype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="userroles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="roledescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="modifieddate" Type="datetime" />
+          <Property Name="modifiedby" Type="int" />
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="isEmailVerified" Type="bit" />
+          <Property Name="activationcode" Type="uniqueidentifier" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__category__create__34C8D9D1">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__category__modifi__35BCFE0A">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__country__created__412EB0B6">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="country" Type="Self.country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__country__modifie__4222D4EF">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="country" Type="Self.country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__buyeri__73BA3083">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="download" Type="Self.download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="buyerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__create__778AC167">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="download" Type="Self.download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__modifi__787EE5A0">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="download" Type="Self.download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__noteid__71D1E811">
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="0..1" />
+          <End Role="download" Type="Self.download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notedetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="noteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__seller__72C60C4A">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="download" Type="Self.download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="sellerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__creat__571DF1D5">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__modif__5812160E">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__notei__5629CD9C">
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notedetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="noteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__actio__4D94879B">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="actionby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__categ__4E88ABD4">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__count__5070F446">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__creat__5165187F">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__modif__52593CB8">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__statu__4CA06362">
+          <End Role="statustype" Type="Self.statustype" Multiplicity="1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statustype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="statusid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__typei__4F7CD00D">
+          <End Role="notetype" Type="Self.notetype" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notetype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="typeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__useri__4BAC3F29">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notetype__create__3A81B327">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notetype">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notetype__modifi__3B75D760">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notetype">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statustyp__creat__46E78A0C">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="statustype">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statustyp__modif__47DBAE45">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="statustype">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userroles__creat__2C3393D0">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userroles">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userroles__modif__2D27B809">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userroles">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__createdby__25869641">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="users1" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__modifiedb__267ABA7A">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="users1" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usrerole">
+          <End Role="userroles" Type="Self.userroles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userroles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="notesmarketplaceModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="download" EntityType="Self.download" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="noteattachment" EntityType="Self.noteattachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notedetails" EntityType="Self.notedetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notetype" EntityType="Self.notetype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statustype" EntityType="Self.statustype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userroles" EntityType="Self.userroles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__category__create__34C8D9D1" Association="Self.FK__category__create__34C8D9D1">
+            <End Role="users" EntitySet="users" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__category__modifi__35BCFE0A" Association="Self.FK__category__modifi__35BCFE0A">
+            <End Role="users" EntitySet="users" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__country__created__412EB0B6" Association="Self.FK__country__created__412EB0B6">
+            <End Role="users" EntitySet="users" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__country__modifie__4222D4EF" Association="Self.FK__country__modifie__4222D4EF">
+            <End Role="users" EntitySet="users" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__buyeri__73BA3083" Association="Self.FK__download__buyeri__73BA3083">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__create__778AC167" Association="Self.FK__download__create__778AC167">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__modifi__787EE5A0" Association="Self.FK__download__modifi__787EE5A0">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__noteid__71D1E811" Association="Self.FK__download__noteid__71D1E811">
+            <End Role="notedetails" EntitySet="notedetails" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__seller__72C60C4A" Association="Self.FK__download__seller__72C60C4A">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__creat__571DF1D5" Association="Self.FK__noteattac__creat__571DF1D5">
+            <End Role="users" EntitySet="users" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__modif__5812160E" Association="Self.FK__noteattac__modif__5812160E">
+            <End Role="users" EntitySet="users" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__notei__5629CD9C" Association="Self.FK__noteattac__notei__5629CD9C">
+            <End Role="notedetails" EntitySet="notedetails" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__actio__4D94879B" Association="Self.FK__notedetai__actio__4D94879B">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__categ__4E88ABD4" Association="Self.FK__notedetai__categ__4E88ABD4">
+            <End Role="category" EntitySet="category" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__count__5070F446" Association="Self.FK__notedetai__count__5070F446">
+            <End Role="country" EntitySet="country" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__creat__5165187F" Association="Self.FK__notedetai__creat__5165187F">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__modif__52593CB8" Association="Self.FK__notedetai__modif__52593CB8">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__statu__4CA06362" Association="Self.FK__notedetai__statu__4CA06362">
+            <End Role="statustype" EntitySet="statustype" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__typei__4F7CD00D" Association="Self.FK__notedetai__typei__4F7CD00D">
+            <End Role="notetype" EntitySet="notetype" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__useri__4BAC3F29" Association="Self.FK__notedetai__useri__4BAC3F29">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notetype__create__3A81B327" Association="Self.FK__notetype__create__3A81B327">
+            <End Role="users" EntitySet="users" />
+            <End Role="notetype" EntitySet="notetype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notetype__modifi__3B75D760" Association="Self.FK__notetype__modifi__3B75D760">
+            <End Role="users" EntitySet="users" />
+            <End Role="notetype" EntitySet="notetype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statustyp__creat__46E78A0C" Association="Self.FK__statustyp__creat__46E78A0C">
+            <End Role="users" EntitySet="users" />
+            <End Role="statustype" EntitySet="statustype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statustyp__modif__47DBAE45" Association="Self.FK__statustyp__modif__47DBAE45">
+            <End Role="users" EntitySet="users" />
+            <End Role="statustype" EntitySet="statustype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userroles__creat__2C3393D0" Association="Self.FK__userroles__creat__2C3393D0">
+            <End Role="users" EntitySet="users" />
+            <End Role="userroles" EntitySet="userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userroles__modif__2D27B809" Association="Self.FK__userroles__modif__2D27B809">
+            <End Role="users" EntitySet="users" />
+            <End Role="userroles" EntitySet="userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__createdby__25869641" Association="Self.FK__users__createdby__25869641">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__modifiedb__267ABA7A" Association="Self.FK__users__modifiedb__267ABA7A">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usrerole" Association="Self.FK_usrerole">
+            <End Role="userroles" EntitySet="userroles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="notesmarketplaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="Self.FK__category__create__34C8D9D1" FromRole="category" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__category__modifi__35BCFE0A" FromRole="category" ToRole="users" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__categ__4E88ABD4" FromRole="category" ToRole="notedetails" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="countryname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="countrycode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="Self.FK__country__created__412EB0B6" FromRole="country" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__country__modifie__4222D4EF" FromRole="country" ToRole="users" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__count__5070F446" FromRole="country" ToRole="notedetails" />
+        </EntityType>
+        <EntityType Name="noteattachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="noteid" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filepath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="Self.FK__noteattac__creat__571DF1D5" FromRole="noteattachment" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__noteattac__modif__5812160E" FromRole="noteattachment" ToRole="users" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__noteattac__notei__5629CD9C" FromRole="noteattachment" ToRole="notedetails" />
+        </EntityType>
+        <EntityType Name="notedetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="statusid" Type="Int32" Nullable="false" />
+          <Property Name="actionby" Type="Int32" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="approveddate" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoryid" Type="Int32" />
+          <Property Name="displaypicture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="typeid" Type="Int32" />
+          <Property Name="numberofpages" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="countryid" Type="Int32" />
+          <Property Name="universityname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="coursename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="coursecode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="professor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ispaid" Type="Boolean" Nullable="false" />
+          <Property Name="sellprice" Type="Int32" />
+          <Property Name="notepreviewfile" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="category" Relationship="Self.FK__notedetai__categ__4E88ABD4" FromRole="notedetails" ToRole="category" />
+          <NavigationProperty Name="country" Relationship="Self.FK__notedetai__count__5070F446" FromRole="notedetails" ToRole="country" />
+          <NavigationProperty Name="noteattachment" Relationship="Self.FK__noteattac__notei__5629CD9C" FromRole="notedetails" ToRole="noteattachment" />
+          <NavigationProperty Name="users" Relationship="Self.FK__notedetai__actio__4D94879B" FromRole="notedetails" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__notedetai__creat__5165187F" FromRole="notedetails" ToRole="users" />
+          <NavigationProperty Name="users2" Relationship="Self.FK__notedetai__modif__52593CB8" FromRole="notedetails" ToRole="users" />
+          <NavigationProperty Name="statustype" Relationship="Self.FK__notedetai__statu__4CA06362" FromRole="notedetails" ToRole="statustype" />
+          <NavigationProperty Name="notetype" Relationship="Self.FK__notedetai__typei__4F7CD00D" FromRole="notedetails" ToRole="notetype" />
+          <NavigationProperty Name="users3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="notedetails" ToRole="users" />
+          <NavigationProperty Name="download" Relationship="notesmarketplaceModel.FK__download__noteid__71D1E811" FromRole="notedetails" ToRole="download" />
+        </EntityType>
+        <EntityType Name="notetype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__typei__4F7CD00D" FromRole="notetype" ToRole="notedetails" />
+          <NavigationProperty Name="users" Relationship="Self.FK__notetype__create__3A81B327" FromRole="notetype" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__notetype__modifi__3B75D760" FromRole="notetype" ToRole="users" />
+        </EntityType>
+        <EntityType Name="statustype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__statu__4CA06362" FromRole="statustype" ToRole="notedetails" />
+          <NavigationProperty Name="users" Relationship="Self.FK__statustyp__creat__46E78A0C" FromRole="statustype" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__statustyp__modif__47DBAE45" FromRole="statustype" ToRole="users" />
+        </EntityType>
+        <EntityType Name="userroles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roledescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="Self.FK__userroles__creat__2C3393D0" FromRole="userroles" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__userroles__modif__2D27B809" FromRole="userroles" ToRole="users" />
+          <NavigationProperty Name="users2" Relationship="Self.FK_usrerole" FromRole="userroles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="isEmailVerified" Type="Boolean" />
+          <Property Name="activationcode" Type="Guid" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="category" Relationship="Self.FK__category__create__34C8D9D1" FromRole="users" ToRole="category" />
+          <NavigationProperty Name="category1" Relationship="Self.FK__category__modifi__35BCFE0A" FromRole="users" ToRole="category" />
+          <NavigationProperty Name="country" Relationship="Self.FK__country__created__412EB0B6" FromRole="users" ToRole="country" />
+          <NavigationProperty Name="country1" Relationship="Self.FK__country__modifie__4222D4EF" FromRole="users" ToRole="country" />
+          <NavigationProperty Name="noteattachment" Relationship="Self.FK__noteattac__creat__571DF1D5" FromRole="users" ToRole="noteattachment" />
+          <NavigationProperty Name="noteattachment1" Relationship="Self.FK__noteattac__modif__5812160E" FromRole="users" ToRole="noteattachment" />
+          <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__actio__4D94879B" FromRole="users" ToRole="notedetails" />
+          <NavigationProperty Name="notedetails1" Relationship="Self.FK__notedetai__creat__5165187F" FromRole="users" ToRole="notedetails" />
+          <NavigationProperty Name="notedetails2" Relationship="Self.FK__notedetai__modif__52593CB8" FromRole="users" ToRole="notedetails" />
+          <NavigationProperty Name="notedetails3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="users" ToRole="notedetails" />
+          <NavigationProperty Name="notetype" Relationship="Self.FK__notetype__create__3A81B327" FromRole="users" ToRole="notetype" />
+          <NavigationProperty Name="notetype1" Relationship="Self.FK__notetype__modifi__3B75D760" FromRole="users" ToRole="notetype" />
+          <NavigationProperty Name="statustype" Relationship="Self.FK__statustyp__creat__46E78A0C" FromRole="users" ToRole="statustype" />
+          <NavigationProperty Name="statustype1" Relationship="Self.FK__statustyp__modif__47DBAE45" FromRole="users" ToRole="statustype" />
+          <NavigationProperty Name="userroles" Relationship="Self.FK__userroles__creat__2C3393D0" FromRole="users" ToRole="userroles" />
+          <NavigationProperty Name="userroles1" Relationship="Self.FK__userroles__modif__2D27B809" FromRole="users" ToRole="userroles" />
+          <NavigationProperty Name="userroles2" Relationship="Self.FK_usrerole" FromRole="users" ToRole="userroles" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__users__createdby__25869641" FromRole="users" ToRole="users1" />
+          <NavigationProperty Name="users2" Relationship="Self.FK__users__createdby__25869641" FromRole="users1" ToRole="users" />
+          <NavigationProperty Name="users11" Relationship="Self.FK__users__modifiedb__267ABA7A" FromRole="users" ToRole="users1" />
+          <NavigationProperty Name="users3" Relationship="Self.FK__users__modifiedb__267ABA7A" FromRole="users1" ToRole="users" />
+          <NavigationProperty Name="download" Relationship="notesmarketplaceModel.FK__download__buyeri__73BA3083" FromRole="users" ToRole="download" />
+          <NavigationProperty Name="download1" Relationship="notesmarketplaceModel.FK__download__create__778AC167" FromRole="users" ToRole="download" />
+          <NavigationProperty Name="download2" Relationship="notesmarketplaceModel.FK__download__modifi__787EE5A0" FromRole="users" ToRole="download" />
+          <NavigationProperty Name="download3" Relationship="notesmarketplaceModel.FK__download__seller__72C60C4A" FromRole="users" ToRole="download" />
+        </EntityType>
+        <Association Name="FK__category__create__34C8D9D1">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__category__modifi__35BCFE0A">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__categ__4E88ABD4">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__country__created__412EB0B6">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="country" Type="Self.country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__country__modifie__4222D4EF">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="country" Type="Self.country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="country">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__count__5070F446">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__creat__571DF1D5">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__modif__5812160E">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__noteattac__notei__5629CD9C">
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="0..1" />
+          <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notedetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="noteattachment">
+              <PropertyRef Name="noteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__actio__4D94879B">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="actionby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__creat__5165187F">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__modif__52593CB8">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__statu__4CA06362">
+          <End Role="statustype" Type="Self.statustype" Multiplicity="1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statustype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="statusid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__typei__4F7CD00D">
+          <End Role="notetype" Type="Self.notetype" Multiplicity="0..1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notetype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="typeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notedetai__useri__4BAC3F29">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="notedetails" Type="Self.notedetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notedetails">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notetype__create__3A81B327">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notetype">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__notetype__modifi__3B75D760">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notetype">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statustyp__creat__46E78A0C">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="statustype">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statustyp__modif__47DBAE45">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="statustype">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userroles__creat__2C3393D0">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userroles">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userroles__modif__2D27B809">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userroles">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usrerole">
+          <End Role="userroles" Type="Self.userroles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userroles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__createdby__25869641">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="users1" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__modifiedb__267ABA7A">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="users1" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="notesmarketplaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="contact" EntityType="Self.contact" />
+          <EntitySet Name="country" EntityType="Self.country" />
+          <EntitySet Name="noteattachment" EntityType="Self.noteattachment" />
+          <EntitySet Name="notedetails" EntityType="Self.notedetails" />
+          <EntitySet Name="notetype" EntityType="Self.notetype" />
+          <EntitySet Name="statustype" EntityType="Self.statustype" />
+          <EntitySet Name="userroles" EntityType="Self.userroles" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK__category__create__34C8D9D1" Association="Self.FK__category__create__34C8D9D1">
+            <End Role="users" EntitySet="users" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__category__modifi__35BCFE0A" Association="Self.FK__category__modifi__35BCFE0A">
+            <End Role="users" EntitySet="users" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__categ__4E88ABD4" Association="Self.FK__notedetai__categ__4E88ABD4">
+            <End Role="category" EntitySet="category" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__country__created__412EB0B6" Association="Self.FK__country__created__412EB0B6">
+            <End Role="users" EntitySet="users" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__country__modifie__4222D4EF" Association="Self.FK__country__modifie__4222D4EF">
+            <End Role="users" EntitySet="users" />
+            <End Role="country" EntitySet="country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__count__5070F446" Association="Self.FK__notedetai__count__5070F446">
+            <End Role="country" EntitySet="country" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__creat__571DF1D5" Association="Self.FK__noteattac__creat__571DF1D5">
+            <End Role="users" EntitySet="users" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__modif__5812160E" Association="Self.FK__noteattac__modif__5812160E">
+            <End Role="users" EntitySet="users" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__noteattac__notei__5629CD9C" Association="Self.FK__noteattac__notei__5629CD9C">
+            <End Role="notedetails" EntitySet="notedetails" />
+            <End Role="noteattachment" EntitySet="noteattachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__actio__4D94879B" Association="Self.FK__notedetai__actio__4D94879B">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__creat__5165187F" Association="Self.FK__notedetai__creat__5165187F">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__modif__52593CB8" Association="Self.FK__notedetai__modif__52593CB8">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__statu__4CA06362" Association="Self.FK__notedetai__statu__4CA06362">
+            <End Role="statustype" EntitySet="statustype" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__typei__4F7CD00D" Association="Self.FK__notedetai__typei__4F7CD00D">
+            <End Role="notetype" EntitySet="notetype" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notedetai__useri__4BAC3F29" Association="Self.FK__notedetai__useri__4BAC3F29">
+            <End Role="users" EntitySet="users" />
+            <End Role="notedetails" EntitySet="notedetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notetype__create__3A81B327" Association="Self.FK__notetype__create__3A81B327">
+            <End Role="users" EntitySet="users" />
+            <End Role="notetype" EntitySet="notetype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__notetype__modifi__3B75D760" Association="Self.FK__notetype__modifi__3B75D760">
+            <End Role="users" EntitySet="users" />
+            <End Role="notetype" EntitySet="notetype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statustyp__creat__46E78A0C" Association="Self.FK__statustyp__creat__46E78A0C">
+            <End Role="users" EntitySet="users" />
+            <End Role="statustype" EntitySet="statustype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statustyp__modif__47DBAE45" Association="Self.FK__statustyp__modif__47DBAE45">
+            <End Role="users" EntitySet="users" />
+            <End Role="statustype" EntitySet="statustype" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userroles__creat__2C3393D0" Association="Self.FK__userroles__creat__2C3393D0">
+            <End Role="users" EntitySet="users" />
+            <End Role="userroles" EntitySet="userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userroles__modif__2D27B809" Association="Self.FK__userroles__modif__2D27B809">
+            <End Role="users" EntitySet="users" />
+            <End Role="userroles" EntitySet="userroles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usrerole" Association="Self.FK_usrerole">
+            <End Role="userroles" EntitySet="userroles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__createdby__25869641" Association="Self.FK__users__createdby__25869641">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__modifiedb__267ABA7A" Association="Self.FK__users__modifiedb__267ABA7A">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
+          <EntitySet Name="download" EntityType="notesmarketplaceModel.download" />
+          <AssociationSet Name="FK__download__buyeri__73BA3083" Association="notesmarketplaceModel.FK__download__buyeri__73BA3083">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__create__778AC167" Association="notesmarketplaceModel.FK__download__create__778AC167">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__modifi__787EE5A0" Association="notesmarketplaceModel.FK__download__modifi__787EE5A0">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__noteid__71D1E811" Association="notesmarketplaceModel.FK__download__noteid__71D1E811">
+            <End Role="notedetails" EntitySet="notedetails" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+          <AssociationSet Name="FK__download__seller__72C60C4A" Association="notesmarketplaceModel.FK__download__seller__72C60C4A">
+            <End Role="users" EntitySet="users" />
+            <End Role="download" EntitySet="download" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="download">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="noteid" Type="Int32" />
+          <Property Name="sellerid" Type="Int32" Nullable="false" />
+          <Property Name="buyerid" Type="Int32" Nullable="false" />
+          <Property Name="requesteddate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ispaid" Type="Boolean" />
+          <Property Name="isapproved" Type="Boolean" />
+          <Property Name="approveddate" Type="DateTime" Precision="3" />
+          <Property Name="isdownloaded" Type="Boolean" />
+          <Property Name="downloadedate" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="purchaseprice" Type="Int32" Nullable="false" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="modifieddate" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="notesmarketplaceModel.FK__download__buyeri__73BA3083" FromRole="download" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="notesmarketplaceModel.FK__download__create__778AC167" FromRole="download" ToRole="users" />
+          <NavigationProperty Name="users2" Relationship="notesmarketplaceModel.FK__download__modifi__787EE5A0" FromRole="download" ToRole="users" />
+          <NavigationProperty Name="notedetails" Relationship="notesmarketplaceModel.FK__download__noteid__71D1E811" FromRole="download" ToRole="notedetails" />
+          <NavigationProperty Name="users3" Relationship="notesmarketplaceModel.FK__download__seller__72C60C4A" FromRole="download" ToRole="users" />
+        </EntityType>
+        <Association Name="FK__download__buyeri__73BA3083">
+          <End Type="notesmarketplaceModel.users" Role="users" Multiplicity="1" />
+          <End Type="notesmarketplaceModel.download" Role="download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="buyerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__create__778AC167">
+          <End Type="notesmarketplaceModel.users" Role="users" Multiplicity="0..1" />
+          <End Type="notesmarketplaceModel.download" Role="download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__modifi__787EE5A0">
+          <End Type="notesmarketplaceModel.users" Role="users" Multiplicity="0..1" />
+          <End Type="notesmarketplaceModel.download" Role="download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="modifiedby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__noteid__71D1E811">
+          <End Type="notesmarketplaceModel.notedetails" Role="notedetails" Multiplicity="0..1" />
+          <End Type="notesmarketplaceModel.download" Role="download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notedetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="noteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__download__seller__72C60C4A">
+          <End Type="notesmarketplaceModel.users" Role="users" Multiplicity="1" />
+          <End Type="notesmarketplaceModel.download" Role="download" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="download">
+              <PropertyRef Name="sellerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="notesmarketplaceModelStoreContainer" CdmEntityContainer="notesmarketplaceEntities">
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="categoryname" ColumnName="categoryname" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contact">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="countryname" ColumnName="countryname" />
+                <ScalarProperty Name="countrycode" ColumnName="countrycode" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="noteattachment">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.noteattachment">
+              <MappingFragment StoreEntitySet="noteattachment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="noteid" ColumnName="noteid" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="filepath" ColumnName="filepath" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notedetails">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.notedetails">
+              <MappingFragment StoreEntitySet="notedetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="actionby" ColumnName="actionby" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="approveddate" ColumnName="approveddate" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="categoryid" ColumnName="categoryid" />
+                <ScalarProperty Name="displaypicture" ColumnName="displaypicture" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="numberofpages" ColumnName="numberofpages" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="universityname" ColumnName="universityname" />
+                <ScalarProperty Name="coursename" ColumnName="coursename" />
+                <ScalarProperty Name="coursecode" ColumnName="coursecode" />
+                <ScalarProperty Name="professor" ColumnName="professor" />
+                <ScalarProperty Name="ispaid" ColumnName="ispaid" />
+                <ScalarProperty Name="sellprice" ColumnName="sellprice" />
+                <ScalarProperty Name="notepreviewfile" ColumnName="notepreviewfile" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notetype">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.notetype">
+              <MappingFragment StoreEntitySet="notetype">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statustype">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.statustype">
+              <MappingFragment StoreEntitySet="statustype">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userroles">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.userroles">
+              <MappingFragment StoreEntitySet="userroles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="roledescription" ColumnName="roledescription" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="isEmailVerified" ColumnName="isEmailVerified" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="download">
+            <EntityTypeMapping TypeName="notesmarketplaceModel.download">
+              <MappingFragment StoreEntitySet="download">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="purchaseprice" ColumnName="purchaseprice" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="downloadedate" ColumnName="downloadedate" />
+                <ScalarProperty Name="isdownloaded" ColumnName="isdownloaded" />
+                <ScalarProperty Name="approveddate" ColumnName="approveddate" />
+                <ScalarProperty Name="isapproved" ColumnName="isapproved" />
+                <ScalarProperty Name="ispaid" ColumnName="ispaid" />
+                <ScalarProperty Name="requesteddate" ColumnName="requesteddate" />
+                <ScalarProperty Name="buyerid" ColumnName="buyerid" />
+                <ScalarProperty Name="sellerid" ColumnName="sellerid" />
+                <ScalarProperty Name="noteid" ColumnName="noteid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

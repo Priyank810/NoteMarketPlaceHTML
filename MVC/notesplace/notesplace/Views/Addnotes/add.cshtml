@@ -1,0 +1,290 @@
+﻿@model notesplace.Models.addbooks
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("add","addnotes",FormMethod.Post,new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid bg-image-user img-responsive">
+
+        <div class="in-image user-profile-tag">Add Notes</div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="form-container">
+
+
+
+            <!-- Basic Profile Details -->
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Basic Note Details
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label re">Title</label>
+
+                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your notes title", @id = "booktitle" } })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label class="form-label re">Category</label>
+                        
+
+                        @Html.DropDownListFor(model => model.categoryid, new SelectList(ViewBag.category, "Value", "Text"), "Select your category", new { @class = "form-control form-box-user", @id = "bookcategory" })
+                        @Html.ValidationMessageFor(model => model.categoryid, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 form-group">
+
+                    <label class="form-label">Display Picture</label>
+                    <input type="file" class="form-control form-box-user upload-back-img" id="imgfile" name="displaypicture">
+                    @Html.ValidationMessageFor(model => model.displaypicture, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="col-md-6 form-group">
+
+                    <label class="form-label re">Upload Notes</label>
+                    <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes" multiple>
+                    @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label class="form-label">Type</label>
+                        
+
+                        @Html.DropDownListFor(model => model.typeid, new SelectList(ViewBag.notetype, "Value", "Text"), "Select type", new { @class = "form-control form-box-user", @id = "booktype" })
+                        @Html.ValidationMessageFor(model => model.typeid, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label">Number of Pages</label>
+
+                        @Html.EditorFor(model => model.numberofpages, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter number of note pages", @id = "totalpages" } })
+                        @Html.ValidationMessageFor(model => model.numberofpages, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+
+                        <label class="form-label re">Description</label>
+
+                        @Html.TextAreaFor(model => model.description,  new { @class = "form-control form-box-user" ,@rows = "5" ,@placeholder = "Enter your description", @id = "bookDescription"  })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <!-- Institute Details -->
+
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Institution Information
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-md-6 form-group">
+
+                    <label class="form-label">Country</label>
+                    
+                    @Html.DropDownListFor(model => model.countryid, new SelectList(ViewBag.country, "Value", "Text"), "Select Country", new { @class="form-control form-box-user",@id = "country" })
+                    @Html.ValidationMessageFor(model => model.countryid, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label">Institution Information</label>
+
+                        @Html.EditorFor(model => model.institutename, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your institute name" ,@id = "institutename" } })
+                        @Html.ValidationMessageFor(model => model.institutename, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Course Details -->
+
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Course Details
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label">Course Name</label>
+
+                        @Html.EditorFor(model => model.coursename, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your course name" ,@id = "coursename" } })
+                        @Html.ValidationMessageFor(model => model.coursename, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label class="form-label">Course Code</label>
+
+                        @Html.EditorFor(model => model.coursecode, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your course code", @id = "coursecode" } })
+                        @Html.ValidationMessageFor(model => model.coursecode, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label class="form-label">Professor/Lecturer</label>
+
+                        @Html.EditorFor(model => model.professor, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your professor name" ,@id = "professor" } })
+                        @Html.ValidationMessageFor(model => model.professor, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Selling Information -->
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Selling Information
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                    <label class="form-label re">Sell for</label><br>
+                        <div class="form-check form-check-inline">
+
+                        @Html.RadioButtonFor(model => model.ispaid, 0, new { @class="form-check-input st", @name="optradio", @onclick = "hide()" })
+                            <label class="form-check-label">
+                            Free
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+
+                            
+                            @Html.RadioButtonFor(model => model.ispaid, 1, new { @class = "form-check-input st", @name = "optradio", @onclick = "show()" })
+                            <label class="form-check-label">
+                                Paid
+                            </label>
+                        </div>
+
+                        <div id="sp">
+                            <label class="form-label"><br>Sell Price</label>
+
+                            @Html.EditorFor(model => model.sellprice , new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your price" ,@id = "sellprice" } })
+                            @Html.ValidationMessageFor(model => model.sellprice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 form-group">
+
+
+                    <label class="form-label">Note Preview</label>
+                    <input type="file" class="form-control form-box-addnotes upload-back-img" id="pfile" name="previewfile">
+                    @Html.ValidationMessageFor(model => model.previewfile, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-6 ptop-30">
+                    <span>
+                        <button class="btn addnotes-btn-style" type="submit"  name="save">
+                            SAVE
+                        </button>
+                    </span>
+                    <span class="padding-bt-btn">
+                        <button class="btn addnotes-btn-style" type="submit" name="sub">
+                            SUBMIT
+                        </button>
+                    </span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+}
+<script>
+    function hide() {
+        document.getElementById('sp').style.display = 'none';
+    }
+    function show() {
+        document.getElementById('sp').style.display = 'block';
+    }
+</script>
+
