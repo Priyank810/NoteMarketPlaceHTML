@@ -50,7 +50,7 @@ namespace notesplace.Controllers
         {
             var fromEmail = new MailAddress("priyanksd123@gmail.com", "Contact Us");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "Priyank_9810"; // Replace with actual password
+            var fromEmailPassword = "******"; // Replace with actual password
             string subject = fullname +" "+ query;
 
             string body = "Hello" + "<br/><br/>" + comments + "<br/><br/>" + "Regards,<br/>"+ fullname;

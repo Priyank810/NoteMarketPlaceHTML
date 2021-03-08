@@ -172,7 +172,7 @@ namespace notesplace.Controllers
 
             var fromEmail = new MailAddress("priyanksd123@gmail.com", "New Password");
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "Priyank_9810"; // Replace with actual password
+            var fromEmailPassword = "******"; // Replace with actual password
             string subject = "New Temporary Password has been created for you";
 
             string body ="Hello,"+"<br/><br/>"+"We have generated a new password for you"+"<br/>"+"Password: "+ password;
