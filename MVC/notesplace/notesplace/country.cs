@@ -17,7 +17,10 @@ namespace notesplace
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public country()
         {
+            this.admindetails = new HashSet<admindetails>();
             this.notedetails = new HashSet<notedetails>();
+            this.userdetails = new HashSet<userdetails>();
+            this.userdetails1 = new HashSet<userdetails>();
         }
     
         public int id { get; set; }
@@ -29,9 +32,15 @@ namespace notesplace
         public Nullable<int> modifiedby { get; set; }
         public Nullable<bool> isActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<admindetails> admindetails { get; set; }
         public virtual users users { get; set; }
         public virtual users users1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<notedetails> notedetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<userdetails> userdetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<userdetails> userdetails1 { get; set; }
     }
 }

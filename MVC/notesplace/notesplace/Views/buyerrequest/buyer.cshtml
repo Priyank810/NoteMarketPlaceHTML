@@ -82,12 +82,13 @@
             <nav class="padding-bt-tb">
 
                 <ul class="pagination justify-content-center">
-                    @Html.PagedListPager(Model.buy, i => Url.Action("buyer", "buyerrequest", new
-                  {
-                     i,
-                     search = Request.QueryString["search"],
-                     sortBy = Request["sortBy"],
-                  }))
+                @Html.PagedListPager(Model.buy, i => Url.Action("buyer", "buyerrequest", new
+                {
+                   i,
+                   search = Request.QueryString["search"],
+                   sortBy = Request["sortBy"],
+
+                }))
 
                 </ul>
 

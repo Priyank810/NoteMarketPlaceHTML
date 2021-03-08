@@ -17,8 +17,10 @@ namespace notesplace
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public notedetails()
         {
-            this.noteattachment = new HashSet<noteattachment>();
             this.download = new HashSet<download>();
+            this.noteattachment = new HashSet<noteattachment>();
+            this.reviews = new HashSet<reviews>();
+            this.spam = new HashSet<spam>();
         }
     
         public int id { get; set; }
@@ -50,6 +52,8 @@ namespace notesplace
         public virtual category category { get; set; }
         public virtual country country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<download> download { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<noteattachment> noteattachment { get; set; }
         public virtual users users { get; set; }
         public virtual users users1 { get; set; }
@@ -58,6 +62,8 @@ namespace notesplace
         public virtual notetype notetype { get; set; }
         public virtual users users3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<download> download { get; set; }
+        public virtual ICollection<reviews> reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<spam> spam { get; set; }
     }
 }

@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="notesmarketplaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admindetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adminid" Type="int" Nullable="false" />
+    <Property Name="secondaryemail" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="profilepicture" Type="varchar(max)" />
+    <Property Name="countrycodeid" Type="int" />
+    <Property Name="mobilenumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
   <EntityType Name="category">
     <Key>
       <PropertyRef Name="id" />
@@ -54,6 +70,18 @@
     <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="category" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="purchaseprice" Type="int" Nullable="false" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="gender">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="createddate" Type="datetime" />
     <Property Name="createdby" Type="int" />
     <Property Name="modifieddate" Type="datetime" />
@@ -117,6 +145,38 @@
     <Property Name="modifiedby" Type="int" />
     <Property Name="isActive" Type="bit" />
   </EntityType>
+  <EntityType Name="reviews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="noteid" Type="int" Nullable="false" />
+    <Property Name="buyerid" Type="int" Nullable="false" />
+    <Property Name="downloadid" Type="int" />
+    <Property Name="ratingstar" Type="int" Nullable="false" />
+    <Property Name="comments" Type="varchar(max)" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="spam">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="noteid" Type="int" Nullable="false" />
+    <Property Name="buyerid" Type="int" Nullable="false" />
+    <Property Name="downloadid" Type="int" />
+    <Property Name="isspam" Type="bit" Nullable="false" />
+    <Property Name="remarks" Type="varchar(max)" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
   <EntityType Name="statustype">
     <Key>
       <PropertyRef Name="id" />
@@ -129,6 +189,44 @@
     <Property Name="modifieddate" Type="datetime" />
     <Property Name="modifiedby" Type="int" />
     <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="systemconfig">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="valuetype" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="value" Type="varchar(max)" Nullable="false" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="userdetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usserid" Type="int" Nullable="false" />
+    <Property Name="dob" Type="date" Nullable="false" />
+    <Property Name="profilepicture" Type="varchar(max)" />
+    <Property Name="addressline1" Type="varchar(max)" Nullable="false" />
+    <Property Name="addressline2" Type="varchar(max)" />
+    <Property Name="city" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="state" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="countryid" Type="int" />
+    <Property Name="zipcode" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="university" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="college" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="countrycodeid" Type="int" />
+    <Property Name="mobilenumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="createddate" Type="datetime" />
+    <Property Name="createdby" Type="int" />
+    <Property Name="modifieddate" Type="datetime" />
+    <Property Name="modifiedby" Type="int" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="genderid" Type="int" />
   </EntityType>
   <EntityType Name="userroles">
     <Key>
@@ -161,6 +259,54 @@
     <Property Name="activationcode" Type="uniqueidentifier" />
     <Property Name="isActive" Type="bit" />
   </EntityType>
+  <Association Name="FK__admindeta__admin__114A936A">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="admindetails">
+        <PropertyRef Name="adminid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__admindeta__count__123EB7A3">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="admindetails">
+        <PropertyRef Name="countrycodeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__admindeta__creat__1332DBDC">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="admindetails">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__admindeta__modif__14270015">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="admindetails">
+        <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__category__create__34C8D9D1">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="category" Type="Self.category" Multiplicity="*" />
@@ -266,6 +412,30 @@
       </Principal>
       <Dependent Role="download">
         <PropertyRef Name="sellerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__gender__createdb__0A9D95DB">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="gender" Type="Self.gender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="gender">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__gender__modified__0B91BA14">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="gender" Type="Self.gender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="gender">
+        <PropertyRef Name="modifiedby" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -425,6 +595,126 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__reviews__buyerid__18EBB532">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="buyerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reviews__created__1AD3FDA4">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reviews__downloa__19DFD96B">
+    <End Role="download" Type="Self.download" Multiplicity="0..1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="download">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="downloadid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reviews__modifie__1BC821DD">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reviews__noteid__17F790F9">
+    <End Role="notedetails" Type="Self.notedetails" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="notedetails">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="noteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spam__buyerid__208CD6FA">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="spam" Type="Self.spam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="spam">
+        <PropertyRef Name="buyerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spam__createdby__22751F6C">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="spam" Type="Self.spam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="spam">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spam__downloadid__2180FB33">
+    <End Role="download" Type="Self.download" Multiplicity="0..1" />
+    <End Role="spam" Type="Self.spam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="download">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="spam">
+        <PropertyRef Name="downloadid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spam__modifiedby__236943A5">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="spam" Type="Self.spam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="spam">
+        <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__spam__noteid__1F98B2C1">
+    <End Role="notedetails" Type="Self.notedetails" Multiplicity="1" />
+    <End Role="spam" Type="Self.spam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="notedetails">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="spam">
+        <PropertyRef Name="noteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__statustyp__creat__46E78A0C">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
@@ -446,6 +736,102 @@
       </Principal>
       <Dependent Role="statustype">
         <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__systemcon__creat__2739D489">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="systemconfig" Type="Self.systemconfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="systemconfig">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__systemcon__modif__282DF8C2">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="systemconfig" Type="Self.systemconfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="systemconfig">
+        <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__count__03F0984C">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__count__04E4BC85">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="countrycodeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__creat__05D8E0BE">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="createdby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__gende__0D7A0286">
+    <End Role="gender" Type="Self.gender" Multiplicity="0..1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gender">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="genderid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__modif__06CD04F7">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="modifiedby" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__userdetai__usser__02FC7413">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userdetails">
+        <PropertyRef Name="usserid" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -510,16 +896,38 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="notesmarketplaceModelStoreContainer">
+    <EntitySet Name="admindetails" EntityType="Self.admindetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="download" EntityType="Self.download" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gender" EntityType="Self.gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="noteattachment" EntityType="Self.noteattachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="notedetails" EntityType="Self.notedetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="notetype" EntityType="Self.notetype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reviews" EntityType="Self.reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="spam" EntityType="Self.spam" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="statustype" EntityType="Self.statustype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="systemconfig" EntityType="Self.systemconfig" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userdetails" EntityType="Self.userdetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="userroles" EntityType="Self.userroles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__admindeta__admin__114A936A" Association="Self.FK__admindeta__admin__114A936A">
+      <End Role="users" EntitySet="users" />
+      <End Role="admindetails" EntitySet="admindetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__admindeta__count__123EB7A3" Association="Self.FK__admindeta__count__123EB7A3">
+      <End Role="country" EntitySet="country" />
+      <End Role="admindetails" EntitySet="admindetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__admindeta__creat__1332DBDC" Association="Self.FK__admindeta__creat__1332DBDC">
+      <End Role="users" EntitySet="users" />
+      <End Role="admindetails" EntitySet="admindetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__admindeta__modif__14270015" Association="Self.FK__admindeta__modif__14270015">
+      <End Role="users" EntitySet="users" />
+      <End Role="admindetails" EntitySet="admindetails" />
+    </AssociationSet>
     <AssociationSet Name="FK__category__create__34C8D9D1" Association="Self.FK__category__create__34C8D9D1">
       <End Role="users" EntitySet="users" />
       <End Role="category" EntitySet="category" />
@@ -555,6 +963,14 @@
     <AssociationSet Name="FK__download__seller__72C60C4A" Association="Self.FK__download__seller__72C60C4A">
       <End Role="users" EntitySet="users" />
       <End Role="download" EntitySet="download" />
+    </AssociationSet>
+    <AssociationSet Name="FK__gender__createdb__0A9D95DB" Association="Self.FK__gender__createdb__0A9D95DB">
+      <End Role="users" EntitySet="users" />
+      <End Role="gender" EntitySet="gender" />
+    </AssociationSet>
+    <AssociationSet Name="FK__gender__modified__0B91BA14" Association="Self.FK__gender__modified__0B91BA14">
+      <End Role="users" EntitySet="users" />
+      <End Role="gender" EntitySet="gender" />
     </AssociationSet>
     <AssociationSet Name="FK__noteattac__creat__571DF1D5" Association="Self.FK__noteattac__creat__571DF1D5">
       <End Role="users" EntitySet="users" />
@@ -608,6 +1024,46 @@
       <End Role="users" EntitySet="users" />
       <End Role="notetype" EntitySet="notetype" />
     </AssociationSet>
+    <AssociationSet Name="FK__reviews__buyerid__18EBB532" Association="Self.FK__reviews__buyerid__18EBB532">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reviews__created__1AD3FDA4" Association="Self.FK__reviews__created__1AD3FDA4">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reviews__downloa__19DFD96B" Association="Self.FK__reviews__downloa__19DFD96B">
+      <End Role="download" EntitySet="download" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reviews__modifie__1BC821DD" Association="Self.FK__reviews__modifie__1BC821DD">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reviews__noteid__17F790F9" Association="Self.FK__reviews__noteid__17F790F9">
+      <End Role="notedetails" EntitySet="notedetails" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spam__buyerid__208CD6FA" Association="Self.FK__spam__buyerid__208CD6FA">
+      <End Role="users" EntitySet="users" />
+      <End Role="spam" EntitySet="spam" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spam__createdby__22751F6C" Association="Self.FK__spam__createdby__22751F6C">
+      <End Role="users" EntitySet="users" />
+      <End Role="spam" EntitySet="spam" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spam__downloadid__2180FB33" Association="Self.FK__spam__downloadid__2180FB33">
+      <End Role="download" EntitySet="download" />
+      <End Role="spam" EntitySet="spam" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spam__modifiedby__236943A5" Association="Self.FK__spam__modifiedby__236943A5">
+      <End Role="users" EntitySet="users" />
+      <End Role="spam" EntitySet="spam" />
+    </AssociationSet>
+    <AssociationSet Name="FK__spam__noteid__1F98B2C1" Association="Self.FK__spam__noteid__1F98B2C1">
+      <End Role="notedetails" EntitySet="notedetails" />
+      <End Role="spam" EntitySet="spam" />
+    </AssociationSet>
     <AssociationSet Name="FK__statustyp__creat__46E78A0C" Association="Self.FK__statustyp__creat__46E78A0C">
       <End Role="users" EntitySet="users" />
       <End Role="statustype" EntitySet="statustype" />
@@ -615,6 +1071,38 @@
     <AssociationSet Name="FK__statustyp__modif__47DBAE45" Association="Self.FK__statustyp__modif__47DBAE45">
       <End Role="users" EntitySet="users" />
       <End Role="statustype" EntitySet="statustype" />
+    </AssociationSet>
+    <AssociationSet Name="FK__systemcon__creat__2739D489" Association="Self.FK__systemcon__creat__2739D489">
+      <End Role="users" EntitySet="users" />
+      <End Role="systemconfig" EntitySet="systemconfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK__systemcon__modif__282DF8C2" Association="Self.FK__systemcon__modif__282DF8C2">
+      <End Role="users" EntitySet="users" />
+      <End Role="systemconfig" EntitySet="systemconfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__count__03F0984C" Association="Self.FK__userdetai__count__03F0984C">
+      <End Role="country" EntitySet="country" />
+      <End Role="userdetails" EntitySet="userdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__count__04E4BC85" Association="Self.FK__userdetai__count__04E4BC85">
+      <End Role="country" EntitySet="country" />
+      <End Role="userdetails" EntitySet="userdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__creat__05D8E0BE" Association="Self.FK__userdetai__creat__05D8E0BE">
+      <End Role="users" EntitySet="users" />
+      <End Role="userdetails" EntitySet="userdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__gende__0D7A0286" Association="Self.FK__userdetai__gende__0D7A0286">
+      <End Role="gender" EntitySet="gender" />
+      <End Role="userdetails" EntitySet="userdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__modif__06CD04F7" Association="Self.FK__userdetai__modif__06CD04F7">
+      <End Role="users" EntitySet="users" />
+      <End Role="userdetails" EntitySet="userdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__userdetai__usser__02FC7413" Association="Self.FK__userdetai__usser__02FC7413">
+      <End Role="users" EntitySet="users" />
+      <End Role="userdetails" EntitySet="userdetails" />
     </AssociationSet>
     <AssociationSet Name="FK__userroles__creat__2C3393D0" Association="Self.FK__userroles__creat__2C3393D0">
       <End Role="users" EntitySet="users" />

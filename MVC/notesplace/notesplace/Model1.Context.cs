@@ -25,15 +25,21 @@ namespace notesplace
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<admindetails> admindetails { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<country> country { get; set; }
+        public virtual DbSet<download> download { get; set; }
+        public virtual DbSet<gender> gender { get; set; }
         public virtual DbSet<noteattachment> noteattachment { get; set; }
         public virtual DbSet<notedetails> notedetails { get; set; }
         public virtual DbSet<notetype> notetype { get; set; }
+        public virtual DbSet<reviews> reviews { get; set; }
+        public virtual DbSet<spam> spam { get; set; }
         public virtual DbSet<statustype> statustype { get; set; }
+        public virtual DbSet<systemconfig> systemconfig { get; set; }
+        public virtual DbSet<userdetails> userdetails { get; set; }
         public virtual DbSet<userroles> userroles { get; set; }
         public virtual DbSet<users> users { get; set; }
-        public virtual DbSet<download> download { get; set; }
     }
 }

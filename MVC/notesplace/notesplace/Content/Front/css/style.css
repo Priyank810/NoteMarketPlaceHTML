@@ -13,13 +13,17 @@ body {
 
 
 
-
 /*==============================
 
     Navigation
 
 ==============================*/
-
+input.input-validation-error,
+textarea.input-validation-error,
+select.input-validation-error {
+    background: #FEF1EC;
+    border: 1px solid #CD0A0A;
+}
 
 
 .transparent-nav {
@@ -1332,62 +1336,22 @@ tr:hover {
 }
 
 
-
-.pagination li a.active {
-    background-color: #6255a5;
-    width: 34px;
-    height: 34px;
+/*Pagonation*/
+.pagination > .active {
+    background-color: #6255a5 !important;
     color: white;
     border-radius: 50%;
 }
 
-
-.le-padding {
-    padding-left: 0px;
-    padding-left: 5px;
-}
-
-.in-padding {
-    padding-left: 0px;
-    padding-left: 5px;
-}
-
-.re-padding {
-    padding-left: 5px;
-}
-
-.no-style {
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #333333;
-}
-
-.pagination li a {
+.pagination > li > a {
     color: black;
     float: left;
     padding: 9px 15px;
     text-decoration: none;
 }
 
-.activepage {
-    background-color: #6255a5;
-    color: #fff !important;
-    border-radius: 50%;
-}
-
-
-.pagination li a.active{
-    background-color: #6255a5;
-    width: 34px;
-    height: 34px;
-    color: white;
-    border-radius: 50%;
-}
-
 .pagination li a:hover:not(.active) {
-    background-color: #6255a5;
+    background-color: #333333;
     border-radius: 50%;
     color: white;
 }
@@ -1395,3 +1359,4 @@ tr:hover {
 .success {
     color: #33cc33 !important;
 }
+

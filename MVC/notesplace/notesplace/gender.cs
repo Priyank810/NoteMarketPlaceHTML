@@ -12,28 +12,16 @@ namespace notesplace
     using System;
     using System.Collections.Generic;
     
-    public partial class download
+    public partial class gender
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public download()
+        public gender()
         {
-            this.reviews = new HashSet<reviews>();
-            this.spam = new HashSet<spam>();
+            this.userdetails = new HashSet<userdetails>();
         }
     
         public int id { get; set; }
-        public Nullable<int> noteid { get; set; }
-        public int sellerid { get; set; }
-        public int buyerid { get; set; }
-        public System.DateTime requesteddate { get; set; }
-        public Nullable<bool> ispaid { get; set; }
-        public Nullable<bool> isapproved { get; set; }
-        public Nullable<System.DateTime> approveddate { get; set; }
-        public Nullable<bool> isdownloaded { get; set; }
-        public Nullable<System.DateTime> downloadedate { get; set; }
-        public string title { get; set; }
-        public string category { get; set; }
-        public int purchaseprice { get; set; }
+        public string gender1 { get; set; }
         public Nullable<System.DateTime> createddate { get; set; }
         public Nullable<int> createdby { get; set; }
         public Nullable<System.DateTime> modifieddate { get; set; }
@@ -42,12 +30,7 @@ namespace notesplace
     
         public virtual users users { get; set; }
         public virtual users users1 { get; set; }
-        public virtual users users2 { get; set; }
-        public virtual notedetails notedetails { get; set; }
-        public virtual users users3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reviews> reviews { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<spam> spam { get; set; }
+        public virtual ICollection<userdetails> userdetails { get; set; }
     }
 }
