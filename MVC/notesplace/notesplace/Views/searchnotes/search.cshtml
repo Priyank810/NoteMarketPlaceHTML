@@ -1,0 +1,196 @@
+﻿@model notesplace.Models.ss
+@{
+    Layout = "~/Views/Shared/navbar.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+
+
+<div class="container-fluid bg-image-user img-responsive">
+
+    <div class="in-image user-profile-tag">Search Notes</div>
+
+</div>
+
+<div class="container">
+
+
+    <div class="row padding-im">
+
+        <div class="col-md-12 search-page-heading">
+            Search and Filter Notes
+        </div>
+    </div>
+    @using (Html.BeginForm("search", "searchnotes", FormMethod.Get))
+    {
+        <div class="row bg-color-search padding-se-bottom">
+
+            <div class="col-md-12">
+
+                <div class="form-group has-search padding-searchbar">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control searchbar-style" name="searchbook" placeholder="Search">
+                </div>
+
+            </div>
+
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+
+                @Html.DropDownList("bytype", new SelectList(ViewBag.notetype, "Value", "Text", ViewBag.bytype), "Select type", new { @class = "form-control searchbar-style" ,onchange = @"form.submit();" })
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+
+                @Html.DropDownList("bycategory", new SelectList(ViewBag.category, "Value", "Text", ViewBag.bycategory), "Select category", new { @class = "form-control searchbar-style", onchange = @"form.submit();" })
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+
+                @Html.DropDownList("byuniversity", new SelectList(ViewBag.university, "Value", "Text", ViewBag.byuniversity), "Select university", new { @class = "form-control searchbar-style", onchange = @"form.submit();" })
+
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+
+                @Html.DropDownList("bycourse", new SelectList(ViewBag.course, "Value", "Text", ViewBag.bycourse), "Select course", new { @class = "form-control searchbar-style", onchange = @"form.submit();" })
+
+            </div>
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+
+                @Html.DropDownList("bycountry", new SelectList(ViewBag.country, "Value", "Text", ViewBag.bycountry), "Select country", new { @class = "form-control searchbar-style", onchange = @"form.submit();" })
+            </div>
+
+
+            <div class="col-xl-2 col-md-4 col-sm-6 padding-select">
+                @Html.DropDownList("byrating", new SelectList(ViewBag.rating, "Value", "Text", ViewBag.byrating), "Select rating", new { @class = "form-control searchbar-style", onchange = @"form.submit();" })
+            </div>
+
+        </div>
+    }
+
+    </div>
+
+
+
+
+
+<div class="container">
+
+
+    <div class="row padding-im padding-se-bottom">
+
+        <div class="col-md-12 search-page-heading">
+            Total @ViewBag.count notes
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+        @{ int count = 0;}
+        @foreach (var book in Model.ssn)
+        {
+            count = count + 1;
+            <div class="col-md-4 col-sm-6 col-xs-12 padding-card">
+
+                <div class="card">
+                    <img class="card-img-top img-responsive" src="@Url.Content(@book.displaypicture)" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="@Url.Action("display","bookdetails",new { nid = book.noteid })"><div class="card-title card-title-style">@book.title</div></a>
+                        <div class="card-text pad-bot"><i class="fa fa-university"></i><span class="card-text-style"> @book.university, @book.country</span></div>
+                        <div class="card-text pad-bot"><i class="fa fa-book"></i><span class="card-text-style"> @book.numberofpages</span></div>
+                        <div class="card-text pad-bot"><i class="fa fa-calendar"></i><span class="card-text-style"> @book.date</span></div>
+                        <div class="card-text pad-bot"><i class="fa fa-flag"></i><span class="card-text-style-last"> @book.totalspam Users marked this note as inappropriate</span></div>
+                        <div>
+
+                            <div>
+
+                                @{
+                                    double rating = 0;
+                                    if (book.avgeragerating == null)
+                                    {
+                                        rating = 0;
+                                    }
+                                    else
+                                    {
+                                        rating = (double)book.avgeragerating * 20;
+                                    }
+                                }
+
+                                <span class="score">
+                                    <span class="score-wrap" style="float: left">
+                                        <span class="stars-active" style="width:@rating%">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="stars-inactive">
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </span>
+                                    </span>
+
+                                    @if (book.avgeragerating == null)
+                                    {
+                                        <span class="card-text-style" style="float: left;margin-left:5px; margin-top:2px;"> 0 reviews</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="card-text-style" style="float: left; margin-left:5px;margin-top:2px;"> @book.totalrating reviews</span>
+                                    }
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    @if (count == 0)
+    {
+        <div style="text-align:center;font-size:20px;font-weight:750;">No Records Found</div>
+    }
+</div>
+
+
+
+<div class="container page-no-margin">
+
+    <nav>
+
+        <ul class="pagination justify-content-center">
+            @Html.PagedListPager(Model.ssn, i => Url.Action("search", "searchnotes", new
+                {
+                   i,
+                    searchbook = Request.QueryString["searchbook"],
+                    bycategory = Request.QueryString["bycategory"],
+                    bytype = Request.QueryString["bytype"],
+                    bycourse = Request.QueryString["bycourse"],
+                    bycountry = Request.QueryString["bycountry"],
+                    byuniversity = Request.QueryString["byuniversity"],
+                    byrating = Request.QueryString["byrating"]
+                }))
+
+        </ul>
+
+    </nav>
+
+</div>
+
+

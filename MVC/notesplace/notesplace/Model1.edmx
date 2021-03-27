@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="notesmarketplaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="notesmarketplaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="admindetails">
           <Key>
             <PropertyRef Name="id" />
@@ -86,7 +86,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="gender" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="gender1" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="createddate" Type="datetime" />
           <Property Name="createdby" Type="int" />
           <Property Name="modifieddate" Type="datetime" />
@@ -118,6 +118,7 @@
           <Property Name="remarks" Type="varchar(max)" />
           <Property Name="approveddate" Type="datetime" />
           <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="totalspam" Type="int" />
           <Property Name="categoryid" Type="int" />
           <Property Name="displaypicture" Type="varchar" MaxLength="500" />
           <Property Name="typeid" Type="int" />
@@ -222,8 +223,8 @@
           <Property Name="state" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="countryid" Type="int" />
           <Property Name="zipcode" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="university" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="college" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="university" Type="varchar" MaxLength="200" />
+          <Property Name="college" Type="varchar" MaxLength="200" />
           <Property Name="countrycodeid" Type="int" />
           <Property Name="mobilenumber" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="createddate" Type="datetime" />
@@ -1130,8 +1131,7 @@
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="notesmarketplaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1304,6 +1304,7 @@
           <NavigationProperty Name="users3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="notedetails" ToRole="users" />
           <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__noteid__17F790F9" FromRole="notedetails" ToRole="reviews" />
           <NavigationProperty Name="spam" Relationship="Self.FK__spam__noteid__1F98B2C1" FromRole="notedetails" ToRole="spam" />
+          <Property Name="totalspam" Type="Int32" />
         </EntityType>
         <EntityType Name="notetype">
           <Key>
@@ -1408,8 +1409,8 @@
           <Property Name="state" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="countryid" Type="Int32" />
           <Property Name="zipcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="university" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="college" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="university" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="college" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="countrycodeid" Type="Int32" />
           <Property Name="mobilenumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="createddate" Type="DateTime" Precision="3" />
@@ -2457,7 +2458,7 @@
             <EntityTypeMapping TypeName="notesmarketplaceModel.gender">
               <MappingFragment StoreEntitySet="gender">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="gender1" ColumnName="gender" />
+                <ScalarProperty Name="gender1" ColumnName="gender1" />
                 <ScalarProperty Name="createddate" ColumnName="createddate" />
                 <ScalarProperty Name="createdby" ColumnName="createdby" />
                 <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
@@ -2484,6 +2485,7 @@
           <EntitySetMapping Name="notedetails">
             <EntityTypeMapping TypeName="notesmarketplaceModel.notedetails">
               <MappingFragment StoreEntitySet="notedetails">
+                <ScalarProperty Name="totalspam" ColumnName="totalspam" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="statusid" ColumnName="statusid" />

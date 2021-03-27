@@ -1,0 +1,109 @@
+﻿@model notesplace.Models.mysoldnotes
+@{
+    Layout = "~/Views/Shared/navbar.cshtml";
+}
+
+@using PagedList.Mvc
+@using PagedList
+
+
+<div class="container">
+
+    <div class="row margintop-100">
+
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 dash-heading-inner">My Download Notes</div>
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 bbt" align="right">
+            @using (Html.BeginForm("sold", "mysoldnotes", FormMethod.Get))
+            {
+                <input type="text" class="search-box-style" placeholder="Search" name="search">
+                <span class="padding-bt-se"><button class="btn search-btn-style">Search</button></span>
+            }
+        </div>
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+
+            <table class="table table-border table-responsive-lg table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "sold", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "sold", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">BUYER</th>
+                        <th scope="col" class="table-row-heading">SELL TYPE</th>
+                        <th scope="col" class="table-row-heading">PRICE</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("APPROVED DATE/TIME", "sold", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0;}
+
+                    @if (Model.soldnotes != null)
+                    {
+                        foreach (var sold in Model.soldnotes)
+                        {
+                            count = count + 1;
+                            <tr>
+                                <td class="table-content">@count</td>
+                                <td class="table-content-diff">@sold.title</td>
+                                <td class="table-content">@sold.category</td>
+                                <td class="table-content">@sold.buyeremail</td>
+                                @if (sold.ispaid == true)
+                                {
+                                    <td class="table-content">Paid</td>
+                                }
+                                else
+                                {
+                                    <td class="table-content">Free</td>
+                                }
+                                <td class="table-content">@sold.price</td>
+                                <td class="table-content">@sold.approveddate</td>
+                                <td class="table-content"><a href="@Url.Action("display", "bookdetails", new { nid = sold.noteid })"><i class="fa fa-eye"></i></a></td>
+                                <td class="table-content dropdown">
+                                    <i class="fa fa-ellipsis-v"></i>
+
+                                    <div class="dropdown-content">
+                                        <a href="@Url.Action("share", "transaction", new { noteid = sold.noteid })">Download Note</a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+            @if (count == 0)
+            {
+                <div style="text-align:center;font-size:20px;font-weight:750;">No Records Found</div>
+            }
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.soldnotes, i => Url.Action("sold", "mysoldnotes", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       sortBy = Request["sortBy"],
+
+                    }))
+
+                </ul>
+            </nav>
+
+        </div>
+        </div>
+    </div>
+

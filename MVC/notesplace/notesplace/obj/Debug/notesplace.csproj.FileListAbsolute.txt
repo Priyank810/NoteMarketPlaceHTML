@@ -78,3 +78,6 @@ C:\Users\DELL\source\repos\notesplace\notesplace\bin\PagedList.dll
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\PagedList.Mvc.dll
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\PagedList.xml
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\PagedList.Mvc.xml
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.dll
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.pdb
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.xml

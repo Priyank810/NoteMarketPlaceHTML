@@ -81,7 +81,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="gender" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="gender1" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="createddate" Type="datetime" />
     <Property Name="createdby" Type="int" />
     <Property Name="modifieddate" Type="datetime" />
@@ -113,6 +113,7 @@
     <Property Name="remarks" Type="varchar(max)" />
     <Property Name="approveddate" Type="datetime" />
     <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="totalspam" Type="int" />
     <Property Name="categoryid" Type="int" />
     <Property Name="displaypicture" Type="varchar" MaxLength="500" />
     <Property Name="typeid" Type="int" />
@@ -217,8 +218,8 @@
     <Property Name="state" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="countryid" Type="int" />
     <Property Name="zipcode" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="university" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="college" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="university" Type="varchar" MaxLength="200" />
+    <Property Name="college" Type="varchar" MaxLength="200" />
     <Property Name="countrycodeid" Type="int" />
     <Property Name="mobilenumber" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="createddate" Type="datetime" />

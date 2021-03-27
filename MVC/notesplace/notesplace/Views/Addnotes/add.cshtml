@@ -1,7 +1,7 @@
 ﻿@model notesplace.Models.addbooks
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/navbar.cshtml";
 }
 
 @using (Html.BeginForm("add","addnotes",FormMethod.Post,new { @enctype = "multipart/form-data" }))
@@ -58,7 +58,7 @@
 
                 <div class="col-md-6 form-group">
 
-                    <label class="form-label">Display Picture</label>
+                    <label class="form-label re">Display Picture</label>
                     <input type="file" class="form-control form-box-user upload-back-img" id="imgfile" name="displaypicture">
                     @Html.ValidationMessageFor(model => model.displaypicture, "", new { @class = "text-danger" })
 
@@ -77,7 +77,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <label class="form-label">Type</label>
+                        <label class="form-label re">Type</label>
                         
 
                         @Html.DropDownListFor(model => model.typeid, new SelectList(ViewBag.notetype, "Value", "Text"), "Select type", new { @class = "form-control form-box-user", @id = "booktype" })
@@ -90,7 +90,7 @@
 
                     <div class="form-group">
 
-                        <label class="form-label">Number of Pages</label>
+                        <label class="form-label re">Number of Pages</label>
 
                         @Html.EditorFor(model => model.numberofpages, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter number of note pages", @id = "totalpages" } })
                         @Html.ValidationMessageFor(model => model.numberofpages, "", new { @class = "text-danger" })
@@ -133,7 +133,7 @@
 
                 <div class="col-md-6 form-group">
 
-                    <label class="form-label">Country</label>
+                    <label class="form-label re">Country</label>
                     
                     @Html.DropDownListFor(model => model.countryid, new SelectList(ViewBag.country, "Value", "Text"), "Select Country", new { @class="form-control form-box-user",@id = "country" })
                     @Html.ValidationMessageFor(model => model.countryid, "", new { @class = "text-danger" })
@@ -143,7 +143,7 @@
 
                     <div class="form-group">
 
-                        <label class="form-label">Institution Information</label>
+                        <label class="form-label re">Institution Information</label>
 
                         @Html.EditorFor(model => model.institutename, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your institute name" ,@id = "institutename" } })
                         @Html.ValidationMessageFor(model => model.institutename, "", new { @class = "text-danger" })
@@ -170,7 +170,7 @@
 
                     <div class="form-group">
 
-                        <label class="form-label">Course Name</label>
+                        <label class="form-label re">Course Name</label>
 
                         @Html.EditorFor(model => model.coursename, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your course name" ,@id = "coursename" } })
                         @Html.ValidationMessageFor(model => model.coursename, "", new { @class = "text-danger" })
@@ -183,7 +183,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <label class="form-label">Course Code</label>
+                        <label class="form-label re">Course Code</label>
 
                         @Html.EditorFor(model => model.coursecode, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your course code", @id = "coursecode" } })
                         @Html.ValidationMessageFor(model => model.coursecode, "", new { @class = "text-danger" })
@@ -195,7 +195,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
 
-                        <label class="form-label">Professor/Lecturer</label>
+                        <label class="form-label re">Professor/Lecturer</label>
 
                         @Html.EditorFor(model => model.professor, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your professor name" ,@id = "professor" } })
                         @Html.ValidationMessageFor(model => model.professor, "", new { @class = "text-danger" })

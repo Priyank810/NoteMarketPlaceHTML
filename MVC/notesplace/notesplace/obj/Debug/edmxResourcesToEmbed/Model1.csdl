@@ -169,6 +169,7 @@
     <NavigationProperty Name="users3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="notedetails" ToRole="users" />
     <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__noteid__17F790F9" FromRole="notedetails" ToRole="reviews" />
     <NavigationProperty Name="spam" Relationship="Self.FK__spam__noteid__1F98B2C1" FromRole="notedetails" ToRole="spam" />
+    <Property Name="totalspam" Type="Int32" />
   </EntityType>
   <EntityType Name="notetype">
     <Key>
@@ -273,8 +274,8 @@
     <Property Name="state" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="countryid" Type="Int32" />
     <Property Name="zipcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="university" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="college" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="university" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="college" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="countrycodeid" Type="Int32" />
     <Property Name="mobilenumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="createddate" Type="DateTime" Precision="3" />

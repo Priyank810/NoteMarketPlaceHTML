@@ -14,17 +14,31 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: Addnotes
+
+        //adding notes
         public ActionResult add()
         {
-            ViewBag.category = categorylist();
-            ViewBag.notetype = typelistlist();
-            ViewBag.country = countrylist();
-            return View();
+            var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+            var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
+
+            if (userprofilestatus != null)
+            {
+                ViewBag.image = userprofilestatus.profilepicture;
+                ViewBag.category = categorylist();
+                ViewBag.notetype = typelistlist();
+                ViewBag.country = countrylist();
+                return View();
+            }
+            return RedirectToAction("userprofile", "userprofile");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult add(addbooks note, string save)
         {
+            var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+            var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
+            ViewBag.image = userprofilestatus.profilepicture;
             ViewBag.category = categorylist();
             ViewBag.notetype = typelistlist();
             ViewBag.country = countrylist();
@@ -67,33 +81,6 @@ namespace notesplace.Controllers
                         return View();
                     }
                 }
-                /*notedetails newnote = new notedetails()
-                {
-                    userid = userid.id,
-                    statusid = statusid.id,
-                    actionby = null,
-                    remarks = null,
-                    approveddate = null,
-                    title = note.title,
-                    categoryid = categoryid.id,
-                    displaypicture = dppath,
-                    typeid = typeid.id,
-                    numberofpages = note.numberofpages,
-                    description = note.description,
-                    countryid = countryid.id,
-                    universityname = note.institutename,
-                    coursename = note.coursename,
-                    coursecode = note.coursecode,
-                    professor = note.professor,
-                    ispaid = paid,
-                    sellprice = note.sellprice,
-                    notepreviewfile = previewfilepath,
-                    createdby = userid.id,
-                    createddate = now,
-                    modifiedby = null,
-                    modifieddate = null,
-                    isActive = true,
-                };*/
                 notedetails newnote = new notedetails();
 
                 newnote.userid = userid.id;
@@ -227,7 +214,6 @@ namespace notesplace.Controllers
 
             return View();
         }
-
 
 
         public SelectList categorylist()

@@ -1,0 +1,212 @@
+﻿@model notesplace.Models.mydownload
+@{
+    Layout = "~/Views/Shared/navbar.cshtml";
+}
+@using PagedList.Mvc
+@using PagedList
+
+
+<div class="container">
+
+    <div class="row margintop-100">
+
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 dash-heading-inner">My Download Notes</div>
+        <div class="col-xl-6 col-md-12 col-sm-12 col-12 bbt" align="right">
+            @using (Html.BeginForm("mydownload", "mydownload", FormMethod.Get))
+            {
+                <input type="text" class="search-box-style" placeholder="Search" name="search">
+                <span class="padding-bt-se"><button class="btn search-btn-style">Search</button></span>
+            }
+        </div>
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+
+            <table class="table table-border table-responsive-lg table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "mydownload", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "mydownload", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">BUYER</th>
+                        <th scope="col" class="table-row-heading">SELL TYPE</th>
+                        <th scope="col" class="table-row-heading">PRICE</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("APPROVED DATE/TIME", "mydownload", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0;}
+                    @foreach (var download in Model.downloads)
+                    {
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff">@download.title</td>
+                            <td class="table-content">@download.category</td>
+                            <td class="table-content">@download.selleremail</td>
+                            @if (download.ispaid == true)
+                            {
+                                <td class="table-content">Paid</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">Free</td>
+                            }
+                            <td class="table-content">@download.price</td>
+                            @if (download.ispaid == true)
+                            {
+                                <td class="table-content">@download.approveddate</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">@download.downloadeddate</td>
+                            }
+                            <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = download.noteid})"><i class="fa fa-eye"></i></a></td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("share","transaction",new { noteid = download.noteid})">Download Note</a>
+                                    <a href="#" onclick="addentry(@download.downloadid)">Add Reviews/Feedback</a>
+
+                                    <a href="#" onclick="spamentry(@download.downloadid, '@download.title')">Report an inappropriate</a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (count == 0)
+            {
+                <div style="text-align:center;font-size:20px;font-weight:750;">No Records Found</div>
+            }
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.downloads, i => Url.Action("mydownload", "mydownload", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       sortBy = Request["sortBy"],
+
+                    }))
+
+                </ul>
+            </nav>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+@using (Html.BeginForm("addreview", "mydownload", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Add Review</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+
+                <input type="hidden" id="did" name="downloadid" />
+
+                <div class="modal-body">
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value=5 required />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value=4 required />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value=3 required />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value=2 required />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value=1 required />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 form-group">
+
+                            <label class="form-label re">Comments</label>
+                            <textarea type="text" class="form-control form-box-modal" rows="5" id="comment" name="comments"maxlength="100"></textarea>
+                        </div>
+                        <div class="col-12 modal-padding">
+                            <button class="btn modal-btn" type="submit">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<!-- Report Modal -->
+@using (Html.BeginForm("spam", "mydownload", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Inappropriate/Spam</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+
+                <input type="hidden" id="did1" name="downloadid" />
+
+                <div class="modal-body">
+                    <h2 class="modal-title modal-heading" id="title"></h2>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 form-group">
+
+                            <label class="form-label re">Comments</label>
+                            <textarea type="text" class="form-control form-box-modal" rows="5" id="comment" name="comments" maxlength="100"></textarea>
+                        </div>
+                        <div class="col-12 modal-padding">
+                            <button class="btn modal-btn" onclick="return confirm('Are you sure you want to mark this report as spam, you cannot update it later?');" type="submit">SUBMIT</button>
+
+                            <button class="btn modal-btn" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var addentry = function (downloadid) {
+        document.getElementById('did').value = downloadid;
+        $("#exampleModalCenter").modal("show");
+    }
+    var spamentry = function (downloadid,title) {
+        document.getElementById('did1').value = downloadid;
+        document.getElementById('title').innerHTML = title;
+        $("#exampleModalCenter1").modal("show");
+    }
+</script>

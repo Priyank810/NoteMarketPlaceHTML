@@ -7,7 +7,7 @@ using PagedList;
 
 namespace notesplace.Models
 {
-    public class merge
+    public class dashboard
     {
         public dashboard00 DM0 { get; set; }
         public IPagedList<dashboard01> DM1 { get; set; }

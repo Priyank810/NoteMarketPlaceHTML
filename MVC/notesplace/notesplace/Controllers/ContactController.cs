@@ -12,16 +12,40 @@ namespace notesplace.Controllers
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     public class ContactController : Controller
     {
+        notesmarketplaceEntities context = new notesmarketplaceEntities();
 
         [HttpGet]
         public ActionResult contactus()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
+                if (userprofilestatus != null)
+                {
+                    ViewBag.image = userprofilestatus.profilepicture;
+                    contactus co = new contactus();
+                    co.fullname = getuser.firstname + " " + getuser.lastname;
+                    co.email = getuser.email;
+                    return View(co);
+                }
+                else
+                {
+                    return RedirectToAction("userprofile", "userprofile");
+                }
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult contactus(contactus model)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
+                ViewBag.image = userprofilestatus.profilepicture;
+            }
             if (ModelState.IsValid)
             {
                 using (var context = new notesmarketplaceEntities())
@@ -50,7 +74,7 @@ namespace notesplace.Controllers
         {
             var fromEmail = new MailAddress("priyanksd123@gmail.com", "Contact Us");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "******"; // Replace with actual password
+            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
             string subject = fullname +" "+ query;
 
             string body = "Hello" + "<br/><br/>" + comments + "<br/><br/>" + "Regards,<br/>"+ fullname;

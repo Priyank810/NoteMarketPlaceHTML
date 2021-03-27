@@ -1,6 +1,6 @@
 ﻿@model notesplace.Models.buyerrequest
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/navbar.cshtml";
 }
 @using PagedList.Mvc
 @using PagedList
@@ -22,58 +22,66 @@
     <div class="row padding-bt-tb">
 
         <!-- Table -->
-        <div class="col-xl-12">
-            <table>
+        <div class="col-xl-12 color-for-link">
 
-                <table class="table table-border table-responsive-xl table-responsive-md table-responsive-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="table-row-heading">SR NO.</th>
-                            
-                            <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "buyer", new { sortBy = ViewBag.SortByTitle,search = Request.QueryString["search"] })</th>
-                            <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "buyer", new { sortBy = ViewBag.SortByCategory,search = Request.QueryString["search"] })</th>
-                            <th scope="col" class="table-row-heading">BUYER</th>
-                            <th scope="col" class="table-row-heading">PHONE NO.</th>
-                            <th scope="col" class="table-row-heading">SELL TYPE</th>
-                            <th scope="col" class="table-row-heading">PRICE</th>
-                            <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED DATE/TIME", "buyer", new { sortBy = ViewBag.SortByDate,search = Request.QueryString["search"] })</th>
-                            <th scope="col" class="table-row-heading"></th>
-                            <th scope="col" class="table-row-heading"></th>
-                        </tr>
-                    </thead>
 
-                    <tbody>
-                        @{ int count = 0;}
-                        @foreach (var book in Model.buy)
+            <table class="table table-border table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "buyer", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "buyer", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">BUYER</th>
+                        <th scope="col" class="table-row-heading">PHONE NO.</th>
+                        <th scope="col" class="table-row-heading">SELL TYPE</th>
+                        <th scope="col" class="table-row-heading">PRICE</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED DATE/TIME", "buyer", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0;}
+                    @foreach (var book in Model.buy)
+                    {
+                        count = count + 1;
+                    <tr>
+                        <td class="table-content">@count</td>
+                        <td class="table-content-diff">@book.title</td>
+                        <td class="table-content">@book.category</td>
+                        <td class="table-content">@book.buyeremail</td>
+                        <td class="table-content">@book.buyercountrycode @book.byyernumber</td>
+                        @if (book.ispaid == true)
                         {
-                            count = count + 1;
-                            <tr>
-                                <td class="table-content">@count</td>
-                                <td class="table-content-diff">@book.title</td>
-                                <td class="table-content">@book.category</td>
-                                <td class="table-content">testing123@gmail.com</td>
-                                <td class="table-content">+91 9898989898</td>
-                                <td class="table-content">@book.ispaid</td>
-                                <td class="table-content">$@book.sellprice</td>
-                                <td class="table-content">@book.addeddate</td>
-                                <td class="table-content"><button type="submit" class="btn ev-btn-style" onclick="window.location.href = '@Url.Action("display","bookdetails",new { nid = book.noteid})'"><i class="fa fa-eye"></i></button></td>
-                                <td class="table-content dropdown">
-                                    <i class="fa fa-ellipsis-v"></i>
-
-                                    <div class="dropdown-content">
-                                        <a href="#">Allow Download</a>
-                                    </div>
-
-                                </td>
-                            </tr>
+                            <td class="table-content">Paid</td>
                         }
+                        else
+                        {
+                            <td class="table-content">Free</td>
+                        }
+                        <td class="table-content">$@book.sellprice</td>
+                        <td class="table-content">@book.addeddate</td>
+                        <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})"><i class="fa fa-eye"></i></a></td>
+                        <td class="table-content dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
 
-                    </tbody>
-                </table>
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("allowdownload","buyerrequest",new { noteid = book.noteid, buyerid = book.buyerid})">Allow Download</a>
+                            </div>
 
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
             </table>
 
-
+            @if (count == 0)
+            {
+                <div style="text-align:center;font-size:20px;font-weight:750;">No Records Found</div>
+            }
         </div>
 
 

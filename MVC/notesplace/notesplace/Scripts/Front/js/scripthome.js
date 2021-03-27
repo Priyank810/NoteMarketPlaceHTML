@@ -20,7 +20,7 @@ $(function () {
             // show white nav
             $("nav").addClass("white-nav-top");
             // show dark logo
-            $(".navbar-brand img").attr("src", "images/logo/logo.png");
+            $(".navbar-brand img").attr("src", "/Content/Front/images/logo/logo.png");
 
             //show back to top button
            // $("#back-to-top").fadeIn();
@@ -34,7 +34,7 @@ $(function () {
 
             //normal logo
 
-            $(".navbar-brand img").attr("src", "images/logo/top-logo.png");
+            $(".navbar-brand img").attr("src", "/Content/Front/images/logo/top-logo.png");
 
             //hide back to top button
            // $("#back-to-top").fadeOut();

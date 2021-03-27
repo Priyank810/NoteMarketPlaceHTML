@@ -1,0 +1,229 @@
+﻿@model notesplace.Models.userprofile
+@{
+    Layout = "~/Views/Shared/navbar.cshtml";
+}
+
+
+<div class="container-fluid bg-image-user img-responsive">
+
+    <div class="in-image user-profile-tag">User Profile</div>
+
+</div>
+
+<div class="container">
+
+
+    @using (Html.BeginForm("userprofile", "userprofile", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-container">
+
+            <!-- Basic Profile Details -->
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Basic Profile Details
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label re">First Name</label>
+                        @Html.EditorFor(model => model.firstname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your First Name", @id = "fname" } })
+                        @Html.ValidationMessageFor(model => model.firstname, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+
+                        <label class="form-label re">Last Name</label>
+                        @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your Last Name", @id = "lname" } })
+                        @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label re">Email</label>
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your Email Address", @id = "email", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label">Date Of Birth</label>
+                    @Html.EditorFor(model => model.dob , new { htmlAttributes = new { @class = "form-control form-box-user"} })
+                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label">Gender</label>
+                    @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.gender, "Value", "Text"), "Select Gender", new { @class = "form-control form-box-user", @id = "gender" })
+                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-2 col-sm-2 form-group">
+
+                    <label class="form-label re">Code</label>
+                    @Html.DropDownListFor(model => model.countrycode, new SelectList(ViewBag.countrycode, "Value", "Text"), "Select Code", new { @class = "form-control form-box-user", @id = "coc" })
+                    @Html.ValidationMessageFor(model => model.countrycode, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 form-group">
+
+                    <label class="form-label re">Phone Number</label>
+                    @Html.EditorFor(model => model.mobilenumber, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your Phone Number", @pattern = "[0-9]{10}" } })
+                    @Html.ValidationMessageFor(model => model.mobilenumber, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label">Profile Picture</label>
+                    <input type="file" class="form-control form-box-user upload-back-img" id="profilepicture" name="profilepicture">
+                    @Html.ValidationMessageFor(model => model.profilepicture, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+
+
+            <!-- Address Details -->
+
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    Address Details
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label re">Address Line 1</label>
+                        @Html.TextAreaFor(model => model.addressline1, new { @class = "form-control form-box-user", @rows = "5", @id = "al1" })
+                        @Html.ValidationMessageFor(model => model.addressline1, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+
+                        <label class="form-label">Address Line 2</label>
+                        @Html.TextAreaFor(model => model.addressline2, new { @class = "form-control form-box-user", @rows = "5", @id = "al2"  })
+                        @Html.ValidationMessageFor(model => model.addressline2, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label re">City</label>
+                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your City", @id = "city" } })
+                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label re">State</label>
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your State", @id = "state" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label re">ZipCode</label>
+                    @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your Zip Code", @id = "zipcode" } })
+                    @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-md-6 col-sm-6 form-group">
+
+                    <label class="form-label re">Country</label>
+                    @Html.DropDownListFor(model => model.country, new SelectList(ViewBag.country, "Value", "Text"), "Select Country", new { @class = "form-control form-box-user", @id = "country" })
+                    @Html.ValidationMessageFor(model => model.country, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+
+
+            <!-- College Details -->
+
+
+            <div class="row padding-im">
+
+                <div class="col-md-12 all-heading">
+                    University and College Information
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+
+                        <label class="form-label">University</label>
+                        @Html.EditorFor(model => model.university, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your University", @id = "uni" } })
+                        @Html.ValidationMessageFor(model => model.university, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+
+                        <label class="form-label">College</label>
+                        @Html.EditorFor(model => model.college, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Your College", @id = "college" } })
+                        @Html.ValidationMessageFor(model => model.college, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+
+
+                    <button type="submit" class="btn user-submit-btn-style">SUBMIT</button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    }
+
+    </div>
+

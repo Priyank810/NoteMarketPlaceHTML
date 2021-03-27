@@ -86,7 +86,7 @@
       <EntityTypeMapping TypeName="notesmarketplaceModel.gender">
         <MappingFragment StoreEntitySet="gender">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="gender1" ColumnName="gender" />
+          <ScalarProperty Name="gender1" ColumnName="gender1" />
           <ScalarProperty Name="createddate" ColumnName="createddate" />
           <ScalarProperty Name="createdby" ColumnName="createdby" />
           <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
@@ -113,6 +113,7 @@
     <EntitySetMapping Name="notedetails">
       <EntityTypeMapping TypeName="notesmarketplaceModel.notedetails">
         <MappingFragment StoreEntitySet="notedetails">
+          <ScalarProperty Name="totalspam" ColumnName="totalspam" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="userid" ColumnName="userid" />
           <ScalarProperty Name="statusid" ColumnName="statusid" />

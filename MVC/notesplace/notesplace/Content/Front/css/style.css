@@ -60,8 +60,8 @@ select.input-validation-error {
 
 
 .transparent-nav ul.navbar-nav > li > a.nav-items:hover {
-    color: #6255a5;
-    border-bottom: 3px solid #6255a5;
+    color: #fff;
+    border-bottom: 3px solid #fff;
 }
 
 .navbar-toggler {
@@ -144,6 +144,11 @@ select.input-validation-error {
     color: #fff !important;
 }
 
+.activelink {
+    color: #6255a5 !important;
+    border-bottom: 3px solid #6255a5;
+}
+
 /*==============================
 
     Footer
@@ -204,7 +209,6 @@ ul.social-list li:nth-child(3) a:hover {
 .cc-p {
     margin-top: -50px;
 }
-
 
 
 
@@ -649,8 +653,36 @@ a:hover {
 .f-size {
     font-size: 20px;
 }
+.score {
+    display: block;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
 
+.score-wrap {
+    display: inline-block;
+    position: relative;
+    height: 23px;
+}
 
+.score .stars-active {
+    color: #EEBD01;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.score .stars-inactive {
+    color: grey;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-text-stroke: initial;
+    /* overflow: hidden; */
+}
 
 
 
@@ -813,14 +845,22 @@ a:hover {
 }
 
 .customer-name {
-    padding-left: 10px;
+    margin-bottom:0px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 450;
+    line-height: 26px;
+    color: #333333;
+}
+
+.customer-comments {
+    margin-top:5px;
     font-family: "Open Sans", sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 26px;
     color: #333333;
 }
-
 .star-al {
     font-size: 18px;
     padding-top: 20px;
@@ -1044,6 +1084,10 @@ a:hover {
     border-radius: 3px;
 }
 
+.search-box-style:focus{
+    outline:none !important;
+}
+
 .search-btn-style {
     border: none;
     /*    width: 117px;*/
@@ -1068,6 +1112,16 @@ a:hover {
 
 .padding-bt-tb {
     padding-top: 30px;
+}
+
+.color-for-link .table th a {
+    text-decoration: none !important;
+    color:black !important;
+}
+
+.color-for-link .table td a {
+    text-decoration: none !important;
+    color: black !important;
 }
 
 
@@ -1248,7 +1302,7 @@ tr:hover {
 }
 
 .modal-btn:hover {
-    background-color: #4f4240;
+    background-color: #4f4294;
     color: #fff;
 }
 
@@ -1360,3 +1414,20 @@ tr:hover {
     color: #33cc33 !important;
 }
 
+
+.re:after {
+    content: " *";
+    color: red;
+}
+
+.number-text a {
+    text-decoration: none;
+    color: #6255a5;
+}
+
+.logout-color {
+    color:#6255a5 !important;
+}
+.logout-color:hover{
+    color:#fff;
+}

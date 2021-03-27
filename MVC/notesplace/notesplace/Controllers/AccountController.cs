@@ -14,6 +14,8 @@ namespace notesplace.Controllers
     public class AccountController : Controller
     {
         // GET: Account
+
+        //signup page
         public ActionResult signup()
         {
             return View();
@@ -27,15 +29,18 @@ namespace notesplace.Controllers
             {
                 using (var context = new notesmarketplaceEntities())
                 {
+                    //checking if email already exists
                     bool isEmailExists = context.users.Any(x => x.email == model.email);
                     if (isEmailExists)
                     {
                         ModelState.AddModelError("email", "Email already exits");
                         return View(model);
                     }
+                    //creating account
                     var now = DateTime.Now;
                     var role = context.userroles.Where(x => x.rolename == "member").FirstOrDefault();
 
+                    //encrypting the password
                     model.password = crypto.Hash(model.password);
                     model.confirmpassword = crypto.Hash(model.confirmpassword);
 
@@ -59,6 +64,7 @@ namespace notesplace.Controllers
                     context.users.Add(user);
                     context.SaveChanges();
 
+                    //sending email verification link
                     SendVerificationLinkEmail(model.email, activationcode.ToString());
                     TempData["Success"] = "Your Account has been successfully created";
                 }
@@ -66,9 +72,10 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //sending to verify email page
         [HttpGet]
         public ActionResult vEmail (string id)
-      {
+        {
             ViewBag.id = id;
             var context = new notesmarketplaceEntities();
             var getname = context.users.Where(x => x.activationcode == new Guid(id)).FirstOrDefault();
@@ -76,10 +83,11 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //Verifying email
         [HttpGet]
         public ActionResult verifyAccount (string id)
         {
-            Console.WriteLine(id);
+            //Console.WriteLine(id);
             using (notesmarketplaceEntities context = new notesmarketplaceEntities())
             {
                 var vcode = context.users.Where(x => x.activationcode == new Guid(id)).FirstOrDefault();
@@ -93,6 +101,7 @@ namespace notesplace.Controllers
             }
         }
 
+        //login page
         [HttpGet]
         public ActionResult login()
         {
@@ -100,6 +109,7 @@ namespace notesplace.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult login(login model)
         {
             if (ModelState.IsValid)
@@ -107,17 +117,30 @@ namespace notesplace.Controllers
                 model.password = crypto.Hash(model.password);
                 using (var context = new notesmarketplaceEntities())
                 {
-                    var c = 0;
-                    bool isValid = context.users.Any(x => x.email == model.email && x.password == model.password);
                     var user = context.users.Where(x => x.email == model.email).FirstOrDefault();
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("email", "Email Doesn't Exist");
+                        return View();
+                    }
+                   
+                    bool isValid = context.users.Any(x => x.email == model.email && x.password == model.password);
+                    
+                    //checking if email is already verified or not
                     if(user.isEmailVerified == false)
                     {
                         ModelState.AddModelError("email", "Please Verify Your Email Address");
-                        c = 1;
+                        return View();
                     }
-                    if (isValid && c==0)
+                    if (isValid)
                     {
-                        FormsAuthentication.SetAuthCookie(model.email, model.remeberme);
+                        int timeout = model.rememberme ? 525600 : 10; 
+                        var ticket = new FormsAuthenticationTicket(model.email, model.rememberme, timeout);
+                        string encrypted = FormsAuthentication.Encrypt(ticket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                        cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                        cookie.HttpOnly = true;
+                        Response.Cookies.Add(cookie);
                         return RedirectToAction("dashboard", "dashboard");
                     }
                     ModelState.AddModelError("password", "Invalid Username or password");
@@ -128,12 +151,15 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //logout
+        [Authorize]
         public ActionResult logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("login");
         }
 
+        //forgot password
         [HttpGet]
         public ActionResult forgotpassword()
         {
@@ -154,7 +180,8 @@ namespace notesplace.Controllers
                         return View(model);
                     }
                     
-                     var password = Membership.GeneratePassword(6, 2);
+                    //generating password
+                    var password = Membership.GeneratePassword(6, 2);
                     sendPasswordMail(model.email, password);
                     isEmailExists.password = crypto.Hash(password);
                     context.SaveChanges();
@@ -164,15 +191,47 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //change password
+        [Authorize]
+        [HttpGet]
+        public ActionResult changepassword()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult changepassword(changepassword cp)
+        {
+            notesmarketplaceEntities context = new notesmarketplaceEntities();
+            if(ModelState.IsValid)
+            {
+                var currentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                var oldpassword = crypto.Hash(cp.oldpassword);
+                if (oldpassword == currentuser.password)
+                {
+                    currentuser.password = crypto.Hash(cp.newpassword);
+                    context.SaveChanges();
+                    FormsAuthentication.SignOut();
+                    return RedirectToAction("login", "account");
+                }
+                else
+                {
+                    ModelState.AddModelError("oldpassword", "Enter Correct Old Password");
+                }
+            }
+            return View();
+        }
 
 
+        //Mail for forgot password
         [NonAction]
         public void sendPasswordMail(string email, string password)
         {
 
             var fromEmail = new MailAddress("priyanksd123@gmail.com", "New Password");
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "******"; // Replace with actual password
+            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
             string subject = "New Temporary Password has been created for you";
 
             string body ="Hello,"+"<br/><br/>"+"We have generated a new password for you"+"<br/>"+"Password: "+ password;
@@ -193,13 +252,10 @@ namespace notesplace.Controllers
                 Body = body,
                 IsBodyHtml = true
             })
-                smtp.Send(message);
+            smtp.Send(message);
         }
 
-
-
-        
-
+        //mail for verification link
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
         {
@@ -208,7 +264,7 @@ namespace notesplace.Controllers
 
             var fromEmail = new MailAddress("priyanksd123@gmail.com", "Email Verification");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "********"; // Replace with actual password
+            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
             string subject = "Your account is successfully created!";
 
             string body = link;

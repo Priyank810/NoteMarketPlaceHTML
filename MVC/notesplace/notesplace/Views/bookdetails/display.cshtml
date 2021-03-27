@@ -1,15 +1,13 @@
-﻿@model IEnumerable<notesplace.Models.bookdetails>
+﻿@model notesplace.Models.bookdetails
+
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/navbar.cshtml";
 }
-
 
 
 <!-- Note Detail Section -->
 
-@foreach (var book in ViewBag.data)
-{
 
 <div class="container">
 
@@ -24,16 +22,43 @@
         <div class="col-xl-3 col-md-6 paddingbottom-20">
 
 
-            <img src="@Url.Content(@book.bookimage)" class="img-responsive image-size" alt="bookimage">
+            <img src="@Url.Content(Model.bb.bookimage)" class="img-responsive image-size" alt="bookimage">
 
         </div>
 
         <div class="col-xl-4 col-md-6 paddingbottom-20">
 
-            <div class="book-name">@book.title</div>
-            <div class="book-type">@book.booktype</div>
-            <div class="book-description">@book.description</div>
-            <button class="btn download-btn" data-toggle="modal" data-target="#exampleModal">Download/@book.sellprice</button>
+            <div class="book-name">@Model.bb.title</div>
+            <div class="book-type">@Model.bb.categoryname</div>
+            <div class="book-description">@Model.bb.description</div>
+            @if (User.Identity.IsAuthenticated == false && Model.bb.sellprice == 0)
+            {
+                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("login", "account", new { noteid = Model.bb.noteid })'">Free</button>
+            }
+            else if (User.Identity.IsAuthenticated == false)
+            {
+                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("login", "account", new { noteid = Model.bb.noteid })'">Download/@Model.bb.sellprice</button>
+            }
+            else if (Model.bb.sellprice == 0 && ViewBag.currentuser != Model.bb.userid)
+            {
+                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("share", "transaction", new { noteid = Model.bb.noteid })'">Free</button>
+            }
+            else if (User.Identity.IsAuthenticated && ViewBag.currentuser == Model.bb.userid)
+            {
+                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("share", "transaction", new { noteid = Model.bb.noteid })'">Your Book</button>
+            }
+            else if (ViewBag.isapproved == true)
+            {
+                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("share", "transaction", new { noteid = Model.bb.noteid })'">Purchased</button>
+            }
+            else if (ViewBag.isrequested == true)
+            {
+                <button class="btn download-btn" onclick="return confirm('You Already Requested');">Requested/@Model.bb.sellprice</button>
+            }
+            else
+            {
+                <button class="btn download-btn" onclick="ShowPopup(@Model.bb.noteid)">Download/@Model.bb.sellprice</button>
+            }
 
         </div>
 
@@ -42,7 +67,7 @@
             <div>
 
                 <span class="q-type">Institution:</span>
-                <span class="answer">@book.institutename</span>
+                <span class="answer">@Model.bb.institutename</span>
 
             </div>
 
@@ -50,42 +75,42 @@
             <div>
 
                 <span class="q-type">Country:</span>
-                <span class="answer">@book.country</span>
+                <span class="answer">@Model.bb.country</span>
 
             </div>
 
             <div>
 
                 <span class="q-type">Course Name:</span>
-                <span class="answer">@book.coursename</span>
+                <span class="answer">@Model.bb.coursename</span>
 
             </div>
 
             <div>
 
                 <span class="q-type">Course Code:</span>
-                <span class="answer">@book.coursecode</span>
+                <span class="answer">@Model.bb.coursecode</span>
 
             </div>
 
             <div>
 
                 <span class="q-type">Professor:</span>
-                <span class="answer">@book.professor</span>
+                <span class="answer">@Model.bb.professor</span>
 
             </div>
 
             <div>
 
                 <span class="q-type">No Of Pages:</span>
-                <span class="answer">@book.numberofpages</span>
+                <span class="answer">@Model.bb.numberofpages</span>
 
             </div>
 
             <div>
 
                 <span class="q-type">Approved Date:</span>
-                <span class="answer">November 25 2020</span>
+                <span class="answer">@Model.bb.createddate</span>
 
             </div>
 
@@ -93,18 +118,31 @@
 
                 <span class="q-type">Rating</span>
                 <span class="star-float">
-                    <i class="fa fa-star checked f-size"></i>
-                    <i class="fa fa-star checked f-size"></i>
-                    <i class="fa fa-star checked f-size"></i>
-                    <i class="fa fa-star-o f-size"></i>
-                    <i class="fa fa-star-o f-size"></i>
-                    <span class="answer-review">100 Reviews</span>
+                    <span class="score">
+                        <span class="score-wrap" style="margin-top:5px;margin-right:5px;">
+                            <span class="stars-active" style="width:@ViewBag.totalstar%">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                            <span class="stars-inactive">
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                            </span>
+                        </span>
+                        <span class="answer-review" style="float:right;">@ViewBag.totalrecords Reviews</span>
+                    </span>
                 </span>
 
             </div>
 
             <div class="inappropriate-message">
-                5 users marked this note as inappropriate.
+                @Model.bb.totalspam users marked this note as inappropriate.
             </div>
 
         </div>
@@ -114,7 +152,6 @@
         </div>
 
     </div>
-    @book.bookpreview
 
     <div class="row">
 
@@ -125,8 +162,14 @@
             <div class="ptop">
 
                 <div class="iframe-pdf">
-
-                    <iframe src="@Url.Content(@book.bookpreview)" width="600px" height="450px"></iframe>
+                    @if (Model.bb.bookpreview != null)
+                    {
+                        <iframe src="@Url.Content(@Model.bb.bookpreview)" width="600px" height="450px"></iframe>
+                    }
+                    else
+                    {
+                        <iframe width="600px" height="450px">Not Available</iframe>
+                    }
                 </div>
 
             </div>
@@ -137,91 +180,58 @@
         <div class="col-xl-6 note-detail-heading">
 
             Customer Reviews
-
             <div class="ptop">
 
                 <div class="customer-box">
 
-                    <div class="container">
+                    @if (Model.rating != null)
+                    {
+                        foreach (var r in Model.rating)
+                        {
+                            if (r.star != null)
+                            {
+                                <div class="container">
 
-                        <div class="row customer-padding">
+                                    <div class="row customer-padding">
+                                        <div class="col-md-2">
+                                            <img src="@Url.Content(r.profile)" class="customer-image">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p class="customer-name">
+                                                @r.name
+                                            </p>
+                                            <span class="score">
+                                                <span class="score-wrap" style="float: left">
+                                                    <span class="stars-active" style="width:@r.star%">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="stars-inactive">
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                    </span>
+                                                </span>
+                                            </span>
 
-                            <img src="images/customers/user-1.jpg" class="customer-image">
-                            <span class="customer-name">
-                                Richard Brown<br>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
+                                            <p class="customer-comments">@r.comments</p>
+                                        </div>
+                                    </div>
 
-                            <div>
-                                <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
-                            </div>
+                                    <div class="container">
+                                        <div class="row customer-review-line">
+                                        </div>
+                                    </div>
 
-                        </div>
-
-                        <div class="container">
-                            <div class="row customer-review-line">
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="container">
-
-                        <div class="row customer-padding">
-
-                            <img src="images/customers/user-1.jpg" class="customer-image">
-                            <span class="customer-name">
-                                Richard Brown<br>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-
-                            <div>
-                                <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
-                            </div>
-
-                        </div>
-
-                        <div class="container">
-                            <div class="row customer-review-line">
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="container">
-
-                        <div class="row customer-padding">
-
-                            <img src="images/customers/user-1.jpg" class="customer-image">
-                            <span class="customer-name">
-                                Richard Brown<br>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star checked"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </span>
-
-                            <div>
-                                <p class="customer-review-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt accusamus quas nulla similique.</p>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
+                                </div>
+                            }
+                        }
+                    }
 
                 </div>
 
@@ -229,14 +239,13 @@
 
         </div>
 
-
     </div>
 
 </div>
-}
+
 
 <!-- popup -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -246,28 +255,60 @@
                         <p class="tick-tick">&#10003;</p>
                     </div>
                 </div>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                @* @Html.ActionLink("display","bookdetails",new { nid = book.noteid})*@
+                <a href="@Url.Action("display", "bookdetails", new { nid = Model.bb.noteid })" class="close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </a>
+
             </div>
 
-            <div class="container modal-body">
+            <div class="container modal-body" id="myModalBodyDiv">
 
-                <div class="popup-title">
-                    Thank you for purchasing!
-                </div>
-
-                <div class="name-r">
-                    Dear Smith,
-                </div>
-                <div class="">
-                    <p class="message"><br>As this is a paid note you need to pay to sellerRahil Shah offline. We will send him an email that you want to download this note. He may contact you frther for payment process completion.<br><br>In case you have urgency.<br>Please contact us on +9195377345959.<br><br>Once he acknowledge us - selected notes you can see over my downloads tab for download.<br><br>Have a good day.</p>
-                </div>
             </div>
 
         </div>
     </div>
+
 </div>
 
+
+
+
+<!-- JS -->
+<script>
+    var pmodal, loading;
+    function ShowProgress() {
+        pmodal = document.createElement("DIV");
+        pmodal.className = "pmodal";
+        document.body.appendChild(pmodal);
+        loading = document.getElementsByClassName("loading")[0];
+        loading.style.display = "block";
+        var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+        var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+        loading.style.top = top + "px";
+        loading.style.left = left + "px";
+    };
+
+    var ShowPopup = function (noteid) {
+
+        ShowProgress();
+        $.ajax({
+            type: "GET",
+            url: "/transaction/share?noteid=" + noteid,
+            success: function (response) {
+                //$("#loaderDiv").hide();
+                setTimeout(function () {
+                    document.body.removeChild(pmodal);
+                    loading.style.display = "none";
+                }, 1);
+
+                $("#myModalBodyDiv").html(response);
+
+                $("#exampleModal").modal("show");
+
+
+            },
+        })
+    }
+</script>
 
