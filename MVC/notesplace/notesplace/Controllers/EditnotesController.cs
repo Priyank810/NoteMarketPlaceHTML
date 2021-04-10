@@ -10,7 +10,6 @@ namespace notesplace.Controllers
 {
     public class EditnotesController : Controller
     {
-        
         // GET: Editnotes
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         public ActionResult editnotes(int nid)

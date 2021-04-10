@@ -1,0 +1,121 @@
+﻿@model notesplace.Models.members
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+@using PagedList
+@using PagedList.Mvc
+
+<div class="container">
+
+    <div class="row margintop-100">
+
+        <div class="col-xl-6 col-md-6 col-sm-12 col-12 dash-heading-member-and-spamreport">
+            Members
+        </div>
+        @using (Html.BeginForm("member", "member", FormMethod.Get, new { @class = "col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-end" }))
+        {
+            <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+            <button class="btn search-btn-style mr-sm-2 mr-2">Search</button>
+        }
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+
+            <table class="table table-border table-responbsive-xl table-responsive-lg table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("FIRST NAME", "member", new { sortBy = ViewBag.SortByFirstname, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("LAST NAME", "member", new { sortBy = ViewBag.SortByLastname, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("EMAIL", "member", new { sortBy = ViewBag.SortByEmail, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("JOINING DATE", "member", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("UNDER REVIEW NOTES", "member", new { sortBy = ViewBag.SortByUnderreviewnotes, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("PUBLISHED NOTES", "member", new { sortBy = ViewBag.SortByPublishednotes, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED NOTES", "member", new { sortBy = ViewBag.SortByDownloadednotes, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("TOTAL EXPENSES", "member", new { sortBy = ViewBag.SortByTotalexpenses, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("TOTAL EARNING", "member", new { sortBy = ViewBag.SortByTotalearning, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var m in Model.member)
+                    {
+                        var jdate = (DateTime)m.joiningdate;
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content">@m.firstname</td>
+                            <td class="table-content">@m.lastname</td>
+                            <td class="table-content">@m.email</td>
+                            <td class="table-content">@jdate.ToString("g")</td>
+                            <td class="table-content-diff"><a href="@Url.Action("notesunderreview","notes",new { byseller = m.firstname+" "+m.lastname })" style="color:#6255a5 !important;">@m.underreviewnotes</a></td>
+                            <td class="table-content-diff"><a href="@Url.Action("publishednotes","notes",new { byseller = m.firstname+" "+m.lastname })" style="color:#6255a5 !important;">@m.publishednotes</a></td>
+                            <td class="table-content-diff"><a href="@Url.Action("downloadednotes","notes",new { bybuyer = m.firstname+" "+m.lastname })" style="color:#6255a5 !important;">@m.downloadednotes</a></td>
+                            @if (m.totalexpense == null)
+                            {
+                                <td class="table-content">0</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">@m.totalexpense</td>
+                            }
+                            @if (m.totalearning == null)
+                            {
+                                <td class="table-content">0</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">@m.totalearning</td>
+                            }
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("memberdetails","member",new { userid = m.memberid })" class="hover-color">View More Details</a>
+                                    @if (m.isActive == true)
+                                    {
+                                        <a href="@Url.Action("deactivate", "member", new { userid = m.memberid })" onclick="return confirm('Are you sure you want to inactive this member?');" class="hover-color">Deactivate</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("reactivate", "member", new { userid = m.memberid })" onclick="return confirm('Are you sure you want to reactive this member?');" class="hover-color">Reactivate</a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.member, i => Url.Action("member", "member", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       sortBy = Request["sortBy"],
+                    }))
+
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+

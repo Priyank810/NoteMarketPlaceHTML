@@ -100,13 +100,23 @@
             <div class="col-md-4 col-sm-6 col-xs-12 padding-card">
 
                 <div class="card">
-                    <img class="card-img-top img-responsive" src="@Url.Content(@book.displaypicture)" alt="Card image cap">
+                    @if (book.displaypicture != null)
+                    {
+                        <img class="card-img-top img-responsive" src="@Url.Content(@book.displaypicture)" alt="Card image cap" style="height:195px !important;">
+                    }
+                    else
+                    {
+                        <img class="card-img-top img-responsive" src="@Url.Content(ViewBag.defaultnoteimage)" alt="Card image cap">
+                    }
                     <div class="card-body">
                         <a href="@Url.Action("display","bookdetails",new { nid = book.noteid })"><div class="card-title card-title-style">@book.title</div></a>
                         <div class="card-text pad-bot"><i class="fa fa-university"></i><span class="card-text-style"> @book.university, @book.country</span></div>
                         <div class="card-text pad-bot"><i class="fa fa-book"></i><span class="card-text-style"> @book.numberofpages</span></div>
                         <div class="card-text pad-bot"><i class="fa fa-calendar"></i><span class="card-text-style"> @book.date</span></div>
-                        <div class="card-text pad-bot"><i class="fa fa-flag"></i><span class="card-text-style-last"> @book.totalspam Users marked this note as inappropriate</span></div>
+                        @if(book.totalspam == null || book.totalspam == 0)
+                        { <div class="card-text pad-bot"><i class="fa fa-flag"></i><span class="card-text-style-last"> 0 Users marked this note as inappropriate</span></div> }
+                        else {<div class="card-text pad-bot"><i class="fa fa-flag"></i><span class="card-text-style-last"> @book.totalspam Users marked this note as inappropriate</span></div> }
+                        
                         <div>
 
                             <div>

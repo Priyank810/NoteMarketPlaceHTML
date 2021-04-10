@@ -105,7 +105,7 @@
 
                         <div class="container">
                             <div class="row">
-                                <div class="col-12 number-text">@Model.DM0.myrejected</div>
+                                <div class="col-12 number-text"><a href="@Url.Action("myrejectednotes","myrejectednotes")">@Model.DM0.myrejected</a></div>
                                 <div class="col-12 number-description">My Rejected Notes</div>
                             </div>
                         </div>
@@ -163,23 +163,24 @@
             <table class="table table-border table-responsive-md table-responsive-sm">
                 <thead>
                     <tr>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date", "dashboard", new { sortBy = ViewBag.SortByDate, search1 = Request["search1"], search = Request["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy = ViewBag.SortByTitle, search1 = Request["search1"], search = Request["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy = ViewBag.SortByCategory, search1 = Request["search1"], search = Request["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date", "dashboard", new { sortBy = ViewBag.SortByDate, search1 = Request["search1"], search = Request["search"],i=Request.QueryString["i"], j = Request.QueryString["j"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy = ViewBag.SortByTitle, search1 = Request["search1"], search = Request["search"], i = Request.QueryString["i"] , j = Request.QueryString["j"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy = ViewBag.SortByCategory, search1 = Request["search1"], search = Request["search"], i = Request.QueryString["i"], j = Request.QueryString["j"] })</th>
                         <th scope="col" class="table-row-heading">Status</th>
                         <th scope="col" class="table-row-heading">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @{ int count = 0;}
+                    @{ int count = 0; if (ViewBag.counter1 != null) { count = ViewBag.counter1; } }
                     @foreach (var book in Model.DM1)
                     {
                         count = count + 1;
                         if (@book.status == "draft")
                         {
+                            var d = (DateTime)book.addeddate;
                             <tr>
-                                <td class="table-content">@book.addeddate</td>
+                                <td class="table-content">@d.ToString(string.Format("dd/MM/yyyy"))</td>
                                 <td class="table-content">@book.title</td>
                                 <td class="table-content">@book.category</td>
                                 <td class="table-content">@book.status</td>
@@ -192,9 +193,9 @@
                         }
                         else
                         {
-
+                            var d = (DateTime)book.addeddate;
                             <tr>
-                                <td class="table-content">@book.addeddate</td>
+                                <td class="table-content">@d.ToString(string.Format("dd/MM/yyyy"))</td>
                                 <td class="table-content">@book.title</td>
                                 <td class="table-content">@book.category</td>
                                 <td class="table-content">@book.status</td>
@@ -215,17 +216,18 @@
 
         <div class="container">
 
-
             <nav class="padding-bt-tb">
 
                 <ul class="pagination justify-content-center">
-                @Html.PagedListPager(Model.DM1, i => Url.Action("dashboard", "dashboard", new
-                {
-                   i,
-                   search1 = Request.QueryString["search1"],
-                   search2 = Request.QueryString["search2"],
-                   sortBy = Request["sortBy"],
-                }))
+                    @Html.PagedListPager(Model.DM1, i => Url.Action("dashboard", "dashboard", new
+                    {
+                       i,
+                       search1 = Request.QueryString["search1"],
+                       search2 = Request.QueryString["search2"],
+                       sortBy = Request.QueryString["sortBy"],
+                       sortBy2 = Request.QueryString["sortBy2"],
+                       j = Request.QueryString["j"]
+                    }))
                 </ul>
 
             </nav>
@@ -259,9 +261,9 @@
             <table class="table table-border table-responsive-md table-responsive-sm color-for-link">
                 <thead>
                     <tr>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date", "dashboard", new { sortBy2 = ViewBag.SortByDate2, search2 = Request["search2"], search = Request["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy2 = ViewBag.SortByTitle2, search2 = Request["search2"], search = Request["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy2 = ViewBag.SortByCategory2, search2 = Request["search2"], search = Request["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Added Date", "dashboard", new { sortBy2 = ViewBag.SortByDate2, search2 = Request["search2"], search = Request["search"], i = Request.QueryString["i"], j = Request.QueryString["j"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "dashboard", new { sortBy2 = ViewBag.SortByTitle2, search2 = Request["search2"], search = Request["search"], i = Request.QueryString["i"], j = Request.QueryString["j"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "dashboard", new { sortBy2 = ViewBag.SortByCategory2, search2 = Request["search2"], search = Request["search"], i = Request.QueryString["i"], j = Request.QueryString["j"] })</th>
                         <th scope="col" class="table-row-heading">IsPaid</th>
                         <th scope="col" class="table-row-heading">Price</th>
                         <th scope="col" class="table-row-heading">Action</th>
@@ -269,25 +271,26 @@
                 </thead>
 
                 <tbody>
-                    @{ int count1 = 0;}
+                    @{ int count1 = 0; if (ViewBag.counter2 != null) { count = ViewBag.counter2; } }
                     @foreach (var book in Model.DM2)
                     {
+                        var d = (DateTime)book.addeddate;
                         count1 = count1 + 1;
-                    <tr>
-                        <td class="table-content">@book.addeddate</td>
-                        <td class="table-content">@book.title</td>
-                        <td class="table-content">@book.category</td>
-                        @if (book.ispaid == true)
-                        {
-                            <td class="table-content">Paid</td>
-                        }
-                        else
-                        {
-                            <td class="table-content">Free</td>
-                        }
-                        <td class="table-content">@book.sellprice</td>
-                        <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})"><i class="fa fa-eye"></i></a></td>
-                    </tr>
+                        <tr>
+                            <td class="table-content">@d.ToString(string.Format("dd/MM/yyyy"))</td>
+                            <td class="table-content">@book.title</td>
+                            <td class="table-content">@book.category</td>
+                            @if (book.ispaid == true)
+                            {
+                                <td class="table-content">Paid</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">Free</td>
+                            }
+                            <td class="table-content">@book.sellprice</td>
+                            <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})"><i class="fa fa-eye"></i></a></td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -304,15 +307,15 @@
             <nav class="padding-bt-tb">
 
                 <ul class="pagination justify-content-center">
-                @Html.PagedListPager(Model.DM2, j => Url.Action("dashboard", "dashboard", new
-                {
-                     j,
-                     search1 = Request.QueryString["search1"],
-                     search2 = Request.QueryString["search2"],
-                     sortBy = Request["sortBy"],
-                 
-                }))
-
+                    @Html.PagedListPager(Model.DM2, j => Url.Action("dashboard", "dashboard", new
+                    {
+                         j,
+                         search1 = Request.QueryString["search1"],
+                         search2 = Request.QueryString["search2"],
+                         sortBy2 = Request.QueryString["sortBy2"],
+                         sortBy = Request.QueryString["sortBy"],
+                         i=Request.QueryString["i"],
+                    }))
                 </ul>
 
             </nav>

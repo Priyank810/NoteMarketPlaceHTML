@@ -15,13 +15,20 @@ namespace notesplace
     public partial class systemconfig
     {
         public int id { get; set; }
-        public string valuetype { get; set; }
-        public string value { get; set; }
+        public string supportemail { get; set; }
+        public string password { get; set; }
+        public string otheremail { get; set; }
+        public string supportphonenumber { get; set; }
+        public string facebookurl { get; set; }
+        public string twitterurl { get; set; }
+        public string linedinurl { get; set; }
+        public string defaultnotepicture { get; set; }
+        public string defaultprofilepicture { get; set; }
         public Nullable<System.DateTime> createddate { get; set; }
         public Nullable<int> createdby { get; set; }
         public Nullable<System.DateTime> modifieddate { get; set; }
         public Nullable<int> modifiedby { get; set; }
-        public Nullable<bool> isActive { get; set; }
+        public bool isActive { get; set; }
     
         public virtual users users { get; set; }
         public virtual users users1 { get; set; }

@@ -8,7 +8,7 @@ using System.IO;
 
 namespace notesplace.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="member")]
     public class userprofileController : Controller
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
@@ -54,7 +54,11 @@ namespace notesplace.Controllers
              
 
                 string profilepicturepath = null;
-                if(user.profilepicture!=null)
+                if (user.profilepicture == null)
+                {
+                    profilepicturepath = context.systemconfig.FirstOrDefault().defaultprofilepicture;
+                }
+                else
                 {
                     string folderpath = Server.MapPath("~/Members/" + users.id.ToString() + "/");
                     if (!Directory.Exists(folderpath))
@@ -202,6 +206,11 @@ namespace notesplace.Controllers
                         string fullpath = Path.Combine(path, fileName);
                         profilepicturepath = "~/Members/" + users.id.ToString() + "/" + fileName;
                         user.profilepicture.SaveAs(fullpath);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("profilepicture", "Please Add file with proper extension");
+                        return View();
                     }
                 }
 

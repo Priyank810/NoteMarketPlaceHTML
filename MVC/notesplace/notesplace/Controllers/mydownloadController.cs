@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using notesplace.Models;
+using System.Net.Mail;
 
 namespace notesplace.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="member")]
     public class mydownloadController : Controller
     {
 
@@ -87,6 +88,7 @@ namespace notesplace.Controllers
                     }
 
                     mydownloadlist.downloads = dlist.ToList().ToPagedList(i ?? 1, 10);
+                    ViewBag.counter = 10 * (i - 1);
                     return View(mydownloadlist);
                //}
 
@@ -160,7 +162,45 @@ namespace notesplace.Controllers
                 context.spam.Add(sp);
                 context.SaveChanges();
             }
+            var getbuyer = context.users.Where(x => x.id == downloadbook.buyerid).FirstOrDefault();
+            var getseller = context.users.Where(x => x.id == downloadbook.sellerid).FirstOrDefault();
+            sendMail(getbuyer.firstname+" "+getbuyer.lastname, notes.title, getseller.firstname+" "+getseller.lastname);
             return RedirectToAction("mydownload", "mydownload");
+        }
+
+        [NonAction]
+        public void sendMail(string buyername, string notetitle, string sellername)
+        {
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
+            var receiver = sender.otheremail;
+
+            var fromEmail = new MailAddress(senderemail, "Report Spam");
+            var toEmail = new MailAddress(receiver);
+            var fromEmailPassword = senderpassword;
+            string subject = buyername + " Reported an issue for note title " + notetitle;
+
+            string body = "Hello, Admins"+ "<br/><br/>" + "We wnat to inform you that," + buyername + " reported an issue for" +sellername+ "<br/>"
+                + "with note title " +notetitle+ " Please look at the notes and take required actions."+ "<br/><br/>" + "Regards, <br/>" + "Notes Marketplace";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            smtp.Send(message);
         }
     }
 }

@@ -1,0 +1,102 @@
+﻿@model notesplace.Models.categorylist
+
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+@using PagedList
+@using PagedList.Mvc
+
+
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Manage Category
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="row margintop-60">
+
+        <div class="col-xl-6 col-md-4 col-sm-12 col-12">
+            <button class="btn addadmin-btn-style" onclick="window.location.href = '@Url.Action("category", "add")'">Add Category</button>
+        </div>
+        @using (Html.BeginForm("category", "manage", FormMethod.Get, new { @class = "col-xl-6 col-md-8 col-sm-12 col-12 d-flex justify-content-end" }))
+        {
+            <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+            <button class="btn search-btn-style mr-sm-2 mr-2" onclick="window.location.href = '@Url.Action("category", "manage")'">Search</button>
+        }
+    </div>
+
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+            <table class="table table-border table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("CATEGORY NAME", "category", new { sortBy = ViewBag.SortByCategoryName, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">Description</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DATE ADDED", "category", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">ADDED BY</th>
+                        <th scope="col" class="table-row-heading">ACTIVE</th>
+                        <th scope="col" class="table-row-heading">ACTION</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var category in Model.category)
+                    {
+                        count = count + 1; 
+                        var ad = (DateTime)category.dateadded;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content">@category.categoryname</td>
+                            <td class="table-content">@category.categorydescription</td>
+                            <td class="table-content">@ad.ToString("g")</td>
+                            <td class="table-content">@category.addedby</td>
+                            @if (category.active == true)
+                            {
+                                <td class="table-content">Yes</td>
+                                <td class="table-content"><a href="@Url.Action("editcategory","manage",new { categoryid = category.categoryid})"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="@Url.Action("deactivatecategory","manage",new { categoryid = category.categoryid })"><i class="fa fa-trash-o"></i></a></td>
+                            }
+                            else
+                            {
+                                <td class="table-content">No</td>
+                                <td class="table-content"><a href="@Url.Action("editcategory","manage",new { categoryid = category.categoryid})"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a href="@Url.Action("reactivatecategory","manage",new { categoryid = category.categoryid })"><i class="fa fa-check-square-o"></i></a></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.category, i => Url.Action("category", "manage", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       sortBy = Request["sortBy"],
+
+                    }))
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+

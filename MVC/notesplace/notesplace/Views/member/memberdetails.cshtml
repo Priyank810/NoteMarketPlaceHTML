@@ -1,0 +1,184 @@
+﻿@model notesplace.Models.memberdetail
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+    var image = Model.photo;
+    if (Model.photo == null)
+    {
+        notesmarketplaceEntities context = new notesmarketplaceEntities();
+        image = context.systemconfig.FirstOrDefault().defaultprofilepicture;
+    }
+}
+
+@using PagedList
+@using PagedList.Mvc
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Member Details
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2 member-image">
+            <img src="@Url.Content(image)" class="img-thumbnail">
+        </div>
+        <div class="col-xl-5 border-separate">
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">First Name:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.firstname</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Last Name:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.lastname</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Email:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.email</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">DOB:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.dob</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Phone:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.phonenumber</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">College/University:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.university</div>
+            </div>
+        </div>
+
+        <div class="col-xl-5">
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Address 1:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.address1</div>
+            </div>
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Address 2:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.address2</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">City:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.city</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">State:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.state</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Country:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.country</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-5 col-md-5 col-sm-5 col-xs-5 col-5 question">Zip Code:</div>
+                <div class="co-xl-7 col-md-7 col-sm-7 col-xs-7 col-7 answer">@Model.zipcode</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+            <div class="border-sep"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container paddingtop-60">
+
+    <div class="row">
+
+        <div class="col-xl-12 col-md-12 col-sm-12 col-12 dash-heading-inner">
+            Notes
+        </div>
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+            
+            <table class="table table-border table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("NOTE TITLE", "memberdetails", new { sortBy = ViewBag.SortByTitle,userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("CATEGORY", "memberdetails", new { sortBy = ViewBag.SortByCategory,userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">STATUS</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED NOTES", "memberdetails", new { sortBy = ViewBag.SortByDownloadednotes, userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("TOTAL EARNINGS", "memberdetails", new { sortBy = ViewBag.SortByTotalearnings, userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DATE ADDED", "memberdetails", new { sortBy = ViewBag.SortByDate, userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("PUBLISHED DATE", "memberdetails", new { sortBy = ViewBag.SortByPublisheddate, userid = (int)Model.memberid, i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var n in Model.membernotes)
+                    {
+                        var ad = (DateTime)n.addeddate; 
+                        var pd = (DateTime)n.publisheddate;
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = n.noteid})" style="color:#6255a5 !important;">@n.notetitle</a></td>
+                            <td class="table-content">@n.category</td>
+                            <td class="table-content">@n.status</td>
+                            <td class="table-content">@n.downloadednotes</td>
+                            <td class="table-content">@n.totalearnings</td>
+                            <td class="table-content">@ad.ToString("g")</td>
+                            <td class="table-content">@pd.ToString("g")</td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("download","notes",new { noteid = n.noteid})">Download Notes</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        @{ int memberid = (int)Model.memberid; }
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.membernotes,i => Url.Action("memberdetails", "member", new
+                    {
+                        i,
+                        userid = memberid,
+                        sortBy = Request["sortBy"],
+                    }))
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>

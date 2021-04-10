@@ -1,0 +1,68 @@
+﻿@model notesplace.Models.category
+
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Edit Category
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+
+        @using (Html.BeginForm("editcategory", "manage", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(x => x.categoryid)
+            <div class="row">
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+
+                            <div class="form-group">
+
+                                <label class="form-label re">Category</label>
+                                @Html.EditorFor(model => model.categoryname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Category" } })
+                                @Html.ValidationMessageFor(model => model.categoryname, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Description</label>
+                                @Html.TextAreaFor(model => model.categorydescription, new { @class = "form-control form-box-user", @rows = "10", @placeholder = "Enter Description" })
+                                @Html.ValidationMessageFor(model => model.categorydescription, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <button type="submit" class="btn user-submit-btn-style">SUBMIT</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

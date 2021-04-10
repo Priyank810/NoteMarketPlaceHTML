@@ -1,0 +1,180 @@
+﻿@model notesplace.Models.systemconfig
+
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Manage System Configuration
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        @using (Html.BeginForm("systemconfig", "systemconfig", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x=>x.systemconfigid)
+            <div class="row">
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+
+                            <div class="form-group">
+
+                                <label class="form-label re">Support email address</label>
+                                @Html.EditorFor(model => model.supportemail, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter enail address" } })
+                                @Html.ValidationMessageFor(model => model.supportemail, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Support Email Password</label>
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your phone number" } })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Confirm Password</label>
+                                @Html.EditorFor(model => model.confirmpassword, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your phone number" } })
+                                @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Support Phone number</label>
+                                @Html.EditorFor(model => model.supportphonenumber, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your phone number" } })
+                                @Html.ValidationMessageFor(model => model.supportphonenumber, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Email Address(es)(for various events system will send notification to these users)</label>
+
+                                @Html.EditorFor(model => model.othereamil, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your email address" } })
+                                @Html.ValidationMessageFor(model => model.othereamil, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label">Facebook URL</label>
+                                @Html.EditorFor(model => model.facebookurl, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter facebook url" } })
+                                @Html.ValidationMessageFor(model => model.facebookurl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label">Twitter URL</label>
+                                @Html.EditorFor(model => model.twitterurl, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter twitter url" } })
+                                @Html.ValidationMessageFor(model => model.twitterurl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label">Linkedin URL</label>
+                                @Html.EditorFor(model => model.linkeinurl, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter linkedin url" } })
+                                @Html.ValidationMessageFor(model => model.linkeinurl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <label class="form-label re">Default image for notes(if seller do not upload)</label>
+                            <input type="file" class="form-control form-box-user upload-back-img" name="defaultnotepicture">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <label class="form-label re">Default Profile Picture(if seller do not upload)</label>
+                            <input type="file" class="form-control form-box-user upload-back-img" name="defaultprofilepicture">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <button type="submit" class="btn user-submit-btn-style" style="margin-bottom:40px;">SUBMIT</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

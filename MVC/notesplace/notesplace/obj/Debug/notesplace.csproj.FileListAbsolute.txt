@@ -81,3 +81,6 @@ C:\Users\DELL\source\repos\notesplace\notesplace\bin\PagedList.Mvc.xml
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.dll
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.pdb
 C:\Users\DELL\source\repos\notesplace\notesplace\bin\DotNetZip.xml
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\Newtonsoft.Json.dll
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\ZendeskApi_v2.dll
+C:\Users\DELL\source\repos\notesplace\notesplace\bin\Newtonsoft.Json.xml

@@ -1,9 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-@{ 
-    Layout = null;
-}
+@{ Layout = null; }
 
+@{ notesmarketplaceEntities context = new notesmarketplaceEntities();
+    var image = context.systemconfig.FirstOrDefault().defaultprofilepicture;
+    if(ViewBag.image==null)
+    {
+        ViewBag.image = image;
+    }
+}
 <head>
 
     <!-- Important Meta Tags -->
@@ -62,7 +67,8 @@
 
                             <li class="nav-item">
                                 <a class="nav-items nav-link" href="@Url.Action("buyer", "buyerrequest")"><span>Buyer Requests</span></a>
-                            </li>}
+                            </li>
+}
 
                         <li class="nav-item">
                             <a class="nav-items nav-link" href="@Url.Action("faq","faq")"><span>FAQ</span></a>
@@ -74,32 +80,35 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-            <li class="nav-item">
-                <div class="dropdown">
-                    <button class="profile-btn-style nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="@Url.Content(ViewBag.image)" class="nav-user-image">
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="@Url.Action("editprofile", "userprofile")">My Profile</a>
-                        <a class="dropdown-item" href="@Url.Action("mydownload", "mydownload")">My Downloads</a>
-                        <a class="dropdown-item" href="@Url.Action("sold", "mysoldnotes")">My Sold Notes</a>
-                        <a class="dropdown-item" href="#">My Rejected Notes</a>
-                        <a class="dropdown-item" href="@Url.Action("changepassword", "account")">Change Password</a>
-                        <a class="dropdown-item logout-color" href="@Url.Action("logout", "account")">LOGOUT</a>
-                    </div>
-                </div>
-            </li>}
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="profile-btn-style nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="@Url.Content(ViewBag.image)" class="nav-user-image">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="@Url.Action("editprofile", "userprofile")">My Profile</a>
+                                        <a class="dropdown-item" href="@Url.Action("mydownload", "mydownload")">My Downloads</a>
+                                        <a class="dropdown-item" href="@Url.Action("sold", "mysoldnotes")">My Sold Notes</a>
+                                        <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                        <a class="dropdown-item" href="@Url.Action("changepassword", "account")">Change Password</a>
+                                        <a class="dropdown-item logout-color" href="@Url.Action("logout", "account")">LOGOUT</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
 
                         @if (User.Identity.IsAuthenticated)
                         {
-            <li class="nav-item">
-                <button type="submit" class="btn log-btn nav-link" onclick="location.href='@Url.Action("logout", "account")'">Logout</button>
-            </li> }
+                            <li class="nav-item">
+                                <button type="submit" class="btn log-btn nav-link" onclick="location.href='@Url.Action("logout", "account")'">Logout</button>
+                            </li>
+                        }
                         else
                         {
-            <li class="nav-item">
-                <button type="submit" class="btn log-btn nav-link" onclick="location.href='@Url.Action("login", "account")'">Login</button>
-            </li>}
+                            <li class="nav-item">
+                                <button type="submit" class="btn log-btn nav-link" onclick="location.href='@Url.Action("login", "account")'">Login</button>
+                            </li>
+                        }
 
                     </ul>
                 </div>
@@ -291,13 +300,7 @@
 
                 <div class="bg-box-review container">
                     <div class="row re-pa">
-                        <!--
-                                                <div class="col-md-4">
-
-
-                                                </div>
-                        -->
-
+                        
                         <div class="col-xl-3 col-md-4 col-sm-12">
 
                             <img src="~/Content/Front/images/customers/customer-1.png" class="customer-profile-photo">

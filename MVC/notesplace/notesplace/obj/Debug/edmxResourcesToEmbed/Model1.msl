@@ -113,7 +113,6 @@
     <EntitySetMapping Name="notedetails">
       <EntityTypeMapping TypeName="notesmarketplaceModel.notedetails">
         <MappingFragment StoreEntitySet="notedetails">
-          <ScalarProperty Name="totalspam" ColumnName="totalspam" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="userid" ColumnName="userid" />
           <ScalarProperty Name="statusid" ColumnName="statusid" />
@@ -121,6 +120,7 @@
           <ScalarProperty Name="remarks" ColumnName="remarks" />
           <ScalarProperty Name="approveddate" ColumnName="approveddate" />
           <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="totalspam" ColumnName="totalspam" />
           <ScalarProperty Name="categoryid" ColumnName="categoryid" />
           <ScalarProperty Name="displaypicture" ColumnName="displaypicture" />
           <ScalarProperty Name="typeid" ColumnName="typeid" />
@@ -208,8 +208,15 @@
       <EntityTypeMapping TypeName="notesmarketplaceModel.systemconfig">
         <MappingFragment StoreEntitySet="systemconfig">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="valuetype" ColumnName="valuetype" />
-          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="supportemail" ColumnName="supportemail" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="otheremail" ColumnName="otheremail" />
+          <ScalarProperty Name="supportphonenumber" ColumnName="supportphonenumber" />
+          <ScalarProperty Name="facebookurl" ColumnName="facebookurl" />
+          <ScalarProperty Name="twitterurl" ColumnName="twitterurl" />
+          <ScalarProperty Name="linedinurl" ColumnName="linedinurl" />
+          <ScalarProperty Name="defaultnotepicture" ColumnName="defaultnotepicture" />
+          <ScalarProperty Name="defaultprofilepicture" ColumnName="defaultprofilepicture" />
           <ScalarProperty Name="createddate" ColumnName="createddate" />
           <ScalarProperty Name="createdby" ColumnName="createdby" />
           <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />

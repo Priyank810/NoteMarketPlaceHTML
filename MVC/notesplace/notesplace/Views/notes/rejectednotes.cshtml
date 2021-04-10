@@ -1,0 +1,127 @@
+﻿@model notesplace.Models.rejected
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+@using PagedList
+@using PagedList.Mvc
+
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Rejected Notes
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    @using (Html.BeginForm("rejectednotes", "notes", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-xl-12">
+                <label class="form-label">Seller</label>
+            </div>
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+
+                @Html.DropDownList("byseller", new SelectList(ViewBag.sellers, "Value", "Text", ViewBag.byseller), "Select seller", new { @class = "form-control element-style", onchange = @"form.submit();"})
+
+            </div>
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-end">
+
+                <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+                <button class="btn search-btn-style mr-sm-2 mr-2">Search</button>
+
+            </div>
+        </div>
+    }
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+            <table class="table table-border table-responsive-lg table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("NOTE TITLE", "rejectednotes", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("CATEGORY", "rejectednotes", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("SELLER", "rejectednotes", new { sortBy = ViewBag.SortBySeller, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("REJECTED DATE", "rejectednotes", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("REJECTED BY", "rejectednotes", new { sortBy = ViewBag.SortByRejectedby, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">REMARK</th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var n in Model.rejectednotes)
+                    {
+                        var rd = (DateTime)n.rejecteddate;
+                        count = count + 1;
+
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = n.noteid})" style="color:#6255a5 !important;">@n.notetitle</a></td>
+                            <td class="table-content">@n.category</td>
+                            <td class="table-content">@n.sellername</td>
+                            <td class="table-content"><a href="@Url.Action("memberdetails","member",new { userid = n.sellerid })"><i class="fa fa-eye"></i></a></td>
+                            <td class="table-content">@rd.ToString("g")</td>
+                            <td class="table-content">@n.rejectedby</td>
+                            <td class="table-content">@n.remark</td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("approved","notes",new { noteid = n.noteid})" onclick="return confirm('Are you sure you want to reject this note?');" class="hover-color">Approve</a>
+                                    <a href="@Url.Action("download","notes",new { noteid = n.noteid})" class="hover-color">Download Notes</a>
+                                    <a href="@Url.Action("display","bookdetails",new { nid = n.noteid })" class="hover-color">View More details</a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (count == 0)
+            {
+                <p align="center"><strong>No Records Found</strong></p>
+            }
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.rejectednotes, i => Url.Action("rejectednotes", "notes", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       byseller = Request.QueryString["byseller"],
+                       sortBy = Request["sortBy"],
+                    }))
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>

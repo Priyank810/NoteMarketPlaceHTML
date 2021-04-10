@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -48,12 +47,15 @@
       <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -66,6 +68,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -84,6 +87,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="ZendeskApi_v2, Version=3.10.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZendeskApi_v2.3.10.11\lib\net452\ZendeskApi_v2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -114,6 +120,36 @@
   <ItemGroup>
     <Content Include="App_Data\DP\1.jpg" />
     <Content Include="App_Data\DP\2.jpg" />
+    <Content Include="Content\Admin\css\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\Admin\css\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Admin\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Admin\css\notedetails.css" />
+    <Content Include="Content\Admin\css\responsive.css" />
+    <Content Include="Content\Admin\css\style.css" />
+    <Content Include="Content\Admin\images\backgroung-image\banner-with-overlay.jpg" />
+    <Content Include="Content\Admin\images\backgroung-image\banner-with-overlay1.jpg" />
+    <Content Include="Content\Admin\images\backgroung-image\download.png" />
+    <Content Include="Content\Admin\images\backgroung-image\seller.png" />
+    <Content Include="Content\Admin\images\backgroung-image\upload.png" />
+    <Content Include="Content\Admin\images\customers\customer-1.png" />
+    <Content Include="Content\Admin\images\customers\customer-2.png" />
+    <Content Include="Content\Admin\images\customers\customer-3.png" />
+    <Content Include="Content\Admin\images\customers\customer-4.png" />
+    <Content Include="Content\Admin\images\customers\user-1.jpg" />
+    <Content Include="Content\Admin\images\customers\user-img.png" />
+    <Content Include="Content\Admin\images\dashboard\earning-icon.svg" />
+    <Content Include="Content\Admin\images\logo\logo.png" />
+    <Content Include="Content\Admin\images\logo\notesetail.jpg" />
+    <Content Include="Content\Admin\images\logo\top-logo.png" />
+    <Content Include="Content\Admin\images\Search\1.jpg" />
+    <Content Include="Content\Admin\images\Search\2.jpg" />
+    <Content Include="Content\Admin\images\Search\3.jpg" />
+    <Content Include="Content\Admin\images\Search\4.jpg" />
+    <Content Include="Content\Admin\images\Search\5.jpg" />
+    <Content Include="Content\Admin\images\Search\6.jpg" />
+    <Content Include="Content\Admin\images\Search\banner-with-overlay.jpg" />
+    <Content Include="Content\Admin\images\Search\banner.jpg" />
     <Content Include="Content\Front\css\bootstrap\bootstrap.min.css" />
     <Content Include="Content\Front\css\changepassword.css" />
     <Content Include="Content\Front\css\emailverification.css" />
@@ -148,7 +184,6 @@
     <Content Include="Content\Front\images\Search\6.jpg" />
     <Content Include="Content\Front\images\Search\banner-with-overlay.jpg" />
     <Content Include="Content\Front\images\Search\banner.jpg" />
-    <Content Include="Content\giphy.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -162,6 +197,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Admin\js\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\Admin\js\popper\popper.js" />
+    <Content Include="Scripts\Admin\js\script.js" />
     <Content Include="Scripts\Front\js\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Front\js\popper\popper.js" />
     <Content Include="Scripts\Front\js\script.js" />
@@ -181,7 +219,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\addController.cs" />
     <Compile Include="Controllers\AddnotesController.cs" />
+    <Compile Include="Controllers\adminController.cs" />
     <Compile Include="Controllers\bookdetailsController.cs" />
     <Compile Include="Controllers\buyerrequestController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -189,9 +229,15 @@
     <Compile Include="Controllers\EditnotesController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\manageController.cs" />
+    <Compile Include="Controllers\memberController.cs" />
     <Compile Include="Controllers\mydownloadController.cs" />
+    <Compile Include="Controllers\myrejectednotesController.cs" />
     <Compile Include="Controllers\mysoldnotesController.cs" />
+    <Compile Include="Controllers\notesController.cs" />
     <Compile Include="Controllers\searchnotesController.cs" />
+    <Compile Include="Controllers\spamreportsController.cs" />
+    <Compile Include="Controllers\systemconfigController.cs" />
     <Compile Include="Controllers\transactionController.cs" />
     <Compile Include="Controllers\userprofileController.cs" />
     <Compile Include="country.cs">
@@ -222,20 +268,39 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\addadminstrator.cs" />
     <Compile Include="Models\addbooks.cs" />
+    <Compile Include="Models\admindashboard.cs" />
+    <Compile Include="Models\administratorlist.cs" />
     <Compile Include="Models\bookdetails.cs" />
     <Compile Include="Models\buyerrequest.cs" />
+    <Compile Include="Models\category.cs" />
+    <Compile Include="Models\categorylist.cs" />
     <Compile Include="Models\changepassword.cs" />
     <Compile Include="Models\contactus.cs" />
+    <Compile Include="Models\country.cs" />
+    <Compile Include="Models\countrylist.cs" />
+    <Compile Include="Models\downloaded.cs" />
     <Compile Include="Models\editbooks.cs" />
     <Compile Include="Models\dashboard.cs" />
     <Compile Include="Models\forgotpassword.cs" />
     <Compile Include="Models\login.cs" />
+    <Compile Include="Models\memberdetail.cs" />
+    <Compile Include="Models\members.cs" />
     <Compile Include="Models\mydownload.cs" />
+    <Compile Include="Models\myrejectednotelist.cs" />
     <Compile Include="Models\mysoldnotes.cs" />
+    <Compile Include="Models\notesunderreview.cs" />
+    <Compile Include="Models\published.cs" />
     <Compile Include="Models\register.cs" />
+    <Compile Include="Models\rejected.cs" />
     <Compile Include="Models\searchnotes.cs" />
+    <Compile Include="Models\spamreports.cs" />
+    <Compile Include="Models\systemconfig.cs" />
+    <Compile Include="Models\type.cs" />
+    <Compile Include="Models\typelist.cs" />
     <Compile Include="Models\userprofile.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="noteattachment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -275,6 +340,11 @@
     <Content Include="Content\Front\css\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Front\css\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Front\css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Admin\css\font-awesome\fonts\FontAwesome.otf" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -302,6 +372,30 @@
     <Content Include="Views\transaction\share.cshtml" />
     <Content Include="Views\mysoldnotes\sold.cshtml" />
     <Content Include="Views\Account\changepassword.cshtml" />
+    <Content Include="Views\add\country.cshtml" />
+    <Content Include="Views\add\category.cshtml" />
+    <Content Include="Views\add\type.cshtml" />
+    <Content Include="Views\Shared\adminnavbar.cshtml" />
+    <Content Include="Views\manage\country.cshtml" />
+    <Content Include="Views\manage\editcountry.cshtml" />
+    <Content Include="Views\manage\category.cshtml" />
+    <Content Include="Views\manage\editcategory.cshtml" />
+    <Content Include="Views\manage\type.cshtml" />
+    <Content Include="Views\manage\edittype.cshtml" />
+    <Content Include="Views\notes\notesunderreview.cshtml" />
+    <Content Include="Views\admin\dashboard.cshtml" />
+    <Content Include="Views\member\member.cshtml" />
+    <Content Include="Views\notes\publishednotes.cshtml" />
+    <Content Include="Views\notes\downloadednotes.cshtml" />
+    <Content Include="Views\notes\rejectednotes.cshtml" />
+    <Content Include="Views\member\memberdetails.cshtml" />
+    <Content Include="Views\add\addadminstrator.cshtml" />
+    <Content Include="Views\manage\administrator.cshtml" />
+    <Content Include="Views\manage\editadministrator.cshtml" />
+    <Content Include="Views\admin\updateprofile.cshtml" />
+    <Content Include="Views\systemconfig\systemconfig.cshtml" />
+    <Content Include="Views\spamreports\spamreports.cshtml" />
+    <Content Include="Views\myrejectednotes\myrejectednotes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -312,6 +406,7 @@
   <ItemGroup>
     <Folder Include="App_Data\NOTES\" />
     <Folder Include="App_Data\PREVIEWFILE\" />
+    <Folder Include="Views\userroles\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -346,10 +441,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

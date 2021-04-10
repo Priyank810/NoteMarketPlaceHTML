@@ -11,13 +11,6 @@ body {
     padding: 0px;
 }
 
-
-
-/*==============================
-
-    Navigation
-
-==============================*/
 input.input-validation-error,
 textarea.input-validation-error,
 select.input-validation-error {
@@ -25,6 +18,11 @@ select.input-validation-error {
     border: 1px solid #CD0A0A;
 }
 
+/*==============================
+
+    Navigation
+
+==============================*/
 
 .transparent-nav {
     background-color: transparent;

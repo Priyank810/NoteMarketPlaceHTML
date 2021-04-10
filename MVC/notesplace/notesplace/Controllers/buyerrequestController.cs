@@ -10,7 +10,7 @@ using System.Net.Mail;
 
 namespace notesplace.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="member")]
     public class buyerrequestController : Controller
     {
         // GET: buyerrequest
@@ -83,8 +83,8 @@ namespace notesplace.Controllers
                         d2 = d2.OrderBy(x => x.addeddate);
                         break;
                 }
-                buyerrequestlist.buy = d2.ToList().ToPagedList(i?? 1, 3);
-
+                buyerrequestlist.buy = d2.ToList().ToPagedList(i?? 1, 10);
+                ViewBag.counter = 10 * (i - 1);
                 return View(buyerrequestlist);
             }
             return RedirectToAction("userprofile", "userprofile");
@@ -103,6 +103,9 @@ namespace notesplace.Controllers
                 notedownload.ispaid = true;
                 notedownload.isapproved = true;
                 notedownload.approveddate = DateTime.Now;
+                notedownload.isActive = true;
+                notedownload.isdownloaded = true;
+                notedownload.downloadedate = DateTime.Now;
 
                 context.SaveChanges();
                 sendMail(buyeremail, buyername, sellername);
@@ -114,10 +117,13 @@ namespace notesplace.Controllers
         [NonAction]
         public void sendMail(string buyeremail, string buyername, string sellername)
         {
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
 
-            var fromEmail = new MailAddress("priyanksd123@gmail.com", "Request Approved");
+            var fromEmail = new MailAddress(senderemail, "Request Approved");
             var toEmail = new MailAddress(buyeremail);
-            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
+            var fromEmailPassword = senderpassword; // Replace with actual password
             string subject = sellername + " Allows you to dowwnload a notes";
 
             string body = "Hello, " + buyername + "<br/><br/>" + "We would like to inform you that," + sellername + " Allows you to download a note" + "<br/>"

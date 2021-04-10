@@ -11,7 +11,7 @@ using PagedList;
 namespace notesplace.Controllers
 {
 
-    [Authorize]
+    [Authorize(Roles ="member")]
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     public class DashboardController : Controller
     {
@@ -104,7 +104,7 @@ namespace notesplace.Controllers
                 }
 
                 dashboard.DM1 = d1.ToList().ToPagedList(i ?? 1, 5);
-
+                ViewBag.counter1 = 5 * (i - 1);
 
 
                 ViewBag.SortByDate2 = string.IsNullOrEmpty(sortBy2) ? "Added Date" : "";
@@ -117,7 +117,7 @@ namespace notesplace.Controllers
                           join status in context.statustype
                           on book.statusid equals status.id
 
-                          where book.userid == userid.id && book.isActive == true
+                          where book.userid == userid.id && book.isActive == true && status.status == "published"
 
                           select new dashboard02
                           {
@@ -158,6 +158,7 @@ namespace notesplace.Controllers
                 }
 
                 dashboard.DM2 = d2.ToList().ToPagedList(j ?? 1, 5);
+                ViewBag.counter2 = 5 * (j - 1);
 
                 //ViewBag.data03 = bookstats1;
 
@@ -169,8 +170,14 @@ namespace notesplace.Controllers
         public ActionResult delete(int id)
         {
             var deletebook = context.notedetails.Where(x => x.id == id).FirstOrDefault();
-            deletebook.isActive = false;
+            var deletebookattachment = context.noteattachment.Where(x => x.noteid == deletebook.id).FirstOrDefault();
+            
+            context.noteattachment.Remove(deletebookattachment);
             context.SaveChanges();
+
+            context.notedetails.Remove(deletebook);
+            context.SaveChanges();
+            
             return RedirectToAction("dashboard");
         }
     }

@@ -1,0 +1,68 @@
+﻿@model notesplace.Models.type
+
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Edit Type
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+
+        @using (Html.BeginForm("edittype", "manage", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(x => x.typeid)
+            <div class="row">
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+
+                            <div class="form-group">
+
+                                <label class="form-label re">Type</label>
+                                @Html.EditorFor(model => model.typename, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter Type" } })
+                                @Html.ValidationMessageFor(model => model.typename, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Description</label>
+                                @Html.TextAreaFor(model => model.typedescription, new { @class = "form-control form-box-user", @rows = "10", @placeholder = "Enter Description" })
+                                @Html.ValidationMessageFor(model => model.typedescription, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <button type="submit" class="btn user-submit-btn-style">SUBMIT</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

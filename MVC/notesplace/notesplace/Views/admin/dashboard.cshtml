@@ -1,0 +1,235 @@
+﻿@model notesplace.Models.admindashboard
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+@using System.IO
+@using PagedList
+@using PagedList.Mvc
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Dashboard
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="content-box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 content-center content-style-number"><a href="@Url.Action("notesunderreview","notes")" style="text-decoration:none !important;color:#6255a5 !important;">@Model.stats.notesforpublish</a></div>
+                        <div class="col-12 content-center content-style-description">Numbers of Notes in Review for Publish</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4">
+            <div class="content-box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 content-center content-style-number"><a href="@Url.Action("downloadednotes","notes")" style="text-decoration:none !important;color:#6255a5 !important;">@Model.stats.notesdownloaded</a></div>
+                        <div class="col-12 content-center content-style-description">Numbers of new Notes Downloaded (Last 7 days)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4">
+            <div class="content-box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 content-center content-style-number"><a href="@Url.Action("member","member")" style="text-decoration:none !important;color:#6255a5 !important;">@Model.stats.newregistration</a></div>
+                        <div class="col-12 content-center content-style-description">Numbers of New Registrations (Last 7 days)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<div class="container">
+
+    <div class="row margintop-60">
+
+        <div class="col-xl-4 col-md-4 col-sm-12 col-12 dash-heading-inner">Published Notes</div>
+
+        @using (Html.BeginForm("dashboard", "admin", FormMethod.Get, new { @class = "col-xl-8 col-md-8 col-sm-12 col-12 d-flex justify-content-end" }))
+        {
+            <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+            <button class="search-btn-style mr-sm-2 mr-2">Search</button>
+
+            @Html.DropDownList("bymonth", new SelectList(ViewBag.month, "Value", "Text", ViewBag.bymonth), "Select month", new { @class = "form-control select-month", onchange = @"form.submit();" })
+        }
+
+    </div>
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+
+
+            <table class="table table-border table-responsive-lg table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("NOTE TITLE", "dashboard", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["month"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("CATEGORY", "dashboard", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["bymonth"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">Attachment Size</th>
+                        <th scope="col" class="table-row-heading">SELL TYPE</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("PRICE", "dashboard", new { sortBy = ViewBag.SortByPrice, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["bymonth"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("PUBLISHER", "dashboard", new { sortBy = ViewBag.SortByPublisher, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["bymonth"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("PUBLISHED DATE", "dashboard", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["bymonth"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("NUMBER OF DOWNLOADS", "dashboard", new { sortBy = ViewBag.SortByNumberofdownloads, search = Request.QueryString["search"],
+                            bymonth = Request.QueryString["bymonth"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var p in Model.publishednotes)
+                    {
+                        var pd = (DateTime)p.publisheddate;
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = p.noteid})" style="color:#6255a5 !important;">@p.notetitle</a></td>
+                            <td class="table-content">@p.category</td>
+                            @{
+                                var s = (new DirectoryInfo(Server.MapPath(p.size)).EnumerateFiles().Sum(file => file.Length)) / 1024;
+                                string size = null;
+                                if (s >= 1024)
+                                {
+                                    size = (s / 1024).ToString() + "MB";
+                                }
+                                else
+                                {
+                                    size = s.ToString() + "KB";
+                                }
+                            }
+                            <td class="table-content">@size</td>
+                            @if (p.selltype == true)
+                            {
+                                <td class="table-content">Paid</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">Free</td>
+                            }
+                            <td class="table-content">@p.price</td>
+                            <td class="table-content">@p.publisher</td>
+                            <td class="table-content">@pd.ToString("g")</td>
+                            <td class="table-content">@p.downloads</td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("download","notes",new { noteid = p.noteid})" class="hover-color">Download Notes</a>
+                                    <a href="@Url.Action("display","bookdetails",new { nid = p.noteid })" class="hover-color">View more details</a>
+                                    <a href="#" onclick="unpublish('@p.noteid', '@p.notetitle')" class="hover-color">Unpublish</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.publishednotes, i => Url.Action("dashboard", "admin", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       bymonth = Request.QueryString["bymonth"],
+                       sortBy = Request.QueryString["sortBy"],
+                    }))
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- UnPublish Modal -->
+@using (Html.BeginForm("unpublish", "notes", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content" id="unpublish-popup-container">
+                <div class="modal-header">
+                    <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Inappropriate/Spam</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <input type="hidden" id="dashboard" name="dashboard" />
+                <input type="hidden" id="noteid" name="noteid" />
+
+                <div class="modal-body">
+                    <h2 class="modal-title modal-heading" id="title"></h2>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 form-group">
+
+                            <label class="form-label re">Remarks</label>
+                            <textarea type="text" class="form-control form-box-modal" rows="5" id="comment" name="remarks" maxlength="100"></textarea>
+                        </div>
+                        <div class="col-12 modal-padding">
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to unpublish this note?');" type="submit">SUBMIT</button>
+
+                            <button class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var unpublish = function (noteid, title) {
+        document.getElementById('noteid').value = noteid;
+        document.getElementById('title').innerHTML = title;
+        document.getElementById('dashboard').innerHTML = "1";
+        $("#exampleModalCenter1").modal("show");
+    }
+</script>
+
+

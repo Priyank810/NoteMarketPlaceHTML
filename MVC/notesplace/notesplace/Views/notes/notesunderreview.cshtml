@@ -1,0 +1,183 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model notesplace.Models.notesunderreview
+
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Notes Under Review
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    @using (Html.BeginForm("notesunderreview", "notes", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-xl-12">
+                <label class="form-label">Seller</label>
+            </div>
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+
+                @Html.DropDownList("byseller", new SelectList(ViewBag.sellers, "Value", "Text", ViewBag.byseller), "Select seller", new { @class = "form-control element-style", onchange = @"form.submit();", @style = "margin-bottom:20px;" })
+
+            </div>
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-end">
+
+                <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+                <button class="btn search-btn-style mr-sm-2 mr-2">Search</button>
+
+            </div>
+        </div>
+    }
+
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+            <table class="table table-border table-responsive-lg table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("NOTE TITLE", "notesunderreview", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("CATEGORY", "notesunderreview", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("SELLER", "notesunderreview", new { sortBy = ViewBag.SortBySeller, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading">
+                            @Html.ActionLink("DATE ADDED", "notesunderreview", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"],
+                            byseller = Request.QueryString["byseller"], i = Request.QueryString["i"] })
+                        </th>
+                        <th scope="col" class="table-row-heading">STATUS</th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading">ACTION</th>
+                        <th scope="col" class="table-row-heading"></th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var n in Model.notes)
+                    {
+                        var nu = (DateTime)n.addeddate;
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = n.noteid})" style="color:#6255a5 !important;">@n.notetitle</a></td>
+                            <td class="table-content">@n.category</td>
+                            <td class="table-content">@n.sellername</td>
+                            <td class="table-content"><a href="@Url.Action("memberdetails","member",new { userid = n.sellerid })"><i class="fa fa-eye"></i></a></td>
+                            <td class="table-content">@nu.ToString("g")</td>
+                            <td class="table-content">@n.status</td>
+                            <td class="table-content">
+                                <button class="btn approve all-btn-style" onclick="if (confirm('If you approve the notes system will publish the notes over portal. Please press yes to continue?')) location.href = '@Url.Action("approve","notes",new { noteid = n.noteid})'">Approve</button>
+                            </td>
+                            <td class="table-content">
+                                <button class="btn reject all-btn-style" onclick="if (confirm('Are you sure you want to reject seller request?')) reject('@n.noteid', '@n.notetitle')">Reject</button>
+                            </td>
+                            <td class="table-content">
+                                <button class="btn inreview all-btn-style" onclick="if (confirm('Via marking the note in review system will let user know that review process is initiated. Please press yes to continue')) location.href = '@Url.Action("inreview","notes",new { noteid = n.noteid})'">InReview</button>
+                            </td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("display","bookdetails",new { nid = n.noteid })" class="hover-color">View More Details</a>
+                                    <a href="@Url.Action("download","notes",new { noteid = n.noteid})" class="hover-color">Download Notes</a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (count == 0)
+            {
+                <p align="center"><strong>No Records Found</strong></p>
+            }
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.notes, i => Url.Action("notesunderreview", "notes", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       byseller = Request.QueryString["byseller"],
+                       sortBy = Request["sortBy"],
+                    }))
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Reject Modal -->
+@using (Html.BeginForm("reject", "notes", FormMethod.Post))
+{
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog" role="document">
+            <div class="modal-content" id="unpublish-popup-container">
+                <div class="modal-header">
+                    <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Inappropriate/Spam</h5>
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+
+                <input type="hidden" id="noteid" name="noteid" />
+
+                <div class="modal-body">
+                    <h2 class="modal-title modal-heading" id="title"></h2>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 form-group">
+
+                            <label class="form-label re">Comments</label>
+                            <textarea type="text" class="form-control form-box-modal" rows="5" id="comment" name="comments" maxlength="100"></textarea>
+                        </div>
+                        <div class="col-12 modal-padding">
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this note?');" type="submit">SUBMIT</button>
+
+                            <button class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var reject = function (noteid,title) {
+            document.getElementById('noteid').value = noteid;
+            document.getElementById('title').innerHTML = title;
+            $("#exampleModalCenter1").modal("show");
+        }
+    </script>
+}
+

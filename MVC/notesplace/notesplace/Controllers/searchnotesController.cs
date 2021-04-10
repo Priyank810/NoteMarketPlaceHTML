@@ -18,6 +18,10 @@ namespace notesplace.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                if (getuser.roleid == 1 || getuser.roleid == 2)
+                {
+                    return RedirectToAction("dashboard", "admin");
+                }
                 var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
                 if (userprofilestatus != null)
                 {
@@ -41,6 +45,7 @@ namespace notesplace.Controllers
             ViewBag.university = universitylist();
             ViewBag.course = courselist();
             ViewBag.rating = ratinglist();
+            ViewBag.defaultnoteimage = context.systemconfig.FirstOrDefault().defaultnotepicture;
 
 
             dynamic snotes = new ss();
@@ -52,12 +57,14 @@ namespace notesplace.Controllers
                       on book.categoryid equals category.id
                       join type in context.notetype
                       on book.typeid equals type.id
+                      join status in context.statustype
+                      on book.statusid equals status.id
                       join r in context.reviews
                       on book.id equals r.noteid into rr
                       from r in rr.DefaultIfEmpty()
                      
                       
-                      where book.isActive == true
+                      where book.isActive == true && status.status == "published"
                       group new { book,r,category,type,country} by new {book.id} into pg
 
 
@@ -180,15 +187,14 @@ namespace notesplace.Controllers
             }
 
             
-            
             if(s==1 && d==0)
             {
                 ViewBag.count = onlysearch.Count();
-                snotes.ssn = onlysearch.ToList().ToPagedList(i ?? 1, 9);
+                snotes.ssn = onlysearch.OrderByDescending(x => x.date).ToList().ToPagedList(i ?? 1, 9);
                 return View(snotes);
             }
             ViewBag.count = sn.Count();
-            snotes.ssn = sn.ToList().ToPagedList(i ?? 1, 9);
+            snotes.ssn = sn.OrderByDescending(x=>x.date).ToList().ToPagedList(i ?? 1, 9);
             return View(snotes);
         }
 

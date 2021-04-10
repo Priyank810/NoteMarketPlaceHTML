@@ -1,0 +1,92 @@
+﻿@model notesplace.Models.spamreports
+@{
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+@using PagedList
+@using PagedList.Mvc
+
+<div class="container">
+    @using (Html.BeginForm("spamreports","spamreports",FormMethod.Get))
+    {
+        <div class="row margintop-100">
+
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12 dash-heading-member-and-spamreport">
+                Spam Reports
+            </div>
+            <div class="col-xl-6 col-md-6 col-sm-12 col-12 d-flex justify-content-end">
+                <input type="text" class="search-box-style form-control mr-sm-2 mr-2" placeholder="Search" name="search">
+                <button class="btn search-btn-style mr-sm-2 mr-2">Search</button>
+            </div>
+        </div>
+    }
+    <div class="row padding-bt-tb">
+
+        <!-- Table -->
+        <div class="col-xl-12 color-for-link">
+            <table class="table table-border table-responsive-lg table-responsive-xl table-responsive-md table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-row-heading">SR NO.</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("REPORTED BY", "spamreports", new { sortBy = ViewBag.SortByReportedby, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("NOTE TITLE", "spamreports", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("CATEGORY", "spamreports", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DATE EDITED", "spamreports", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">REMARK</th>
+                        <th scope="col" class="table-row-heading">ACTION</th>
+                        <th scope="col" class="table-row-heading"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
+                    @foreach (var a in Model.spamreport)
+                    {
+                        count = count + 1;
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content">@a.reportedby</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = a.noteid})" style="color:#6255a5 !important;">@a.notetitle</a></td>
+                            <td class="table-content">@a.category</td>
+                            <td class="table-content">@a.dateedited</td>
+                            <td class="table-content">@a.remark</td>
+                            <td class="table-content"><a href="@Url.Action("Delete","spamreports",new { reportid = a.reportid})" onclick="return confirm('Are you sure you want to remove this spam report?')" style="color:black !important;"><i class="fa fa-trash-o"></i></a></td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
+
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("download","notes",new { noteid = a.noteid})">Download Notes</a>
+                                    <a href="@Url.Action("display","bookdetails",new { nid = a.noteid })">View More Details</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (count == 0)
+            {
+                <p align="center"><strong>No Records Found</strong></p>
+            }
+        </div>
+
+
+        <div class="container">
+
+            <nav class="padding-bt-tb">
+
+                <ul class="pagination justify-content-center">
+                    @Html.PagedListPager(Model.spamreport, i => Url.Action("spamreports", "spamreports", new
+                    {
+                       i,
+                       search = Request.QueryString["search"],
+                       sortBy = Request["sortBy"],
+
+                    }))
+
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+</div>
+

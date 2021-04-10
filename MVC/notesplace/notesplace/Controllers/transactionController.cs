@@ -70,6 +70,7 @@ namespace notesplace.Controllers
                     notedownload.isapproved = true;
                     notedownload.isdownloaded = true;
                     notedownload.downloadedate = DateTime.Now;
+                    notedownload.approveddate = DateTime.Now;
                     notedownload.ispaid = true;
                 }
                 notedownload.requesteddate = DateTime.Now;
@@ -131,12 +132,14 @@ namespace notesplace.Controllers
                 ViewBag.sellerfirstname = uname.firstname;
                 ViewBag.sellerlastname = uname.lastname;
                 return PartialView("share");
-                //return RedirectToAction("search", "searchnotes");
             }
             else if (checkrecord.isapproved == true)
             {
-                checkrecord.isdownloaded = true;
-                checkrecord.downloadedate = DateTime.Now;
+                if (checkrecord.isdownloaded != true)
+                {
+                    checkrecord.isdownloaded = true;
+                    checkrecord.downloadedate = DateTime.Now;
+                }
 
                 context.SaveChanges();
 
@@ -173,10 +176,13 @@ namespace notesplace.Controllers
         [NonAction]
         public void sendMail(string selleremail, string sellername, string buyername)
         {
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
 
-            var fromEmail = new MailAddress("priyanksd123@gmail.com", "Buyer Request");
+            var fromEmail = new MailAddress(senderemail, "Buyer Request");
             var toEmail = new MailAddress(selleremail);
-            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
+            var fromEmailPassword = senderpassword;
             string subject = buyername + " wants to purchase your notes";
 
             string body = "Hello, "+ sellername + "<br/><br/>" + "We would like to inform you that,"+buyername+" wnats to purchase your notes. Please see"+"<br/>"

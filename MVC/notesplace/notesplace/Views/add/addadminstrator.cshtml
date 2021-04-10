@@ -1,0 +1,106 @@
+﻿@model notesplace.Models.addadminstrator
+
+@{
+    ViewBag.Title = "addadminstrator";
+    Layout = "~/Views/Shared/adminnavbar.cshtml";
+}
+
+<div class="container">
+    <div class="row margin">
+        <div class="col-xl-12 dash-heading">
+            Add Adminstrator
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+
+        @using (Html.BeginForm("addadminstrator","add",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            
+            <div class="row">
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+
+                            <div class="form-group">
+
+                                <label class="form-label re">First Name</label>
+                                @Html.EditorFor(model => model.firstname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your first name" } })
+                                @Html.ValidationMessageFor(model => model.firstname, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Last Name</label>
+                                @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your lastname name" } })
+                                @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+
+                                <label class="form-label re">Email</label>
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your Email" } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-12">
+
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <div class="form-group">
+
+                                <label class="form-label re">Code</label>
+                                @Html.DropDownListFor(model => model.countrycode, new SelectList(ViewBag.countrycode, "Value", "Text"), "Select Code", new { @class = "form-control form-box-user" })
+                                @Html.ValidationMessageFor(model => model.countrycode, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="col-xl-4">
+
+                            <label class="form-label re">Phone Number</label>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.phonenumber, new { htmlAttributes = new { @class = "form-control form-box-user", @placeholder = "Enter your phone number", @pattern = "[0-9]{10}" } })
+                                @Html.ValidationMessageFor(model => model.phonenumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12">
+                    <div class="row">
+
+                        <div class="col-xl-6 form-group">
+
+                            <button type="submit" class="btn user-submit-btn-style">SUBMIT</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

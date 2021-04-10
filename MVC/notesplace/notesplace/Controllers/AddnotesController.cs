@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using notesplace.Models;
 using System.IO;
+using System.Net.Mail;
 
 namespace notesplace.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="member")]
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     public class AddnotesController : Controller
     {
@@ -16,7 +17,7 @@ namespace notesplace.Controllers
         // GET: Addnotes
 
         //adding notes
-        public ActionResult add()
+        public ActionResult add(int? nid)
         {
             var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
             var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
@@ -27,6 +28,43 @@ namespace notesplace.Controllers
                 ViewBag.category = categorylist();
                 ViewBag.notetype = typelistlist();
                 ViewBag.country = countrylist();
+
+                if(nid!=null)
+                {
+                    addbooks addbook = new addbooks();
+                    var ebooks = (from book in context.notedetails
+                                  join category in context.category
+                                  on book.categoryid equals category.id
+                                  join type in context.notetype
+                                  on book.typeid equals type.id
+                                  join country in context.country
+                                  on book.countryid equals country.id
+                                  join status in context.statustype
+                                  on book.statusid equals status.id
+                                  join notesa in context.noteattachment
+                                  on book.id equals notesa.noteid
+
+                                  where book.id == nid
+
+                                  select new addbooks
+                                  { 
+                                      title = book.title,
+                                      typeid = type.id.ToString(),
+                                      categoryid = category.id.ToString(),
+                                      description = book.description,
+                                      sellprice = book.sellprice,
+                                      institutename = book.universityname,
+                                      countryid = country.id.ToString(),
+                                      coursename = book.coursename,
+                                      coursecode = book.coursecode,
+                                      professor = book.professor,
+                                      numberofpages = (int)book.numberofpages,
+                                  }).ToList().FirstOrDefault();
+                    
+                    addbook = ebooks;
+                    return View(addbook);
+                }
+
                 return View();
             }
             return RedirectToAction("userprofile", "userprofile");
@@ -115,26 +153,30 @@ namespace notesplace.Controllers
                 string previewfilepath = null;
                 string pdffilepath = null;
                 string attachmentfilename = null;
-
-                string folderpath = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + newnote.id.ToString()+"/");
-                if(!Directory.Exists(folderpath))
+                string extension = null;
+                
+                string folderpath = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + newnote.id.ToString() + "/");
+                if (!Directory.Exists(folderpath))
                 {
                     Directory.CreateDirectory(folderpath);
                 }
 
-                string extension = Path.GetExtension(note.displaypicture.FileName).ToLower();
-                if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
+                if (note.displaypicture != null)
                 {
-                    string path = Server.MapPath("~/Members/" + newnote.userid.ToString()+"/"+newnote.id.ToString()+"/");
-                    string fileName = "DP_" + now.ToString().Replace(':','-')+extension;
-                    string fullpath = Path.Combine(path + fileName);
-                    dppath = "~/Members/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString()+"/"+fileName;
-                    note.displaypicture.SaveAs(fullpath);
-                }
-                else
-                {
-                    ModelState.AddModelError("displaypicture", "Please Add file with proper extension");
-                    return View();
+                    extension = Path.GetExtension(note.displaypicture.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
+                    {
+                        string path = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + newnote.id.ToString() + "/");
+                        string fileName = "DP_" + now.ToString().Replace(':', '-') + extension;
+                        string fullpath = Path.Combine(path + fileName);
+                        dppath = "~/Members/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString() + "/" + fileName;
+                        note.displaypicture.SaveAs(fullpath);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("displaypicture", "Please Add file with proper extension");
+                        return View();
+                    }
                 }
 
                 if (note.previewfile != null)
@@ -209,6 +251,11 @@ namespace notesplace.Controllers
                 context.noteattachment.Add(notefile);
                 context.SaveChanges();
 
+                if(save == null)
+                {
+                    sendMail(userid.firstname+" "+userid.lastname,note.title);
+                }
+
                 return RedirectToAction("dashboard", "dashboard");
             }
 
@@ -230,6 +277,40 @@ namespace notesplace.Controllers
         {
             var countries = new SelectList(context.country.Where(x => x.isActive == true), "id", "countryname");
             return countries;
+        }
+
+        [NonAction]
+        public void sendMail(string sellername, string notetitle)
+        {
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
+            var receiver = sender.otheremail;
+
+            var fromEmail = new MailAddress(senderemail, "Note sent for review");
+            var toEmail = new MailAddress(receiver);
+            var fromEmailPassword = senderpassword;
+            string subject = sellername + " sent his note for review";
+
+            string body = "Hello, Admins" + "<br/><br/>" + "We wnat to inform you that," +sellername+" sent his note"+ notetitle+" for review"+ " Please look at the notes and take required actions." + "<br/><br/>" + "Regards, <br/>" + "Notes Marketplace";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            smtp.Send(message);
         }
     }
 }

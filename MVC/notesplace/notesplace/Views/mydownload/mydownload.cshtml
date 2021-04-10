@@ -29,57 +29,66 @@
                 <thead>
                     <tr>
                         <th scope="col" class="table-row-heading">SR NO.</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "mydownload", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "mydownload", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "mydownload", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "mydownload", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
                         <th scope="col" class="table-row-heading">BUYER</th>
                         <th scope="col" class="table-row-heading">SELL TYPE</th>
                         <th scope="col" class="table-row-heading">PRICE</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("APPROVED DATE/TIME", "mydownload", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("APPROVED DATE/TIME", "mydownload", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
                         <th scope="col" class="table-row-heading"></th>
                         <th scope="col" class="table-row-heading"></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @{ int count = 0;}
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
                     @foreach (var download in Model.downloads)
                     {
                         count = count + 1;
-                        <tr>
-                            <td class="table-content">@count</td>
-                            <td class="table-content-diff">@download.title</td>
-                            <td class="table-content">@download.category</td>
-                            <td class="table-content">@download.selleremail</td>
-                            @if (download.ispaid == true)
+                        var ad = (DateTime)download.approveddate;
+                    <tr>
+                        <td class="table-content">@count</td>
+                        <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = download.noteid})" style="color:#6255a5 !important;">@download.title</a></td>
+                        <td class="table-content">@download.category</td>
+                        <td class="table-content">@download.selleremail</td>
+                        @if (download.ispaid == true)
+                        {
+                            <td class="table-content">Paid</td>
+                        }
+                        else
+                        {
+                            <td class="table-content">Free</td>
+                        }
+                        <td class="table-content">@download.price</td>
+                        @if (download.ispaid == true)
+                        {
+                            <td class="table-content">@ad.ToString("F")</td>
+                        }
+                        else
+                        {
+                            if (download.downloadeddate == null)
                             {
-                                <td class="table-content">Paid</td>
+                                <td class="table-content">You can download</td>
                             }
                             else
                             {
-                                <td class="table-content">Free</td>
+                                var dd = (DateTime)download.downloadeddate;
+                                <td class="table-content">@dd.ToString("F")</td>
                             }
-                            <td class="table-content">@download.price</td>
-                            @if (download.ispaid == true)
-                            {
-                                <td class="table-content">@download.approveddate</td>
-                            }
-                            else
-                            {
-                                <td class="table-content">@download.downloadeddate</td>
-                            }
-                            <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = download.noteid})"><i class="fa fa-eye"></i></a></td>
-                            <td class="table-content dropdown">
-                                <i class="fa fa-ellipsis-v"></i>
+                        }
+                        <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = download.noteid})"><i class="fa fa-eye"></i></a></td>
+                        <td class="table-content dropdown">
+                            <i class="fa fa-ellipsis-v"></i>
 
-                                <div class="dropdown-content">
-                                    <a href="@Url.Action("share","transaction",new { noteid = download.noteid})">Download Note</a>
-                                    <a href="#" onclick="addentry(@download.downloadid)">Add Reviews/Feedback</a>
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("share","transaction",new { noteid = download.noteid})" class="dropdown-item">Download Note</a>
+                                <a href="#" onclick="addentry(@download.downloadid)" class="dropdown-item">Add Reviews/Feedback</a>
 
-                                    <a href="#" onclick="spamentry(@download.downloadid, '@download.title')">Report an inappropriate</a>
-                                </div>
+                                <a href="#" onclick="spamentry(@download.downloadid, '@download.title')" class="dropdown-item">Report an inappropriate</a>
+                            </div>
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

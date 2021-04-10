@@ -19,12 +19,19 @@ namespace notesplace.Controllers
         public ActionResult display(int nid)
         {
             int flag = 0;
+            int isadmin = 0; 
             if (User.Identity.IsAuthenticated)
             {
                 var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
                 var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
+
+                if(getuser.roleid == 1 || getuser.roleid == 2)
+                {
+                    isadmin = 1;
+                    ViewBag.Admin = 1;
+                }
                 
-                if (userprofilestatus != null)
+                else if (userprofilestatus != null)
                 {
                     ViewBag.image = userprofilestatus.profilepicture;
                     flag = 1;
@@ -32,8 +39,9 @@ namespace notesplace.Controllers
             }
 
             dynamic bookdetails = new bookdetails();
+            ViewBag.defaultnoteimage = context.systemconfig.FirstOrDefault().defaultnotepicture;
 
-            if (flag==1 || User.Identity.IsAuthenticated == false)
+            if (flag == 1 || User.Identity.IsAuthenticated == false || isadmin == 1)
             {
                 var details = (from book in context.notedetails
                                join category in context.category
@@ -69,6 +77,11 @@ namespace notesplace.Controllers
                                    totalspam = book.totalspam,
                                    createddate = book.createddate
                                }).FirstOrDefault();
+                
+                if(details.bookimage == null)
+                {
+                    details.bookimage = ViewBag.defaultnoteimage;
+                }
                 bookdetails.bb = details;
                 
 
@@ -84,6 +97,7 @@ namespace notesplace.Controllers
 
                                     select new ratings
                                     {
+                                        ratingid = review.id,
                                         name = uname.firstname+" "+uname.lastname,
                                         profile = user.profilepicture,
                                         star = review.ratingstar*20,
@@ -98,7 +112,7 @@ namespace notesplace.Controllers
                 {
                     var records = context.reviews.Where(x => x.noteid == nid);
                     int totalrecords = records.Count();
-                    double totalstar = (records.Select(x => x.ratingstar).Count() * 20)/totalrecords;
+                    double totalstar = (records.Select(x => x.ratingstar).Sum() * 20)/totalrecords;
                     ViewBag.totalrecords = totalrecords;
                     ViewBag.totalstar = totalstar;
                 }
@@ -107,24 +121,27 @@ namespace notesplace.Controllers
                     ViewBag.totalrecords = 0;
                     ViewBag.totalstar = 0;
                 }
-                    
-                var userid = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
-                if (userid != null)
-                {
-                    ViewBag.currentuser = userid.id;
 
-                    ViewBag.username = userid.firstname;
-                    var getbook = context.notedetails.Where(x => x.id == nid).FirstOrDefault();
-                    var checkdownload = context.download.Where(x => x.sellerid == getbook.userid && x.buyerid == userid.id && x.noteid == getbook.id).FirstOrDefault();
-                    if (checkdownload != null)
+                if (isadmin != 1)
+                {
+                    var userid = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                    if (userid != null)
                     {
-                        if (checkdownload.isapproved == true)
+                        ViewBag.currentuser = userid.id;
+
+                        ViewBag.username = userid.firstname;
+                        var getbook = context.notedetails.Where(x => x.id == nid).FirstOrDefault();
+                        var checkdownload = context.download.Where(x => x.sellerid == getbook.userid && x.buyerid == userid.id && x.noteid == getbook.id).FirstOrDefault();
+                        if (checkdownload != null)
                         {
-                            ViewBag.isapproved = true;
-                        }
-                        else if(checkdownload.isapproved==false)
-                        {
-                            ViewBag.isrequested = true;
+                            if (checkdownload.isapproved == true)
+                            {
+                                ViewBag.isapproved = true;
+                            }
+                            else if (checkdownload.isapproved == false)
+                            {
+                                ViewBag.isrequested = true;
+                            }
                         }
                     }
                 }

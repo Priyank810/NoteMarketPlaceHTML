@@ -57,10 +57,10 @@ namespace notesplace.Controllers
                         fullname = model.fullname,
                         email = model.email,
                         subject = model.subject,
-                        comment = model.comment,
+                        comment = model.comment.Trim(),
                         createddate = now,
                     };
-                    SendContactEmail(cc.email, cc.fullname, cc.subject, cc.comment);
+                    SendContactEmail(cc.fullname, cc.subject, cc.comment);
                     context.contact.Add(cc);
                     context.SaveChanges();
                 }
@@ -70,11 +70,16 @@ namespace notesplace.Controllers
         }
 
         [NonAction]
-        public void SendContactEmail(string emailID, string fullname, string comments, string query)
+        public void SendContactEmail(string fullname, string comments, string query)
         {
-            var fromEmail = new MailAddress("priyanksd123@gmail.com", "Contact Us");
-            var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "Patrick_9810"; // Replace with actual password
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
+            var reciever = sender.otheremail;
+
+            var fromEmail = new MailAddress(senderemail, "Contact Us");
+            var toEmail = new MailAddress(reciever);
+            var fromEmailPassword = senderpassword; // Replace with actual password
             string subject = fullname +" "+ query;
 
             string body = "Hello" + "<br/><br/>" + comments + "<br/><br/>" + "Regards,<br/>"+ fullname;
@@ -95,7 +100,7 @@ namespace notesplace.Controllers
                 Body = body,
                 IsBodyHtml = true
             })
-                smtp.Send(message);
+            smtp.Send(message);
         }
     }
 }

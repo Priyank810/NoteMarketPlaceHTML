@@ -14,7 +14,7 @@
             @using (Html.BeginForm("buyer", "buyerrequest", FormMethod.Get))
             {
                 <input type="text" class="search-box-style" placeholder="Search" name="search">
-                <span class="padding-bt-se"><button class="search-btn-style">Search</button></span>
+                <span class="padding-bt-se"><button class="btn search-btn-style">Search</button></span>
             }
         </div>
     </div>
@@ -30,49 +30,51 @@
                     <tr>
                         <th scope="col" class="table-row-heading">SR NO.</th>
 
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "buyer", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"] })</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "buyer", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Title", "buyer", new { sortBy = ViewBag.SortByTitle, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("Category", "buyer", new { sortBy = ViewBag.SortByCategory, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
                         <th scope="col" class="table-row-heading">BUYER</th>
                         <th scope="col" class="table-row-heading">PHONE NO.</th>
                         <th scope="col" class="table-row-heading">SELL TYPE</th>
                         <th scope="col" class="table-row-heading">PRICE</th>
-                        <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED DATE/TIME", "buyer", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"] })</th>
+                        <th scope="col" class="table-row-heading">@Html.ActionLink("DOWNLOADED DATE/TIME", "buyer", new { sortBy = ViewBag.SortByDate, search = Request.QueryString["search"], i = Request.QueryString["i"] })</th>
                         <th scope="col" class="table-row-heading"></th>
                         <th scope="col" class="table-row-heading"></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @{ int count = 0;}
+                    @{ int count = 0; if (ViewBag.counter != null) { count = ViewBag.counter; } }
                     @foreach (var book in Model.buy)
                     {
+                        var d = (DateTime)book.addeddate;
                         count = count + 1;
-                    <tr>
-                        <td class="table-content">@count</td>
-                        <td class="table-content-diff">@book.title</td>
-                        <td class="table-content">@book.category</td>
-                        <td class="table-content">@book.buyeremail</td>
-                        <td class="table-content">@book.buyercountrycode @book.byyernumber</td>
-                        @if (book.ispaid == true)
-                        {
-                            <td class="table-content">Paid</td>
-                        }
-                        else
-                        {
-                            <td class="table-content">Free</td>
-                        }
-                        <td class="table-content">$@book.sellprice</td>
-                        <td class="table-content">@book.addeddate</td>
-                        <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})"><i class="fa fa-eye"></i></a></td>
-                        <td class="table-content dropdown">
-                            <i class="fa fa-ellipsis-v"></i>
+                        <tr>
+                            <td class="table-content">@count</td>
+                            <td class="table-content-diff"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})" style="color:#6255a5 !important;">@book.title</a></td>
+                            <td class="table-content">@book.category</td>
+                            <td class="table-content">@book.buyeremail</td>
+                            <td class="table-content">@book.buyercountrycode @book.byyernumber</td>
+                            @if (book.ispaid == true)
+                            {
+                                <td class="table-content">Paid</td>
+                            }
+                            else
+                            {
+                                <td class="table-content">Free</td>
+                            }
 
-                            <div class="dropdown-content">
-                                <a href="@Url.Action("allowdownload","buyerrequest",new { noteid = book.noteid, buyerid = book.buyerid})">Allow Download</a>
-                            </div>
+                            <td class="table-content">$@book.sellprice</td>
+                            <td class="table-content">@d.ToString("F")</td>
+                            <td class="table-content"><a href="@Url.Action("display","bookdetails",new { nid = book.noteid})"><i class="fa fa-eye"></i></a></td>
+                            <td class="table-content dropdown">
+                                <i class="fa fa-ellipsis-v"></i>
 
-                        </td>
-                    </tr>
+                                <div class="dropdown-content">
+                                    <a href="@Url.Action("allowdownload","buyerrequest",new { noteid = book.noteid, buyerid = book.buyerid})">Allow Download</a>
+                                </div>
+
+                            </td>
+                        </tr>
                     }
 
                 </tbody>

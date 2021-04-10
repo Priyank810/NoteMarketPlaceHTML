@@ -9,7 +9,7 @@ using notesplace.Models;
 
 namespace notesplace.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="member")]
     public class mysoldnotesController : Controller
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
@@ -84,6 +84,7 @@ namespace notesplace.Controllers
                     }
 
                     mysoldlist.soldnotes = dlist.ToList().ToPagedList(i ?? 1, 10);
+                    ViewBag.counter = 10 * (i - 1);
                     return View(mysoldlist);
                // }
 

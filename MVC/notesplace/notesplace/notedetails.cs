@@ -30,6 +30,7 @@ namespace notesplace
         public string remarks { get; set; }
         public Nullable<System.DateTime> approveddate { get; set; }
         public string title { get; set; }
+        public Nullable<int> totalspam { get; set; }
         public Nullable<int> categoryid { get; set; }
         public string displaypicture { get; set; }
         public Nullable<int> typeid { get; set; }
@@ -48,7 +49,6 @@ namespace notesplace
         public Nullable<System.DateTime> modifieddate { get; set; }
         public Nullable<int> modifiedby { get; set; }
         public Nullable<bool> isActive { get; set; }
-        public Nullable<int> totalspam { get; set; }
     
         public virtual category category { get; set; }
         public virtual country country { get; set; }

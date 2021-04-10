@@ -36,6 +36,7 @@ namespace notesplace.Models
 
     public class ratings
     {
+        public int? ratingid { get; set; }
         public string name { get; set; }
         public string profile { get; set; }
         public int? star { get; set; }

@@ -6,19 +6,19 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="adminid" Type="Int32" Nullable="false" />
-    <Property Name="secondaryemail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="secondaryemail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="profilepicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="countrycodeid" Type="Int32" />
-    <Property Name="mobilenumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobilenumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="createddate" Type="DateTime" Precision="3" />
     <Property Name="createdby" Type="Int32" />
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__admindeta__admin__114A936A" FromRole="admindetails" ToRole="users" />
-    <NavigationProperty Name="country" Relationship="Self.FK__admindeta__count__123EB7A3" FromRole="admindetails" ToRole="country" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__admindeta__creat__1332DBDC" FromRole="admindetails" ToRole="users" />
-    <NavigationProperty Name="users2" Relationship="Self.FK__admindeta__modif__14270015" FromRole="admindetails" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__admindeta__admin__6E01572D" FromRole="admindetails" ToRole="users" />
+    <NavigationProperty Name="country" Relationship="Self.FK__admindeta__count__6EF57B66" FromRole="admindetails" ToRole="country" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__admindeta__creat__6FE99F9F" FromRole="admindetails" ToRole="users" />
+    <NavigationProperty Name="users2" Relationship="Self.FK__admindeta__modif__70DDC3D8" FromRole="admindetails" ToRole="users" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -32,8 +32,8 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__category__create__34C8D9D1" FromRole="category" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__category__modifi__35BCFE0A" FromRole="category" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__category__create__71D1E811" FromRole="category" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__category__modifi__72C60C4A" FromRole="category" ToRole="users" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__categ__4E88ABD4" FromRole="category" ToRole="notedetails" />
   </EntityType>
   <EntityType Name="contact">
@@ -51,7 +51,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="countryname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="countrycode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="createddate" Type="DateTime" Precision="3" />
@@ -59,9 +59,9 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="admindetails" Relationship="Self.FK__admindeta__count__123EB7A3" FromRole="country" ToRole="admindetails" />
-    <NavigationProperty Name="users" Relationship="Self.FK__country__created__412EB0B6" FromRole="country" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__country__modifie__4222D4EF" FromRole="country" ToRole="users" />
+    <NavigationProperty Name="admindetails" Relationship="Self.FK__admindeta__count__6EF57B66" FromRole="country" ToRole="admindetails" />
+    <NavigationProperty Name="users" Relationship="Self.FK__country__created__73BA3083" FromRole="country" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__country__modifie__74AE54BC" FromRole="country" ToRole="users" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__count__5070F446" FromRole="country" ToRole="notedetails" />
     <NavigationProperty Name="userdetails" Relationship="Self.FK__userdetai__count__03F0984C" FromRole="country" ToRole="userdetails" />
     <NavigationProperty Name="userdetails1" Relationship="Self.FK__userdetai__count__04E4BC85" FromRole="country" ToRole="userdetails" />
@@ -88,13 +88,13 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__download__buyeri__73BA3083" FromRole="download" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__download__create__778AC167" FromRole="download" ToRole="users" />
-    <NavigationProperty Name="users2" Relationship="Self.FK__download__modifi__787EE5A0" FromRole="download" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__download__buyeri__75A278F5" FromRole="download" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__download__create__76969D2E" FromRole="download" ToRole="users" />
+    <NavigationProperty Name="users2" Relationship="Self.FK__download__modifi__778AC167" FromRole="download" ToRole="users" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__download__noteid__71D1E811" FromRole="download" ToRole="notedetails" />
-    <NavigationProperty Name="users3" Relationship="Self.FK__download__seller__72C60C4A" FromRole="download" ToRole="users" />
-    <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__downloa__19DFD96B" FromRole="download" ToRole="reviews" />
-    <NavigationProperty Name="spam" Relationship="Self.FK__spam__downloadid__2180FB33" FromRole="download" ToRole="spam" />
+    <NavigationProperty Name="users3" Relationship="Self.FK__download__seller__797309D9" FromRole="download" ToRole="users" />
+    <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__downloa__0A9D95DB" FromRole="download" ToRole="reviews" />
+    <NavigationProperty Name="spam" Relationship="Self.FK__spam__downloadid__0F624AF8" FromRole="download" ToRole="spam" />
   </EntityType>
   <EntityType Name="gender">
     <Key>
@@ -107,8 +107,8 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__gender__createdb__0A9D95DB" FromRole="gender" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__gender__modified__0B91BA14" FromRole="gender" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__gender__createdb__7A672E12" FromRole="gender" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__gender__modified__7B5B524B" FromRole="gender" ToRole="users" />
     <NavigationProperty Name="userdetails" Relationship="Self.FK__userdetai__gende__0D7A0286" FromRole="gender" ToRole="userdetails" />
   </EntityType>
   <EntityType Name="noteattachment">
@@ -117,15 +117,15 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="noteid" Type="Int32" />
-    <Property Name="filename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="filename" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="filepath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="createddate" Type="DateTime" Precision="3" />
     <Property Name="createdby" Type="Int32" />
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__noteattac__creat__571DF1D5" FromRole="noteattachment" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__noteattac__modif__5812160E" FromRole="noteattachment" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__noteattac__creat__7C4F7684" FromRole="noteattachment" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__noteattac__modif__7D439ABD" FromRole="noteattachment" ToRole="users" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__noteattac__notei__5629CD9C" FromRole="noteattachment" ToRole="notedetails" />
   </EntityType>
   <EntityType Name="notedetails">
@@ -139,6 +139,7 @@
     <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="approveddate" Type="DateTime" Precision="3" />
     <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="totalspam" Type="Int32" />
     <Property Name="categoryid" Type="Int32" />
     <Property Name="displaypicture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="typeid" Type="Int32" />
@@ -169,7 +170,6 @@
     <NavigationProperty Name="users3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="notedetails" ToRole="users" />
     <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__noteid__17F790F9" FromRole="notedetails" ToRole="reviews" />
     <NavigationProperty Name="spam" Relationship="Self.FK__spam__noteid__1F98B2C1" FromRole="notedetails" ToRole="spam" />
-    <Property Name="totalspam" Type="Int32" />
   </EntityType>
   <EntityType Name="notetype">
     <Key>
@@ -184,8 +184,8 @@
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__typei__4F7CD00D" FromRole="notetype" ToRole="notedetails" />
-    <NavigationProperty Name="users" Relationship="Self.FK__notetype__create__3A81B327" FromRole="notetype" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__notetype__modifi__3B75D760" FromRole="notetype" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__notetype__create__06CD04F7" FromRole="notetype" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__notetype__modifi__07C12930" FromRole="notetype" ToRole="users" />
   </EntityType>
   <EntityType Name="reviews">
     <Key>
@@ -202,11 +202,11 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="download" Relationship="Self.FK__reviews__downloa__19DFD96B" FromRole="reviews" ToRole="download" />
+    <NavigationProperty Name="download" Relationship="Self.FK__reviews__downloa__0A9D95DB" FromRole="reviews" ToRole="download" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__reviews__noteid__17F790F9" FromRole="reviews" ToRole="notedetails" />
-    <NavigationProperty Name="users" Relationship="Self.FK__reviews__buyerid__18EBB532" FromRole="reviews" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__reviews__created__1AD3FDA4" FromRole="reviews" ToRole="users" />
-    <NavigationProperty Name="users2" Relationship="Self.FK__reviews__modifie__1BC821DD" FromRole="reviews" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__reviews__buyerid__08B54D69" FromRole="reviews" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__reviews__created__09A971A2" FromRole="reviews" ToRole="users" />
+    <NavigationProperty Name="users2" Relationship="Self.FK__reviews__modifie__0B91BA14" FromRole="reviews" ToRole="users" />
   </EntityType>
   <EntityType Name="spam">
     <Key>
@@ -223,11 +223,11 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="download" Relationship="Self.FK__spam__downloadid__2180FB33" FromRole="spam" ToRole="download" />
+    <NavigationProperty Name="download" Relationship="Self.FK__spam__downloadid__0F624AF8" FromRole="spam" ToRole="download" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__spam__noteid__1F98B2C1" FromRole="spam" ToRole="notedetails" />
-    <NavigationProperty Name="users" Relationship="Self.FK__spam__buyerid__208CD6FA" FromRole="spam" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__spam__createdby__22751F6C" FromRole="spam" ToRole="users" />
-    <NavigationProperty Name="users2" Relationship="Self.FK__spam__modifiedby__236943A5" FromRole="spam" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__spam__buyerid__0D7A0286" FromRole="spam" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__spam__createdby__0E6E26BF" FromRole="spam" ToRole="users" />
+    <NavigationProperty Name="users2" Relationship="Self.FK__spam__modifiedby__10566F31" FromRole="spam" ToRole="users" />
   </EntityType>
   <EntityType Name="statustype">
     <Key>
@@ -242,23 +242,30 @@
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__statu__4CA06362" FromRole="statustype" ToRole="notedetails" />
-    <NavigationProperty Name="users" Relationship="Self.FK__statustyp__creat__46E78A0C" FromRole="statustype" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__statustyp__modif__47DBAE45" FromRole="statustype" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__statustyp__creat__123EB7A3" FromRole="statustype" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__statustyp__modif__1332DBDC" FromRole="statustype" ToRole="users" />
   </EntityType>
   <EntityType Name="systemconfig">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="valuetype" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="supportemail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="otheremail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="supportphonenumber" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="facebookurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="twitterurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="linedinurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="defaultnotepicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="defaultprofilepicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="createddate" Type="DateTime" Precision="3" />
     <Property Name="createdby" Type="Int32" />
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
-    <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__systemcon__creat__2739D489" FromRole="systemconfig" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__systemcon__modif__282DF8C2" FromRole="systemconfig" ToRole="users" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="users" Relationship="Self.FK__systemcon__creat__14270015" FromRole="systemconfig" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__systemcon__modif__151B244E" FromRole="systemconfig" ToRole="users" />
   </EntityType>
   <EntityType Name="userdetails">
     <Key>
@@ -303,8 +310,8 @@
     <Property Name="modifieddate" Type="DateTime" Precision="3" />
     <Property Name="modifiedby" Type="Int32" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="users" Relationship="Self.FK__userroles__creat__2C3393D0" FromRole="userroles" ToRole="users" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__userroles__modif__2D27B809" FromRole="userroles" ToRole="users" />
+    <NavigationProperty Name="users" Relationship="Self.FK__userroles__creat__1BC821DD" FromRole="userroles" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__userroles__modif__1CBC4616" FromRole="userroles" ToRole="users" />
     <NavigationProperty Name="users2" Relationship="Self.FK_usrerole" FromRole="userroles" ToRole="users" />
   </EntityType>
   <EntityType Name="users">
@@ -324,49 +331,49 @@
     <Property Name="isEmailVerified" Type="Boolean" />
     <Property Name="activationcode" Type="Guid" />
     <Property Name="isActive" Type="Boolean" />
-    <NavigationProperty Name="admindetails" Relationship="Self.FK__admindeta__admin__114A936A" FromRole="users" ToRole="admindetails" />
-    <NavigationProperty Name="admindetails1" Relationship="Self.FK__admindeta__creat__1332DBDC" FromRole="users" ToRole="admindetails" />
-    <NavigationProperty Name="admindetails2" Relationship="Self.FK__admindeta__modif__14270015" FromRole="users" ToRole="admindetails" />
-    <NavigationProperty Name="category" Relationship="Self.FK__category__create__34C8D9D1" FromRole="users" ToRole="category" />
-    <NavigationProperty Name="category1" Relationship="Self.FK__category__modifi__35BCFE0A" FromRole="users" ToRole="category" />
-    <NavigationProperty Name="country" Relationship="Self.FK__country__created__412EB0B6" FromRole="users" ToRole="country" />
-    <NavigationProperty Name="country1" Relationship="Self.FK__country__modifie__4222D4EF" FromRole="users" ToRole="country" />
-    <NavigationProperty Name="download" Relationship="Self.FK__download__buyeri__73BA3083" FromRole="users" ToRole="download" />
-    <NavigationProperty Name="download1" Relationship="Self.FK__download__create__778AC167" FromRole="users" ToRole="download" />
-    <NavigationProperty Name="download2" Relationship="Self.FK__download__modifi__787EE5A0" FromRole="users" ToRole="download" />
-    <NavigationProperty Name="download3" Relationship="Self.FK__download__seller__72C60C4A" FromRole="users" ToRole="download" />
-    <NavigationProperty Name="gender" Relationship="Self.FK__gender__createdb__0A9D95DB" FromRole="users" ToRole="gender" />
-    <NavigationProperty Name="gender1" Relationship="Self.FK__gender__modified__0B91BA14" FromRole="users" ToRole="gender" />
-    <NavigationProperty Name="noteattachment" Relationship="Self.FK__noteattac__creat__571DF1D5" FromRole="users" ToRole="noteattachment" />
-    <NavigationProperty Name="noteattachment1" Relationship="Self.FK__noteattac__modif__5812160E" FromRole="users" ToRole="noteattachment" />
+    <NavigationProperty Name="admindetails" Relationship="Self.FK__admindeta__admin__6E01572D" FromRole="users" ToRole="admindetails" />
+    <NavigationProperty Name="admindetails1" Relationship="Self.FK__admindeta__creat__6FE99F9F" FromRole="users" ToRole="admindetails" />
+    <NavigationProperty Name="admindetails2" Relationship="Self.FK__admindeta__modif__70DDC3D8" FromRole="users" ToRole="admindetails" />
+    <NavigationProperty Name="category" Relationship="Self.FK__category__create__71D1E811" FromRole="users" ToRole="category" />
+    <NavigationProperty Name="category1" Relationship="Self.FK__category__modifi__72C60C4A" FromRole="users" ToRole="category" />
+    <NavigationProperty Name="country" Relationship="Self.FK__country__created__73BA3083" FromRole="users" ToRole="country" />
+    <NavigationProperty Name="country1" Relationship="Self.FK__country__modifie__74AE54BC" FromRole="users" ToRole="country" />
+    <NavigationProperty Name="download" Relationship="Self.FK__download__buyeri__75A278F5" FromRole="users" ToRole="download" />
+    <NavigationProperty Name="download1" Relationship="Self.FK__download__create__76969D2E" FromRole="users" ToRole="download" />
+    <NavigationProperty Name="download2" Relationship="Self.FK__download__modifi__778AC167" FromRole="users" ToRole="download" />
+    <NavigationProperty Name="download3" Relationship="Self.FK__download__seller__797309D9" FromRole="users" ToRole="download" />
+    <NavigationProperty Name="gender" Relationship="Self.FK__gender__createdb__7A672E12" FromRole="users" ToRole="gender" />
+    <NavigationProperty Name="gender1" Relationship="Self.FK__gender__modified__7B5B524B" FromRole="users" ToRole="gender" />
+    <NavigationProperty Name="noteattachment" Relationship="Self.FK__noteattac__creat__7C4F7684" FromRole="users" ToRole="noteattachment" />
+    <NavigationProperty Name="noteattachment1" Relationship="Self.FK__noteattac__modif__7D439ABD" FromRole="users" ToRole="noteattachment" />
     <NavigationProperty Name="notedetails" Relationship="Self.FK__notedetai__actio__4D94879B" FromRole="users" ToRole="notedetails" />
     <NavigationProperty Name="notedetails1" Relationship="Self.FK__notedetai__creat__5165187F" FromRole="users" ToRole="notedetails" />
     <NavigationProperty Name="notedetails2" Relationship="Self.FK__notedetai__modif__52593CB8" FromRole="users" ToRole="notedetails" />
     <NavigationProperty Name="notedetails3" Relationship="Self.FK__notedetai__useri__4BAC3F29" FromRole="users" ToRole="notedetails" />
-    <NavigationProperty Name="notetype" Relationship="Self.FK__notetype__create__3A81B327" FromRole="users" ToRole="notetype" />
-    <NavigationProperty Name="notetype1" Relationship="Self.FK__notetype__modifi__3B75D760" FromRole="users" ToRole="notetype" />
-    <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__buyerid__18EBB532" FromRole="users" ToRole="reviews" />
-    <NavigationProperty Name="reviews1" Relationship="Self.FK__reviews__created__1AD3FDA4" FromRole="users" ToRole="reviews" />
-    <NavigationProperty Name="reviews2" Relationship="Self.FK__reviews__modifie__1BC821DD" FromRole="users" ToRole="reviews" />
-    <NavigationProperty Name="spam" Relationship="Self.FK__spam__buyerid__208CD6FA" FromRole="users" ToRole="spam" />
-    <NavigationProperty Name="spam1" Relationship="Self.FK__spam__createdby__22751F6C" FromRole="users" ToRole="spam" />
-    <NavigationProperty Name="spam2" Relationship="Self.FK__spam__modifiedby__236943A5" FromRole="users" ToRole="spam" />
-    <NavigationProperty Name="statustype" Relationship="Self.FK__statustyp__creat__46E78A0C" FromRole="users" ToRole="statustype" />
-    <NavigationProperty Name="statustype1" Relationship="Self.FK__statustyp__modif__47DBAE45" FromRole="users" ToRole="statustype" />
-    <NavigationProperty Name="systemconfig" Relationship="Self.FK__systemcon__creat__2739D489" FromRole="users" ToRole="systemconfig" />
-    <NavigationProperty Name="systemconfig1" Relationship="Self.FK__systemcon__modif__282DF8C2" FromRole="users" ToRole="systemconfig" />
+    <NavigationProperty Name="notetype" Relationship="Self.FK__notetype__create__06CD04F7" FromRole="users" ToRole="notetype" />
+    <NavigationProperty Name="notetype1" Relationship="Self.FK__notetype__modifi__07C12930" FromRole="users" ToRole="notetype" />
+    <NavigationProperty Name="reviews" Relationship="Self.FK__reviews__buyerid__08B54D69" FromRole="users" ToRole="reviews" />
+    <NavigationProperty Name="reviews1" Relationship="Self.FK__reviews__created__09A971A2" FromRole="users" ToRole="reviews" />
+    <NavigationProperty Name="reviews2" Relationship="Self.FK__reviews__modifie__0B91BA14" FromRole="users" ToRole="reviews" />
+    <NavigationProperty Name="spam" Relationship="Self.FK__spam__buyerid__0D7A0286" FromRole="users" ToRole="spam" />
+    <NavigationProperty Name="spam1" Relationship="Self.FK__spam__createdby__0E6E26BF" FromRole="users" ToRole="spam" />
+    <NavigationProperty Name="spam2" Relationship="Self.FK__spam__modifiedby__10566F31" FromRole="users" ToRole="spam" />
+    <NavigationProperty Name="statustype" Relationship="Self.FK__statustyp__creat__123EB7A3" FromRole="users" ToRole="statustype" />
+    <NavigationProperty Name="statustype1" Relationship="Self.FK__statustyp__modif__1332DBDC" FromRole="users" ToRole="statustype" />
+    <NavigationProperty Name="systemconfig" Relationship="Self.FK__systemcon__creat__14270015" FromRole="users" ToRole="systemconfig" />
+    <NavigationProperty Name="systemconfig1" Relationship="Self.FK__systemcon__modif__151B244E" FromRole="users" ToRole="systemconfig" />
     <NavigationProperty Name="userdetails" Relationship="Self.FK__userdetai__creat__05D8E0BE" FromRole="users" ToRole="userdetails" />
     <NavigationProperty Name="userdetails1" Relationship="Self.FK__userdetai__modif__06CD04F7" FromRole="users" ToRole="userdetails" />
     <NavigationProperty Name="userdetails2" Relationship="Self.FK__userdetai__usser__02FC7413" FromRole="users" ToRole="userdetails" />
-    <NavigationProperty Name="userroles" Relationship="Self.FK__userroles__creat__2C3393D0" FromRole="users" ToRole="userroles" />
-    <NavigationProperty Name="userroles1" Relationship="Self.FK__userroles__modif__2D27B809" FromRole="users" ToRole="userroles" />
+    <NavigationProperty Name="userroles" Relationship="Self.FK__userroles__creat__1BC821DD" FromRole="users" ToRole="userroles" />
+    <NavigationProperty Name="userroles1" Relationship="Self.FK__userroles__modif__1CBC4616" FromRole="users" ToRole="userroles" />
     <NavigationProperty Name="userroles2" Relationship="Self.FK_usrerole" FromRole="users" ToRole="userroles" />
-    <NavigationProperty Name="users1" Relationship="Self.FK__users__createdby__25869641" FromRole="users" ToRole="users1" />
-    <NavigationProperty Name="users2" Relationship="Self.FK__users__createdby__25869641" FromRole="users1" ToRole="users" />
-    <NavigationProperty Name="users11" Relationship="Self.FK__users__modifiedb__267ABA7A" FromRole="users" ToRole="users1" />
-    <NavigationProperty Name="users3" Relationship="Self.FK__users__modifiedb__267ABA7A" FromRole="users1" ToRole="users" />
+    <NavigationProperty Name="users1" Relationship="Self.FK__users__createdby__1DB06A4F" FromRole="users" ToRole="users1" />
+    <NavigationProperty Name="users2" Relationship="Self.FK__users__createdby__1DB06A4F" FromRole="users1" ToRole="users" />
+    <NavigationProperty Name="users11" Relationship="Self.FK__users__modifiedb__1EA48E88" FromRole="users" ToRole="users1" />
+    <NavigationProperty Name="users3" Relationship="Self.FK__users__modifiedb__1EA48E88" FromRole="users1" ToRole="users" />
   </EntityType>
-  <Association Name="FK__admindeta__admin__114A936A">
+  <Association Name="FK__admindeta__admin__6E01572D">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -378,7 +385,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__admindeta__count__123EB7A3">
+  <Association Name="FK__admindeta__count__6EF57B66">
     <End Role="country" Type="Self.country" Multiplicity="0..1" />
     <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -390,7 +397,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__admindeta__creat__1332DBDC">
+  <Association Name="FK__admindeta__creat__6FE99F9F">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -402,7 +409,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__admindeta__modif__14270015">
+  <Association Name="FK__admindeta__modif__70DDC3D8">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="admindetails" Type="Self.admindetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -414,7 +421,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__category__create__34C8D9D1">
+  <Association Name="FK__category__create__71D1E811">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="category" Type="Self.category" Multiplicity="*" />
     <ReferentialConstraint>
@@ -426,7 +433,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__category__modifi__35BCFE0A">
+  <Association Name="FK__category__modifi__72C60C4A">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="category" Type="Self.category" Multiplicity="*" />
     <ReferentialConstraint>
@@ -450,7 +457,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__country__created__412EB0B6">
+  <Association Name="FK__country__created__73BA3083">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="country" Type="Self.country" Multiplicity="*" />
     <ReferentialConstraint>
@@ -462,7 +469,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__country__modifie__4222D4EF">
+  <Association Name="FK__country__modifie__74AE54BC">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="country" Type="Self.country" Multiplicity="*" />
     <ReferentialConstraint>
@@ -510,7 +517,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__download__buyeri__73BA3083">
+  <Association Name="FK__download__buyeri__75A278F5">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="download" Type="Self.download" Multiplicity="*" />
     <ReferentialConstraint>
@@ -522,7 +529,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__download__create__778AC167">
+  <Association Name="FK__download__create__76969D2E">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="download" Type="Self.download" Multiplicity="*" />
     <ReferentialConstraint>
@@ -534,7 +541,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__download__modifi__787EE5A0">
+  <Association Name="FK__download__modifi__778AC167">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="download" Type="Self.download" Multiplicity="*" />
     <ReferentialConstraint>
@@ -558,7 +565,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__download__seller__72C60C4A">
+  <Association Name="FK__download__seller__797309D9">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="download" Type="Self.download" Multiplicity="*" />
     <ReferentialConstraint>
@@ -570,7 +577,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reviews__downloa__19DFD96B">
+  <Association Name="FK__reviews__downloa__0A9D95DB">
     <End Role="download" Type="Self.download" Multiplicity="0..1" />
     <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
     <ReferentialConstraint>
@@ -582,7 +589,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__spam__downloadid__2180FB33">
+  <Association Name="FK__spam__downloadid__0F624AF8">
     <End Role="download" Type="Self.download" Multiplicity="0..1" />
     <End Role="spam" Type="Self.spam" Multiplicity="*" />
     <ReferentialConstraint>
@@ -594,7 +601,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__gender__createdb__0A9D95DB">
+  <Association Name="FK__gender__createdb__7A672E12">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="gender" Type="Self.gender" Multiplicity="*" />
     <ReferentialConstraint>
@@ -606,7 +613,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__gender__modified__0B91BA14">
+  <Association Name="FK__gender__modified__7B5B524B">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="gender" Type="Self.gender" Multiplicity="*" />
     <ReferentialConstraint>
@@ -630,7 +637,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__noteattac__creat__571DF1D5">
+  <Association Name="FK__noteattac__creat__7C4F7684">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -642,7 +649,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__noteattac__modif__5812160E">
+  <Association Name="FK__noteattac__modif__7D439ABD">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="noteattachment" Type="Self.noteattachment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -762,7 +769,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__notetype__create__3A81B327">
+  <Association Name="FK__notetype__create__06CD04F7">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
     <ReferentialConstraint>
@@ -774,7 +781,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__notetype__modifi__3B75D760">
+  <Association Name="FK__notetype__modifi__07C12930">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="notetype" Type="Self.notetype" Multiplicity="*" />
     <ReferentialConstraint>
@@ -786,7 +793,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reviews__buyerid__18EBB532">
+  <Association Name="FK__reviews__buyerid__08B54D69">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
     <ReferentialConstraint>
@@ -798,7 +805,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reviews__created__1AD3FDA4">
+  <Association Name="FK__reviews__created__09A971A2">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
     <ReferentialConstraint>
@@ -810,7 +817,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reviews__modifie__1BC821DD">
+  <Association Name="FK__reviews__modifie__0B91BA14">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
     <ReferentialConstraint>
@@ -822,7 +829,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__spam__buyerid__208CD6FA">
+  <Association Name="FK__spam__buyerid__0D7A0286">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="spam" Type="Self.spam" Multiplicity="*" />
     <ReferentialConstraint>
@@ -834,7 +841,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__spam__createdby__22751F6C">
+  <Association Name="FK__spam__createdby__0E6E26BF">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="spam" Type="Self.spam" Multiplicity="*" />
     <ReferentialConstraint>
@@ -846,7 +853,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__spam__modifiedby__236943A5">
+  <Association Name="FK__spam__modifiedby__10566F31">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="spam" Type="Self.spam" Multiplicity="*" />
     <ReferentialConstraint>
@@ -858,7 +865,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__statustyp__creat__46E78A0C">
+  <Association Name="FK__statustyp__creat__123EB7A3">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
     <ReferentialConstraint>
@@ -870,7 +877,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__statustyp__modif__47DBAE45">
+  <Association Name="FK__statustyp__modif__1332DBDC">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="statustype" Type="Self.statustype" Multiplicity="*" />
     <ReferentialConstraint>
@@ -882,7 +889,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__systemcon__creat__2739D489">
+  <Association Name="FK__systemcon__creat__14270015">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="systemconfig" Type="Self.systemconfig" Multiplicity="*" />
     <ReferentialConstraint>
@@ -894,7 +901,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__systemcon__modif__282DF8C2">
+  <Association Name="FK__systemcon__modif__151B244E">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="systemconfig" Type="Self.systemconfig" Multiplicity="*" />
     <ReferentialConstraint>
@@ -942,7 +949,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userroles__creat__2C3393D0">
+  <Association Name="FK__userroles__creat__1BC821DD">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -954,7 +961,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__userroles__modif__2D27B809">
+  <Association Name="FK__userroles__modif__1CBC4616">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="userroles" Type="Self.userroles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -978,7 +985,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__users__createdby__25869641">
+  <Association Name="FK__users__createdby__1DB06A4F">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="users1" Type="Self.users" Multiplicity="*" />
     <ReferentialConstraint>
@@ -990,7 +997,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__users__modifiedb__267ABA7A">
+  <Association Name="FK__users__modifiedb__1EA48E88">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="users1" Type="Self.users" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1019,27 +1026,27 @@
     <EntitySet Name="userdetails" EntityType="Self.userdetails" />
     <EntitySet Name="userroles" EntityType="Self.userroles" />
     <EntitySet Name="users" EntityType="Self.users" />
-    <AssociationSet Name="FK__admindeta__admin__114A936A" Association="Self.FK__admindeta__admin__114A936A">
+    <AssociationSet Name="FK__admindeta__admin__6E01572D" Association="Self.FK__admindeta__admin__6E01572D">
       <End Role="users" EntitySet="users" />
       <End Role="admindetails" EntitySet="admindetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__admindeta__count__123EB7A3" Association="Self.FK__admindeta__count__123EB7A3">
+    <AssociationSet Name="FK__admindeta__count__6EF57B66" Association="Self.FK__admindeta__count__6EF57B66">
       <End Role="country" EntitySet="country" />
       <End Role="admindetails" EntitySet="admindetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__admindeta__creat__1332DBDC" Association="Self.FK__admindeta__creat__1332DBDC">
+    <AssociationSet Name="FK__admindeta__creat__6FE99F9F" Association="Self.FK__admindeta__creat__6FE99F9F">
       <End Role="users" EntitySet="users" />
       <End Role="admindetails" EntitySet="admindetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__admindeta__modif__14270015" Association="Self.FK__admindeta__modif__14270015">
+    <AssociationSet Name="FK__admindeta__modif__70DDC3D8" Association="Self.FK__admindeta__modif__70DDC3D8">
       <End Role="users" EntitySet="users" />
       <End Role="admindetails" EntitySet="admindetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__category__create__34C8D9D1" Association="Self.FK__category__create__34C8D9D1">
+    <AssociationSet Name="FK__category__create__71D1E811" Association="Self.FK__category__create__71D1E811">
       <End Role="users" EntitySet="users" />
       <End Role="category" EntitySet="category" />
     </AssociationSet>
-    <AssociationSet Name="FK__category__modifi__35BCFE0A" Association="Self.FK__category__modifi__35BCFE0A">
+    <AssociationSet Name="FK__category__modifi__72C60C4A" Association="Self.FK__category__modifi__72C60C4A">
       <End Role="users" EntitySet="users" />
       <End Role="category" EntitySet="category" />
     </AssociationSet>
@@ -1047,11 +1054,11 @@
       <End Role="category" EntitySet="category" />
       <End Role="notedetails" EntitySet="notedetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__country__created__412EB0B6" Association="Self.FK__country__created__412EB0B6">
+    <AssociationSet Name="FK__country__created__73BA3083" Association="Self.FK__country__created__73BA3083">
       <End Role="users" EntitySet="users" />
       <End Role="country" EntitySet="country" />
     </AssociationSet>
-    <AssociationSet Name="FK__country__modifie__4222D4EF" Association="Self.FK__country__modifie__4222D4EF">
+    <AssociationSet Name="FK__country__modifie__74AE54BC" Association="Self.FK__country__modifie__74AE54BC">
       <End Role="users" EntitySet="users" />
       <End Role="country" EntitySet="country" />
     </AssociationSet>
@@ -1067,15 +1074,15 @@
       <End Role="country" EntitySet="country" />
       <End Role="userdetails" EntitySet="userdetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__download__buyeri__73BA3083" Association="Self.FK__download__buyeri__73BA3083">
+    <AssociationSet Name="FK__download__buyeri__75A278F5" Association="Self.FK__download__buyeri__75A278F5">
       <End Role="users" EntitySet="users" />
       <End Role="download" EntitySet="download" />
     </AssociationSet>
-    <AssociationSet Name="FK__download__create__778AC167" Association="Self.FK__download__create__778AC167">
+    <AssociationSet Name="FK__download__create__76969D2E" Association="Self.FK__download__create__76969D2E">
       <End Role="users" EntitySet="users" />
       <End Role="download" EntitySet="download" />
     </AssociationSet>
-    <AssociationSet Name="FK__download__modifi__787EE5A0" Association="Self.FK__download__modifi__787EE5A0">
+    <AssociationSet Name="FK__download__modifi__778AC167" Association="Self.FK__download__modifi__778AC167">
       <End Role="users" EntitySet="users" />
       <End Role="download" EntitySet="download" />
     </AssociationSet>
@@ -1083,23 +1090,23 @@
       <End Role="notedetails" EntitySet="notedetails" />
       <End Role="download" EntitySet="download" />
     </AssociationSet>
-    <AssociationSet Name="FK__download__seller__72C60C4A" Association="Self.FK__download__seller__72C60C4A">
+    <AssociationSet Name="FK__download__seller__797309D9" Association="Self.FK__download__seller__797309D9">
       <End Role="users" EntitySet="users" />
       <End Role="download" EntitySet="download" />
     </AssociationSet>
-    <AssociationSet Name="FK__reviews__downloa__19DFD96B" Association="Self.FK__reviews__downloa__19DFD96B">
+    <AssociationSet Name="FK__reviews__downloa__0A9D95DB" Association="Self.FK__reviews__downloa__0A9D95DB">
       <End Role="download" EntitySet="download" />
       <End Role="reviews" EntitySet="reviews" />
     </AssociationSet>
-    <AssociationSet Name="FK__spam__downloadid__2180FB33" Association="Self.FK__spam__downloadid__2180FB33">
+    <AssociationSet Name="FK__spam__downloadid__0F624AF8" Association="Self.FK__spam__downloadid__0F624AF8">
       <End Role="download" EntitySet="download" />
       <End Role="spam" EntitySet="spam" />
     </AssociationSet>
-    <AssociationSet Name="FK__gender__createdb__0A9D95DB" Association="Self.FK__gender__createdb__0A9D95DB">
+    <AssociationSet Name="FK__gender__createdb__7A672E12" Association="Self.FK__gender__createdb__7A672E12">
       <End Role="users" EntitySet="users" />
       <End Role="gender" EntitySet="gender" />
     </AssociationSet>
-    <AssociationSet Name="FK__gender__modified__0B91BA14" Association="Self.FK__gender__modified__0B91BA14">
+    <AssociationSet Name="FK__gender__modified__7B5B524B" Association="Self.FK__gender__modified__7B5B524B">
       <End Role="users" EntitySet="users" />
       <End Role="gender" EntitySet="gender" />
     </AssociationSet>
@@ -1107,11 +1114,11 @@
       <End Role="gender" EntitySet="gender" />
       <End Role="userdetails" EntitySet="userdetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__noteattac__creat__571DF1D5" Association="Self.FK__noteattac__creat__571DF1D5">
+    <AssociationSet Name="FK__noteattac__creat__7C4F7684" Association="Self.FK__noteattac__creat__7C4F7684">
       <End Role="users" EntitySet="users" />
       <End Role="noteattachment" EntitySet="noteattachment" />
     </AssociationSet>
-    <AssociationSet Name="FK__noteattac__modif__5812160E" Association="Self.FK__noteattac__modif__5812160E">
+    <AssociationSet Name="FK__noteattac__modif__7D439ABD" Association="Self.FK__noteattac__modif__7D439ABD">
       <End Role="users" EntitySet="users" />
       <End Role="noteattachment" EntitySet="noteattachment" />
     </AssociationSet>
@@ -1151,51 +1158,51 @@
       <End Role="notedetails" EntitySet="notedetails" />
       <End Role="spam" EntitySet="spam" />
     </AssociationSet>
-    <AssociationSet Name="FK__notetype__create__3A81B327" Association="Self.FK__notetype__create__3A81B327">
+    <AssociationSet Name="FK__notetype__create__06CD04F7" Association="Self.FK__notetype__create__06CD04F7">
       <End Role="users" EntitySet="users" />
       <End Role="notetype" EntitySet="notetype" />
     </AssociationSet>
-    <AssociationSet Name="FK__notetype__modifi__3B75D760" Association="Self.FK__notetype__modifi__3B75D760">
+    <AssociationSet Name="FK__notetype__modifi__07C12930" Association="Self.FK__notetype__modifi__07C12930">
       <End Role="users" EntitySet="users" />
       <End Role="notetype" EntitySet="notetype" />
     </AssociationSet>
-    <AssociationSet Name="FK__reviews__buyerid__18EBB532" Association="Self.FK__reviews__buyerid__18EBB532">
+    <AssociationSet Name="FK__reviews__buyerid__08B54D69" Association="Self.FK__reviews__buyerid__08B54D69">
       <End Role="users" EntitySet="users" />
       <End Role="reviews" EntitySet="reviews" />
     </AssociationSet>
-    <AssociationSet Name="FK__reviews__created__1AD3FDA4" Association="Self.FK__reviews__created__1AD3FDA4">
+    <AssociationSet Name="FK__reviews__created__09A971A2" Association="Self.FK__reviews__created__09A971A2">
       <End Role="users" EntitySet="users" />
       <End Role="reviews" EntitySet="reviews" />
     </AssociationSet>
-    <AssociationSet Name="FK__reviews__modifie__1BC821DD" Association="Self.FK__reviews__modifie__1BC821DD">
+    <AssociationSet Name="FK__reviews__modifie__0B91BA14" Association="Self.FK__reviews__modifie__0B91BA14">
       <End Role="users" EntitySet="users" />
       <End Role="reviews" EntitySet="reviews" />
     </AssociationSet>
-    <AssociationSet Name="FK__spam__buyerid__208CD6FA" Association="Self.FK__spam__buyerid__208CD6FA">
+    <AssociationSet Name="FK__spam__buyerid__0D7A0286" Association="Self.FK__spam__buyerid__0D7A0286">
       <End Role="users" EntitySet="users" />
       <End Role="spam" EntitySet="spam" />
     </AssociationSet>
-    <AssociationSet Name="FK__spam__createdby__22751F6C" Association="Self.FK__spam__createdby__22751F6C">
+    <AssociationSet Name="FK__spam__createdby__0E6E26BF" Association="Self.FK__spam__createdby__0E6E26BF">
       <End Role="users" EntitySet="users" />
       <End Role="spam" EntitySet="spam" />
     </AssociationSet>
-    <AssociationSet Name="FK__spam__modifiedby__236943A5" Association="Self.FK__spam__modifiedby__236943A5">
+    <AssociationSet Name="FK__spam__modifiedby__10566F31" Association="Self.FK__spam__modifiedby__10566F31">
       <End Role="users" EntitySet="users" />
       <End Role="spam" EntitySet="spam" />
     </AssociationSet>
-    <AssociationSet Name="FK__statustyp__creat__46E78A0C" Association="Self.FK__statustyp__creat__46E78A0C">
+    <AssociationSet Name="FK__statustyp__creat__123EB7A3" Association="Self.FK__statustyp__creat__123EB7A3">
       <End Role="users" EntitySet="users" />
       <End Role="statustype" EntitySet="statustype" />
     </AssociationSet>
-    <AssociationSet Name="FK__statustyp__modif__47DBAE45" Association="Self.FK__statustyp__modif__47DBAE45">
+    <AssociationSet Name="FK__statustyp__modif__1332DBDC" Association="Self.FK__statustyp__modif__1332DBDC">
       <End Role="users" EntitySet="users" />
       <End Role="statustype" EntitySet="statustype" />
     </AssociationSet>
-    <AssociationSet Name="FK__systemcon__creat__2739D489" Association="Self.FK__systemcon__creat__2739D489">
+    <AssociationSet Name="FK__systemcon__creat__14270015" Association="Self.FK__systemcon__creat__14270015">
       <End Role="users" EntitySet="users" />
       <End Role="systemconfig" EntitySet="systemconfig" />
     </AssociationSet>
-    <AssociationSet Name="FK__systemcon__modif__282DF8C2" Association="Self.FK__systemcon__modif__282DF8C2">
+    <AssociationSet Name="FK__systemcon__modif__151B244E" Association="Self.FK__systemcon__modif__151B244E">
       <End Role="users" EntitySet="users" />
       <End Role="systemconfig" EntitySet="systemconfig" />
     </AssociationSet>
@@ -1211,11 +1218,11 @@
       <End Role="users" EntitySet="users" />
       <End Role="userdetails" EntitySet="userdetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__userroles__creat__2C3393D0" Association="Self.FK__userroles__creat__2C3393D0">
+    <AssociationSet Name="FK__userroles__creat__1BC821DD" Association="Self.FK__userroles__creat__1BC821DD">
       <End Role="users" EntitySet="users" />
       <End Role="userroles" EntitySet="userroles" />
     </AssociationSet>
-    <AssociationSet Name="FK__userroles__modif__2D27B809" Association="Self.FK__userroles__modif__2D27B809">
+    <AssociationSet Name="FK__userroles__modif__1CBC4616" Association="Self.FK__userroles__modif__1CBC4616">
       <End Role="users" EntitySet="users" />
       <End Role="userroles" EntitySet="userroles" />
     </AssociationSet>
@@ -1223,11 +1230,11 @@
       <End Role="userroles" EntitySet="userroles" />
       <End Role="users" EntitySet="users" />
     </AssociationSet>
-    <AssociationSet Name="FK__users__createdby__25869641" Association="Self.FK__users__createdby__25869641">
+    <AssociationSet Name="FK__users__createdby__1DB06A4F" Association="Self.FK__users__createdby__1DB06A4F">
       <End Role="users" EntitySet="users" />
       <End Role="users1" EntitySet="users" />
     </AssociationSet>
-    <AssociationSet Name="FK__users__modifiedb__267ABA7A" Association="Self.FK__users__modifiedb__267ABA7A">
+    <AssociationSet Name="FK__users__modifiedb__1EA48E88" Association="Self.FK__users__modifiedb__1EA48E88">
       <End Role="users" EntitySet="users" />
       <End Role="users1" EntitySet="users" />
     </AssociationSet>

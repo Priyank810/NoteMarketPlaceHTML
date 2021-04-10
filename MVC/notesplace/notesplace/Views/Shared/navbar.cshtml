@@ -1,37 +1,4 @@
 ﻿<!DOCTYPE html>
-
-<style type="text/css">
-    .pmodal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: black;
-        z-index: 99;
-        opacity: 0.8;
-        filter: alpha(opacity=80);
-        -moz-opacity: 0.8;
-        min-height: 100%;
-        width: 100%;
-    }
-
-    .loading {
-        font-family: Open Sans;
-        font-size: 20px;
-        color: #fff;
-        width: 200px;
-        height: 100px;
-        display: none;
-        position: fixed;
-        z-index: 999;
-    }
-</style>
-
-<div class="loading" align="center">
-    <br />
-    <br />
-    <strong>Sending Request.....</strong>
-    <!-- <img src="https://www.aspsnippets.com/demos/loader.gif" alt="" /> -->
-</div>
 <html>
 <head>
     <!-- Important Meta Tags -->
@@ -72,6 +39,9 @@
                 </button>
 
 
+                @{ notesmarketplaceEntities context = new notesmarketplaceEntities();
+                    var image = context.systemconfig.FirstOrDefault().defaultprofilepicture; }
+
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul class="navbar-nav" id="myDiv">
                         <li class="nav-item">
@@ -98,6 +68,7 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
+
                             <li class="nav-item">
                                 <div class="dropdown">
                                     @if (ViewBag.image != null)
@@ -109,14 +80,14 @@
                                     else
                                     {
                                         <button class="profile-btn-style nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="" alt="Image" class="nav-user-image">
+                                            <img src="@Url.Content(image)" alt="Image" class="nav-user-image">
                                         </button>
                                     }
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="@Url.Action("editprofile", "userprofile")">My Profile</a>
                                         <a class="dropdown-item" href="@Url.Action("mydownload", "mydownload")">My Downloads</a>
                                         <a class="dropdown-item" href="@Url.Action("sold", "mysoldnotes")">My Sold Notes</a>
-                                        <a class="dropdown-item" href="#">My Rejected Notes</a>
+                                        <a class="dropdown-item" href="@Url.Action("myrejectednotes", "myrejectednotes")">My Rejected Notes</a>
                                         <a class="dropdown-item" href="@Url.Action("changepassword", "account")">Change Password</a>
                                         <a class="dropdown-item logout-color" href="@Url.Action("logout", "account")">LOGOUT</a>
                                     </div>
@@ -146,9 +117,6 @@
     <div>
         @RenderBody()
     </div>
-
-
-
 
     <!-- Footer Section -->
     <div class="footer-border"></div>
@@ -191,6 +159,41 @@
 
         </div>
     </div>
+
+    <!-- style for loading icon -->
+    <style type="text/css">
+        .pmodal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .loading {
+            font-family: Open Sans;
+            font-size: 20px;
+            color: #fff;
+            width: 200px;
+            height: 100px;
+            display: none;
+            position: fixed;
+            z-index: 999;
+        }
+    </style>
+
+    <div class="loading" align="center">
+        <br />
+        <br />
+        <strong>Sending Request.....</strong>
+    </div>
+
+
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

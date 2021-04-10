@@ -16,6 +16,10 @@ namespace notesplace.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
+                if(getuser.roleid == 1 || getuser.roleid == 2)
+                {
+                    return RedirectToAction("dashboard", "admin");
+                }
                 var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
                 if (userprofilestatus != null)
                 {
