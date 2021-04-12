@@ -71,7 +71,7 @@
                 <div class="col-md-6 form-group">
 
                     <label class="form-label re">Upload Notes</label>
-                    <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes" multiple>
+                    <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes"  multiple accept="application/pdf">
                     @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
 
                 </div>
@@ -256,7 +256,7 @@
 
 
                     <label class="form-label">Note Preview</label>
-                    <input type="file" class="form-control form-box-addnotes upload-back-img" id="pfile" name="previewfile">
+                    <input type="file" class="form-control form-box-addnotes upload-back-img" id="pfile" name="previewfile" accept="application/pdf">
                     @Html.ValidationMessageFor(model => model.previewfile, "", new { @class = "text-danger" })
 
                 </div>
