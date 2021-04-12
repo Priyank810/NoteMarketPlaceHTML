@@ -13,7 +13,7 @@ namespace notesplace.Controllers
     [Authorize(Roles ="member")]
     public class mydownloadController : Controller
     {
-
+        //notes that are downloaded and puechased by user
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: mydownload
         public ActionResult mydownload(string search, int? i, string sortBy)
@@ -97,6 +97,7 @@ namespace notesplace.Controllers
             return RedirectToAction("userprofile", "userprofile");
         }
 
+        // adding review to the notes
         [HttpPost]
         public ActionResult addreview(int downloadid, int rate, string comments)
         {
@@ -125,6 +126,7 @@ namespace notesplace.Controllers
             return RedirectToAction("mydownload", "mydownload");
         }
 
+        //reporting notes
         [HttpPost]
         public ActionResult spam(int downloadid, string comments)
         {

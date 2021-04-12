@@ -13,6 +13,7 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: searchnotes
+
         public ActionResult search(int? i, string searchbook, string bycountry, string bycategory, string bytype, string byuniversity, string bycourse, string byrating)
         {
             if (User.Identity.IsAuthenticated)
@@ -65,24 +66,24 @@ namespace notesplace.Controllers
                      
                       
                       where book.isActive == true && status.status == "published"
-                      group new { book,r,category,type,country} by new {book.id} into pg
+                      group new { book,r,category,type,country} by new {book.id} into fn
 
 
                       select new searchnotes
                       {
-                          noteid = pg.FirstOrDefault().book.id,
-                          date = pg.FirstOrDefault().book.createddate,
-                          title = pg.FirstOrDefault().book.title,
-                          university = pg.FirstOrDefault().book.universityname,
-                          numberofpages = pg.FirstOrDefault().book.numberofpages,
-                          country = pg.FirstOrDefault().country.countryname,
-                          displaypicture = pg.FirstOrDefault().book.displaypicture,
-                          categoryname = pg.FirstOrDefault().category.categoryname,
-                          typename = pg.FirstOrDefault().type.typename,
-                          coursename = pg.FirstOrDefault().book.coursename,
-                          avgeragerating = pg.Average(m=>m.r.ratingstar),
-                          totalrating = pg.Count(),
-                          totalspam = pg.FirstOrDefault().book.totalspam
+                          noteid = fn.FirstOrDefault().book.id,
+                          date = fn.FirstOrDefault().book.createddate,
+                          title = fn.FirstOrDefault().book.title,
+                          university = fn.FirstOrDefault().book.universityname,
+                          numberofpages = fn.FirstOrDefault().book.numberofpages,
+                          country = fn.FirstOrDefault().country.countryname,
+                          displaypicture = fn.FirstOrDefault().book.displaypicture,
+                          categoryname = fn.FirstOrDefault().category.categoryname,
+                          typename = fn.FirstOrDefault().type.typename,
+                          coursename = fn.FirstOrDefault().book.coursename,
+                          avgeragerating = fn.Average(m=>m.r.ratingstar),
+                          totalrating = fn.Count(),
+                          totalspam = fn.FirstOrDefault().book.totalspam
                       });
 
             

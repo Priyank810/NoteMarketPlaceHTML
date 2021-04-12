@@ -14,6 +14,8 @@ namespace notesplace.Controllers
     {
         // GET: Editnotes
         notesmarketplaceEntities context = new notesmarketplaceEntities();
+
+        //For edinting notes
         public ActionResult editnotes(int nid)
         {
 

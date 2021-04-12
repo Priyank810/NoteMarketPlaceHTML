@@ -16,6 +16,7 @@ namespace notesplace.Controllers
 
         notesmarketplaceEntities context = new notesmarketplaceEntities();
 
+        // For displaying details of notes
         public ActionResult display(int nid)
         {
             int flag = 0;

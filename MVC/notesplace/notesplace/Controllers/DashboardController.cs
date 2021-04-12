@@ -18,7 +18,7 @@ namespace notesplace.Controllers
 
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         
-
+        //Member Dashboard
         [HttpGet]
         public ActionResult dashboard(string search1, string search2, int? i, string sortBy, int? j, string sortBy2)
         {
@@ -169,6 +169,7 @@ namespace notesplace.Controllers
             return RedirectToAction("userprofile", "userprofile");
         }
 
+        //Deleting notes whose status is draft
         public ActionResult delete(int id)
         {
             var deletebook = context.notedetails.Where(x => x.id == id).FirstOrDefault();

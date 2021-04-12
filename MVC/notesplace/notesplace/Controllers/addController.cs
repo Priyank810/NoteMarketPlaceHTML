@@ -14,6 +14,7 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         
+        //adding country details
         [HttpGet]
         public ActionResult country()
         {
@@ -75,6 +76,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //adding category
         [HttpGet]
         public ActionResult category()
         {
@@ -90,6 +92,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+       
         [HttpPost]
         public ActionResult category(notesplace.Models.category model)
         {
@@ -131,6 +134,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //adding type
         [HttpGet]
         public ActionResult type()
         {
@@ -187,6 +191,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //adding administrator (This is only done by superadmin)
         [HttpGet]
         public ActionResult addadminstrator()
         {
@@ -248,14 +253,14 @@ namespace notesplace.Controllers
                 context.admindetails.Add(admindetail);
                 context.SaveChanges();
 
-                
+
+                //sending login password to administrator through mail
                 sendPasswordMail(model.email, password);
                 return RedirectToAction("administrator","manage");
             }
             return View();
         }
 
-        
         [NonAction]
         public void sendPasswordMail(string email, string password)
         {

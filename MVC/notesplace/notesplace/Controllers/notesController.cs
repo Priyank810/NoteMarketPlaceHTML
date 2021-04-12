@@ -18,6 +18,9 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: notes
+
+        //all the notes that are submitted for review or are in review
+        //from here admin can approve, reject or make status inreview of notes
         public ActionResult notesunderreview(int? i, string search, string byseller, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -133,6 +136,7 @@ namespace notesplace.Controllers
             return View(notesunderreview);
         }
 
+        //approve the note set status to published 
         public ActionResult approve(int? noteid)
         {
             var getnote = context.notedetails.Where(x => x.id == (int)noteid).FirstOrDefault();
@@ -146,6 +150,7 @@ namespace notesplace.Controllers
             return RedirectToAction("notesunderreview", "notes");
         }
 
+        //reject the note
         [HttpPost]
         public ActionResult reject(int? noteid, string comments)
         {
@@ -160,6 +165,8 @@ namespace notesplace.Controllers
 
             return RedirectToAction("notesunderreview", "notes");
         }
+
+        // set status to inreview
         public ActionResult inreview(int? noteid)
         {
             var getnote = context.notedetails.Where(x => x.id == (int)noteid).FirstOrDefault();
@@ -173,6 +180,7 @@ namespace notesplace.Controllers
             return RedirectToAction("notesunderreview", "notes");
         }
 
+        // all the notes which are published
         public ActionResult publishednotes(int? i, string search, string byseller, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -318,6 +326,7 @@ namespace notesplace.Controllers
             return View(published);
         }
 
+        // unpublish the notes
         public ActionResult unpublish(int? noteid, string remarks, string dashboard)
         {
             var getnote = context.notedetails.Where(x => x.id == noteid).FirstOrDefault();
@@ -337,6 +346,7 @@ namespace notesplace.Controllers
             return RedirectToAction("publishednotes", "notes");
         }
 
+        // all the downloaded notes
         public ActionResult downloadednotes(int? i, string search, string byseller, string bybuyer, string bynote, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -471,6 +481,7 @@ namespace notesplace.Controllers
             return View(downloaded);
         }
 
+        //all the rejected notes
         public ActionResult rejectednotes(int? i, string search, string byseller, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -595,6 +606,7 @@ namespace notesplace.Controllers
             return View(rejected);
         }
 
+        //approve the note
         public ActionResult approved(int? noteid)
         {
             var getnote = context.notedetails.Where(x => x.id == (int)noteid).FirstOrDefault();
@@ -608,6 +620,7 @@ namespace notesplace.Controllers
             return RedirectToAction("rejectednotes", "notes");
         }
 
+        //download the note
         public ActionResult download(int noteid)
         {
             var getnote = context.notedetails.Where(x => x.id == noteid).FirstOrDefault();

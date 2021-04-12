@@ -11,6 +11,8 @@ namespace notesplace.Controllers
 
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: Home
+
+        //Home controller for member
         public ActionResult Home()
         {
             if (User.Identity.IsAuthenticated)

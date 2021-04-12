@@ -12,6 +12,7 @@ namespace notesplace.Controllers
     [Authorize(Roles ="member")]
     public class mysoldnotesController : Controller
     {
+        //notes that are sold by member
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: mysoldnotes
         public ActionResult sold(string search, int? i, string sortBy)

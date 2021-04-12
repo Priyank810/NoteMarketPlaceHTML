@@ -20,10 +20,9 @@ namespace notesplace.Controllers
         {
             var buyer = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
             var note = context.notedetails.Where(x => x.id == noteid).FirstOrDefault();
-            var checkrecord = context.download.Where(x => x.noteid == noteid && x.buyerid == buyer.id && x.sellerid == note.userid).FirstOrDefault();
+            var checkrecord = context.download.Where(x => x.noteid == noteid && x.buyerid == buyer.id && x.sellerid == note.userid).FirstOrDefault(); 
             if (buyer.id == note.userid)
             {
-
                 var getnote = context.notedetails.Where(x => x.id == noteid).FirstOrDefault();
                 string filePaths = Server.MapPath("~/Members/Attachments/" + getnote.userid.ToString() + "/" + getnote.id.ToString() + "/");
                 List<string> files = new List<string>();

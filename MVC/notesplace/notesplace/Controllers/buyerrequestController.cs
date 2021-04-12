@@ -108,6 +108,8 @@ namespace notesplace.Controllers
                 notedownload.downloadedate = DateTime.Now;
 
                 context.SaveChanges();
+
+                //when seller allows download sending mail to buyer that he/she can download
                 sendMail(buyeremail, buyername, sellername);
             }
             return RedirectToAction("buyer","buyerrequest");

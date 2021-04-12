@@ -79,6 +79,7 @@ namespace notesplace.Controllers
             return View(countrylist);
         }
 
+        //edinting country details
         public ActionResult editcountry(int? countryid)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -138,6 +139,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //deactivating and reactivating country
         public ActionResult deactivatecountry(int? countryid)
         {
 
@@ -216,6 +218,8 @@ namespace notesplace.Controllers
 
             return View(categorylist);
         }
+
+        //edit category
         public ActionResult editcategory(int? categoryid)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -268,6 +272,8 @@ namespace notesplace.Controllers
             }
             return View();
         }
+
+        //activating and deactivating category
         public ActionResult deactivatecategory(int? categoryid)
         {
 
@@ -344,6 +350,8 @@ namespace notesplace.Controllers
 
             return View(typelist);
         }
+
+        //editing type
         public ActionResult edittype(int? typeid)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -396,6 +404,8 @@ namespace notesplace.Controllers
             }
             return View();
         }
+
+        //activating and deactivating type
         public ActionResult deactivatetype(int? typeid)
         {
             var gettype = context.notetype.Where(x => x.id == typeid).FirstOrDefault();
@@ -491,6 +501,8 @@ namespace notesplace.Controllers
 
             return View(adminlist);
         }
+
+        //editing administrator details
         public ActionResult editadministrator(int adminid)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -555,6 +567,8 @@ namespace notesplace.Controllers
             }
             return View();
         }
+
+        //activating and deactivating administrator
         public ActionResult deactivatetadministrator(int adminid)
         {
             var gettype = context.users.Where(x => x.id == adminid).FirstOrDefault();

@@ -15,6 +15,8 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: admin
+
+        //admin dashboard
         public ActionResult dashboard(int? i, string search, string bymonth, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -159,6 +161,7 @@ namespace notesplace.Controllers
             return View(admindashboard);
         }
 
+        //For updating profile 
         public ActionResult updateprofile()
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -258,6 +261,7 @@ namespace notesplace.Controllers
             return View();
         }
 
+        //deleteing comments pf notes 
         public ActionResult deletecomment(int? commentid, int? nid)
         {
             var getcomment = context.reviews.Where(x => x.id == commentid).FirstOrDefault();

@@ -16,6 +16,8 @@ namespace notesplace.Controllers
     public class myrejectednotesController : Controller
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
+
+        // notes of member that are rejected by admin 
         // GET: myrejectednotes
         public ActionResult myrejectednotes(int? i, string search, string sortBy)
         {

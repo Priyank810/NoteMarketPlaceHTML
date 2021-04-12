@@ -13,7 +13,8 @@ namespace notesplace.Controllers
     public class ContactController : Controller
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
-
+        
+        //Contact US
         [HttpGet]
         public ActionResult contactus()
         {

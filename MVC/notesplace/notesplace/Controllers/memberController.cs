@@ -13,6 +13,8 @@ namespace notesplace.Controllers
     public class memberController : Controller
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
+
+        //all member list
         // GET: member
         public ActionResult member(int? i, string search, string sortBy)
         {
@@ -147,6 +149,7 @@ namespace notesplace.Controllers
             return View(members);
         }
 
+        //Particular member details
         public ActionResult memberdetails(int? i, int userid, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
@@ -262,6 +265,7 @@ namespace notesplace.Controllers
             return View(memberdetail);
         }
 
+        //activating and deactivating members
         public ActionResult deactivate(int userid)
         {
             var getuser = context.users.Where(x => x.id == userid).FirstOrDefault();

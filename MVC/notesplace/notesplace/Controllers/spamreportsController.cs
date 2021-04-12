@@ -14,6 +14,7 @@ namespace notesplace.Controllers
     {
         notesmarketplaceEntities context = new notesmarketplaceEntities();
         // GET: spamreports
+        //all the spam reports of notes
         public ActionResult spamreports(int? i, string search, string sortBy)
         {
             var getcurrentuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
