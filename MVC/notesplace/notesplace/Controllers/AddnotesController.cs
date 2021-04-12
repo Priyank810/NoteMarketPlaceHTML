@@ -81,7 +81,24 @@ namespace notesplace.Controllers
             ViewBag.notetype = typelistlist();
             ViewBag.country = countrylist();
 
-            if(ModelState.IsValid)
+            if (note.ispaid == 1)
+            {
+                if (note.previewfile == null)
+                {
+                    ModelState.AddModelError("previewfile", "PLEASE ADD PREVIEW FILE");
+                    return View();
+                }
+            }
+            if (note.displaypicture != null)
+            {
+                var ext = Path.GetExtension(note.displaypicture.FileName).ToLower();
+                if (ext != ".jpg" || ext != ".jpeg" || ext != ".png")
+                {
+                    ModelState.AddModelError("imgfile", "Pleade add display picture with proper extension");
+                    return View();
+                }
+            }
+            if (ModelState.IsValid)
             {
 
                 string status = "draft";

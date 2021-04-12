@@ -68,7 +68,7 @@
                 <div class="col-md-6 form-group">
 
                     <label class="form-label re">Upload Notes</label>
-                    <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes" multiple accept="application/pdf">
+                    <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes" multiple accept="application/pdf" required>
                     @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
 
                 </div>

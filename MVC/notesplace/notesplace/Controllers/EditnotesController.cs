@@ -84,6 +84,24 @@ namespace notesplace.Controllers
             var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
             var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
             ViewBag.image = userprofilestatus.profilepicture;
+            
+            if (book.ispaid == 1)
+            {
+                if (book.previewfile == null)
+                {
+                    ModelState.AddModelError("previewfile", "Please add preview file");
+                    return View();
+                }
+            }
+            if (book.displaypicture != null)
+            {
+                var ext = Path.GetExtension(book.displaypicture.FileName).ToLower();
+                if (ext != ".jpg" || ext != ".jpeg" || ext != ".png")
+                {
+                    ModelState.AddModelError("imgfile", "Pleade add display picture with proper extension");
+                    return View();
+                }
+            }
 
             if (ModelState.IsValid)
                 {
