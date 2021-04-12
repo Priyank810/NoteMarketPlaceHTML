@@ -45,7 +45,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                     <ul class="navbar-nav" id="myDiv">
                         <li class="nav-item">
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "search" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("search","searchnotes")">Search Notes</a>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "search" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("search", "searchnotes")">Search Notes</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -59,11 +59,11 @@
                         }
 
                         <li class="nav-item">
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "faq" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("faq","faq")">FAQ</a>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "faq" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("faq", "faq")">FAQ</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "contactus" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("contactus","contact")">Contact Us</a>
+                            <a class="@(ViewContext.RouteData.Values["Action"].ToString() == "contactus" ? "activelink nav-items nav-link" : "nav-items nav-link")" href="@Url.Action("contactus", "contact")">Contact Us</a>
                         </li>
 
                         @if (User.Identity.IsAuthenticated)
@@ -122,25 +122,25 @@
     <div class="footer-border"></div>
     <div class="container">
         <div class="row footer-padding">
-
+            @{ var link = context.systemconfig.FirstOrDefault(); }
             <div class="social-icons-alignment">
 
                 <span>
                     <ul class="social-list">
                         <li>
-                            <a href="#">
+                            <a href="@link.facebookurl">
                                 <i class="fa fa-facebook"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a href="#">
+                            <a href="@link.twitterurl">
                                 <i class="fa fa-twitter"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a href="#">
+                            <a href="@link.linedinurl">
                                 <i class="fa fa-linkedin"></i>
                             </a>
                         </li>

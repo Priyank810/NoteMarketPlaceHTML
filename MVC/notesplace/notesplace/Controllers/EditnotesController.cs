@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using notesplace.Models;
 using System.IO;
+using System.Net.Mail;
 
 namespace notesplace.Controllers
 {
+    [Authorize]
     public class EditnotesController : Controller
     {
         // GET: Editnotes
@@ -238,6 +240,10 @@ namespace notesplace.Controllers
 
                     }
                     context.SaveChanges();
+                    if (save == null)
+                    {
+                        sendMail(getuser.firstname + " " + getuser.lastname, book.title);
+                    }
                     return RedirectToAction("dashboard", "dashboard");
                 }
                 return View();
@@ -258,6 +264,41 @@ namespace notesplace.Controllers
         {
             var countries = new SelectList(context.country.Where(x => x.isActive == true), "id", "countryname");
             return countries;
+        }
+
+
+        [NonAction]
+        public void sendMail(string sellername, string notetitle)
+        {
+            var sender = context.systemconfig.FirstOrDefault();
+            var senderemail = sender.supportemail;
+            var senderpassword = sender.password;
+            var receiver = sender.otheremail;
+
+            var fromEmail = new MailAddress(senderemail, "Note sent for review");
+            var toEmail = new MailAddress(receiver);
+            var fromEmailPassword = senderpassword;
+            string subject = sellername + " sent his note for review";
+
+            string body = "Hello, Admins" + "<br/><br/>" + "We wnat to inform you that," + sellername + " sent his note" + notetitle + " for review" + " Please look at the notes and take required actions." + "<br/><br/>" + "Regards, <br/>" + "Notes Marketplace";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+            smtp.Send(message);
         }
     }
 }

@@ -22,7 +22,8 @@ namespace notesplace.Controllers
         [HttpGet]
         public ActionResult dashboard(string search1, string search2, int? i, string sortBy, int? j, string sortBy2)
         {
-
+            ViewBag.search1 = search1;
+            ViewBag.search2 = search2;
             var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
             var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
 
@@ -32,7 +33,8 @@ namespace notesplace.Controllers
                 ViewBag.SortByDate = string.IsNullOrEmpty(sortBy) ? "Added Date" : "";
                 ViewBag.SortByTitle = sortBy == "Title" ? "title desc" : "Title";
                 ViewBag.SortByCategory = sortBy == "Category" ? "category desc" : "Category";
-
+                ViewBag.search1 = search1;
+                ViewBag.search2 = search2;
 
                 dynamic dashboard = new dashboard();
 

@@ -153,7 +153,7 @@ namespace notesplace.Controllers
                         //If user is memeber then redirect to member dashboard else redirect to admin dashboard 
                         if (user.roleid == 3)
                         {
-                            return RedirectToAction("dashboard", "dashboard");
+                            return RedirectToAction("search", "searchnotes");
                         }
 
                         else

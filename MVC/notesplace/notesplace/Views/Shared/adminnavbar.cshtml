@@ -58,7 +58,7 @@
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <button class="nav-items1 nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="@((ViewContext.RouteData.Values["Action"].ToString() == "notesunderreview" || ViewContext.RouteData.Values["Action"].ToString() == "publishednotes" || ViewContext.RouteData.Values["Action"].ToString() =="downloadednotes" || ViewContext.RouteData.Values["Action"].ToString() == "rejectednotes") ? "activelink nav-items1 nav-link" : "nav-items1 nav-link")" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Notes
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
