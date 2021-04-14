@@ -99,7 +99,7 @@ namespace notesplace.Controllers
                                     select new ratings
                                     {
                                         ratingid = review.id,
-                                        name = uname.firstname+" "+uname.lastname,
+                                        name = context.users.Where(x=>x.id == review.buyerid).FirstOrDefault().firstname+" "+ context.users.Where(x => x.id == review.buyerid).FirstOrDefault().lastname,
                                         profile = user.profilepicture,
                                         star = review.ratingstar*20,
                                         comments = review.comments,

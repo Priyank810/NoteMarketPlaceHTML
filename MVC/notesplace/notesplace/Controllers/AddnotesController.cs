@@ -81,23 +81,6 @@ namespace notesplace.Controllers
             ViewBag.notetype = typelistlist();
             ViewBag.country = countrylist();
 
-            if (note.ispaid == 1)
-            {
-                if (note.previewfile == null)
-                {
-                    ModelState.AddModelError("previewfile", "PLEASE ADD PREVIEW FILE");
-                    return View();
-                }
-            }
-            if (note.displaypicture != null)
-            {
-                var ext = Path.GetExtension(note.displaypicture.FileName).ToLower();
-                if (ext != ".jpg" || ext != ".jpeg" || ext != ".png")
-                {
-                    ModelState.AddModelError("imgfile", "Pleade add display picture with proper extension");
-                    return View();
-                }
-            }
             if (ModelState.IsValid)
             {
 
@@ -163,7 +146,8 @@ namespace notesplace.Controllers
 
                 context.notedetails.Add(newnote);
                 context.SaveChanges();
-
+                var currentnote = context.notedetails.OrderByDescending(x => x.id).FirstOrDefault();
+                var currentnoteid = currentnote.id;
 
                 //************************************************
                 string dppath = null;
@@ -172,7 +156,7 @@ namespace notesplace.Controllers
                 string attachmentfilename = null;
                 string extension = null;
                 
-                string folderpath = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + newnote.id.ToString() + "/");
+                string folderpath = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + (currentnoteid).ToString() + "/");
                 if (!Directory.Exists(folderpath))
                 {
                     Directory.CreateDirectory(folderpath);
@@ -183,10 +167,10 @@ namespace notesplace.Controllers
                     extension = Path.GetExtension(note.displaypicture.FileName).ToLower();
                     if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
                     {
-                        string path = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + newnote.id.ToString() + "/");
+                        string path = Server.MapPath("~/Members/" + newnote.userid.ToString() + "/" + (currentnoteid).ToString() + "/");
                         string fileName = "DP_" + now.ToString().Replace(':', '-') + extension;
                         string fullpath = Path.Combine(path + fileName);
-                        dppath = "~/Members/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString() + "/" + fileName;
+                        dppath = "~/Members/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString() + "/" + fileName;
                         note.displaypicture.SaveAs(fullpath);
                     }
                     else
@@ -201,10 +185,10 @@ namespace notesplace.Controllers
                     extension = Path.GetExtension(note.previewfile.FileName).ToLower();
                     if (extension == ".pdf" || extension == ".docx" || extension == ".doc")
                     {
-                        string path = Server.MapPath("~/Members/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString());
+                        string path = Server.MapPath("~/Members/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString());
                         string fileName = "Preview_" + now.ToString().Replace(':', '-') + extension;
                         string fullpath = Path.Combine(path, fileName);
-                        previewfilepath = "~/Members/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString() + "/" + fileName;
+                        previewfilepath = "~/Members/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString() + "/" + fileName;
                         note.previewfile.SaveAs(fullpath);
                     }
                     else
@@ -214,7 +198,7 @@ namespace notesplace.Controllers
                     }
                 }
 
-                string attachmentfolderpath = Server.MapPath("~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString());
+                string attachmentfolderpath = Server.MapPath("~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString());
                 if (!Directory.Exists(attachmentfolderpath))
                 {
                     Directory.CreateDirectory(attachmentfolderpath);
@@ -227,10 +211,10 @@ namespace notesplace.Controllers
                         extension = Path.GetExtension(pdff.FileName).ToLower();
                         if (extension == ".pdf" || extension == ".docx" || extension == ".doc")
                         {
-                            string path = Server.MapPath("~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString());
+                            string path = Server.MapPath("~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString());
                             string fileName = counter.ToString() + "Attachment" + newnote.id.ToString() + "_" + now.ToString().Replace(':', '-') + extension;
                             string fullpath = Path.Combine(path, fileName);
-                            pdffilepath = "~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (newnote.id).ToString() + "/";
+                            pdffilepath = "~/Members/Attachments/" + (newnote.userid).ToString() + "/" + (currentnoteid).ToString() + "/";
                             attachmentfilename += fileName + ";";
                             pdff.SaveAs(fullpath);
                             counter++;
@@ -249,14 +233,21 @@ namespace notesplace.Controllers
                 }
                 //************************************************
 
-                var updatenoterecor = context.notedetails.Where(x => x.id == newnote.id).FirstOrDefault();
-                updatenoterecor.displaypicture = dppath;
-                updatenoterecor.notepreviewfile = previewfilepath;
+                //var updatenoterecord = context.notedetails.Where(x => x.id == newnote.id).FirstOrDefault();
+                //updatenoterecor.displaypicture = dppath;
+                //updatenoterecor.notepreviewfile = previewfilepath;
+                currentnote.displaypicture = dppath;
+                currentnote.notepreviewfile = previewfilepath;
+                //context.SaveChanges();
+
+
                 context.SaveChanges();
 
+                //var getnote = context.notedetails.OrderByDescending(x=>x.createddate).FirstOrDefault();
+                
                 noteattachment notefile = new noteattachment()
                 {
-                    noteid = newnote.id,
+                    noteid = currentnoteid,
                     filename = attachmentfilename,
                     filepath = pdffilepath,
                     createdby = userid.id,

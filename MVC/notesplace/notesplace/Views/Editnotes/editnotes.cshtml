@@ -61,8 +61,8 @@
 
                 <div class="col-md-6 form-group">
 
-                    <label class="form-label">Display Picture</label>
-                    <input type="file" class="form-control form-box-user upload-back-img" id="imgfile" name="displaypicture">
+                    <label class="form-label">Display Picture(only jpeg,jpg,img,png allowed)</label>
+                    <input type="file" class="form-control form-box-user upload-back-img" id="imgfile" name="displaypicture" onchange="return fileValidation()">
                     @Html.ValidationMessageFor(model => model.displaypicture, "", new { @class = "text-danger" })
 
                 </div>
@@ -70,7 +70,7 @@
 
                 <div class="col-md-6 form-group">
 
-                    <label class="form-label re">Upload Notes</label>
+                    <label class="form-label">Upload Notes(only pdf allowed)</label>
                     <input type="file" class="form-control form-box-user upload-back-img" id="pdffile" name="notes"  multiple accept="application/pdf">
                     @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
 
@@ -228,7 +228,7 @@
                         <label class="form-label re">Sell for</label><br>
                         <div class="form-check form-check-inline">
 
-                            @Html.RadioButtonFor(model => model.ispaid, 0, new { @class = "form-check-input st", @name = "optradio", @onclick = "hide()" })
+                            @Html.RadioButtonFor(model => model.ispaid, 0, new { @class = "form-check-input st", @name = "optradio", @onclick = "hide()",@id="free" })
                             <label class="form-check-label">
                                 Free
                             </label>
@@ -236,7 +236,7 @@
                         <div class="form-check-inline">
 
 
-                            @Html.RadioButtonFor(model => model.ispaid, 1, new { @class = "form-check-input st", @name = "optradio", @onclick = "show()" })
+                            @Html.RadioButtonFor(model => model.ispaid, 1, new { @class = "form-check-input st", @name = "optradio", @onclick = "show()",@id = "paid" })
                             <label class="form-check-label">
                                 Paid
                             </label>
@@ -255,7 +255,7 @@
                 <div class="col-md-6 form-group">
 
 
-                    <label class="form-label">Note Preview</label>
+                    <label class="form-label">Note Preview(only pdf allowed)</label>
                     <input type="file" class="form-control form-box-addnotes upload-back-img" id="pfile" name="previewfile" accept="application/pdf">
                     @Html.ValidationMessageFor(model => model.previewfile, "", new { @class = "text-danger" })
 
@@ -289,5 +289,30 @@
     function show() {
         document.getElementById('sp').style.display = 'block';
     }
+    function fileValidation() {
+        var fileInput =
+            document.getElementById('imgfile');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type
+        var allowedExtensions =
+            /(\.img|\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    document.getElementById("paid").addEventListener('change', function () {
+        document.getElementById("pfile").required = this.checked;
+    })
+    document.getElementById("free").addEventListener('change', function () {
+        document.getElementById("pfile").required = !this.checked;
+    })
 </script>
 

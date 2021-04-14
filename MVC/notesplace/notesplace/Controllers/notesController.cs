@@ -63,38 +63,21 @@ namespace notesplace.Controllers
                          addeddate = (DateTime)book.createddate
                      });
 
-            var onlysearch = n;
-            int flag_search = 0, flag_dropdown = 0;
             if (!string.IsNullOrEmpty(search))
             {
-                flag_search = 1;
-                onlysearch = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
+                n = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
             }
 
 
             if (!string.IsNullOrEmpty(byseller))
             {
-                flag_dropdown = 1;
                 n = n.Where(x => x.sellername.ToLower() == byseller.ToLower());
-                if (flag_search == 1)
-                {
-                    n = onlysearch.Union(n);
-                }
             }
 
             notesunderreview notesunderreview = new notesunderreview();
 
             var temp = n;
 
-            if (flag_search == 0 && flag_dropdown == 0)
-            {
-                temp = n;
-            }
-
-            else if (flag_search == 1 && flag_dropdown == 0)
-            {
-                temp = onlysearch;
-            }
 
             switch (sortBy)
             {
@@ -229,38 +212,21 @@ namespace notesplace.Controllers
                          downloads = context.download.Where(x => x.isdownloaded == true && x.noteid == book.id).Count()
                      });
 
-            var onlysearch = n;
-            int flag_search = 0, flag_dropdown = 0;
             if (!string.IsNullOrEmpty(search))
             {
-                flag_search = 1;
-                onlysearch = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
+                n = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
             }
 
 
             if (!string.IsNullOrEmpty(byseller))
             {
-                flag_dropdown = 1;
                 n = n.Where(x => x.sellername.ToLower() == byseller.ToLower());
-                if (flag_search == 1)
-                {
-                    n = onlysearch.Union(n);
-                }
             }
 
             published published = new published();
 
             var temp = n;
 
-            if (flag_search == 0 && flag_dropdown == 0)
-            {
-                temp = n;
-            }
-
-            else if (flag_search == 1 && flag_dropdown == 0)
-            {
-                temp = onlysearch;
-            }
             switch (sortBy)
             {
                 case "PUBLISHED DATE":
@@ -392,38 +358,30 @@ namespace notesplace.Controllers
                          downloadeddatetime = (DateTime)book.approveddate,
                      });
 
-            var onlysearch = n;
-            int flag_search = 0, flag_dropdown = 0;
             if (!string.IsNullOrEmpty(search))
             {
-                flag_search = 1;
-                onlysearch = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search) || x.buyername.Contains(search));
+                //flag_search = 1;
+                n = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search) || x.buyername.Contains(search));
             }
-
-
-            if (!string.IsNullOrEmpty(byseller) || !string.IsNullOrEmpty(bybuyer) || !string.IsNullOrEmpty(bynote))
+            if (!string.IsNullOrEmpty(byseller))
             {
-                flag_dropdown = 1;
-                n = n.Where(x => x.sellername.ToLower() == byseller.ToLower() || x.buyername.ToLower() == bybuyer.ToLower() || x.notetitle.ToLower() == bynote.ToLower());
-                if (flag_search == 1)
-                {
-                    n = onlysearch.Union(n);
-                }
+                //flag_search = 1;
+                n = n.Where(x => x.sellername.ToLower() == byseller.ToLower());
+            }
+            if (!string.IsNullOrEmpty(bynote))
+            {
+                //flag_search = 1;
+                n = n.Where(x => x.notetitle.ToLower() == bynote.ToLower());
+            }
+            if (!string.IsNullOrEmpty(bybuyer))
+            {
+                //flag_search = 1;
+                n = n.Where(x => x.buyername.ToLower() == bybuyer.ToLower());
             }
 
             downloaded downloaded = new downloaded();
 
             var temp = n;
-
-            if (flag_search == 0 && flag_dropdown == 0)
-            {
-                temp = n;
-            }
-
-            else if (flag_search == 1 && flag_dropdown == 0)
-            {
-                temp = onlysearch;
-            }
 
             switch (sortBy)
             {
@@ -525,38 +483,21 @@ namespace notesplace.Controllers
                          remark = book.remarks
                      });
 
-            var onlysearch = n;
-            int flag_search = 0, flag_dropdown = 0;
             if (!string.IsNullOrEmpty(search))
             {
-                flag_search = 1;
-                onlysearch = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
+                n = n.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.sellername.Contains(search));
             }
 
 
             if (!string.IsNullOrEmpty(byseller))
             {
-                flag_dropdown = 1;
                 n = n.Where(x => x.sellername.ToLower() == byseller.ToLower());
-                if (flag_search == 1)
-                {
-                    n = onlysearch.Union(n);
-                }
             }
 
             rejected rejected = new rejected();
 
             var temp = n;
 
-            if (flag_search == 0 && flag_dropdown == 0)
-            {
-                temp = n;
-            }
-
-            else if (flag_search == 1 && flag_dropdown == 0)
-            {
-                temp = onlysearch;
-            }
 
             switch (sortBy)
             {

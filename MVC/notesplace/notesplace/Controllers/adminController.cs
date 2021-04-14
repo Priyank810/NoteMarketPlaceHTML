@@ -71,37 +71,19 @@ namespace notesplace.Controllers
 
 
             admindashboard.stats = stats;
-            var onlysearch = pn;
-            int flag_search = 0, flag_dropdown = 0;
             if (!string.IsNullOrEmpty(search))
             {
-                flag_search = 1;
-                onlysearch = pn.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.publisher.Contains(search) || search==null);
+                pn=pn.Where(x => x.notetitle.Contains(search) || x.category.Contains(search) || x.publisher.Contains(search));
             }
 
 
             if (!string.IsNullOrEmpty(bymonth))
             {
-                flag_dropdown = 1;
                 int bm = Convert.ToInt32(bymonth);
                 pn = pn.Where(x => x.publisheddate.Value.Month == bm);
-                if (flag_search == 1)
-                {
-                    pn = onlysearch.Union(pn);
-                }
-                admindashboard.publishednotes = pn.ToList().ToPagedList(i ?? 1, 5);
             }
 
             var temp = pn;
-            if (flag_search == 0 && flag_dropdown == 0)
-            {
-                temp = pn;
-            }
-
-            else if (flag_search == 1 && flag_dropdown == 0)
-            {
-                temp = onlysearch;
-            }
 
         
             switch (sortBy)

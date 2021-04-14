@@ -62,9 +62,9 @@
             {
                 <button class="btn download-btn" onclick="window.location.href = '@Url.Action("login", "account", new { noteid = Model.bb.noteid })'">Download/@Model.bb.sellprice</button>
             }
-            else if (Model.bb.sellprice == 0 && ViewBag.currentuser != Model.bb.userid)
+            else if (Model.bb.sellprice == 0 && ViewBag.currentuser != Model.bb.userid && ViewBag.isapproved != true)
             {
-                <button class="btn download-btn" onclick="window.location.href = '@Url.Action("share", "transaction", new { noteid = Model.bb.noteid })'">Free</button>
+                <button class="btn download-btn" onclick="if (confirm('Are you sure you want to downoad this free note?')) window.location.href = '@Url.Action("share", "transaction", new { noteid = Model.bb.noteid })'">Free</button>
             }
             else if (User.Identity.IsAuthenticated && ViewBag.currentuser == Model.bb.userid)
             {

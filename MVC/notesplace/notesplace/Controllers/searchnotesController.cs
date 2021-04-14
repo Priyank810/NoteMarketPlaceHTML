@@ -46,10 +46,7 @@ namespace notesplace.Controllers
             ViewBag.university = universitylist();
             ViewBag.course = courselist();
             ViewBag.rating = ratinglist();
-            ViewBag.defaultnoteimage = context.systemconfig.FirstOrDefault().defaultnotepicture;
 
-
-            dynamic snotes = new ss();
 
             var sn = (from book in context.notedetails
                       join country in context.country
@@ -60,142 +57,63 @@ namespace notesplace.Controllers
                       on book.typeid equals type.id
                       join status in context.statustype
                       on book.statusid equals status.id
-                      join r in context.reviews
-                      on book.id equals r.noteid into rr
-                      from r in rr.DefaultIfEmpty()
                      
                       
                       where book.isActive == true && status.status == "published"
-                      group new { book,r,category,type,country} by new {book.id} into fn
 
 
                       select new searchnotes
                       {
-                          noteid = fn.FirstOrDefault().book.id,
-                          date = fn.FirstOrDefault().book.createddate,
-                          title = fn.FirstOrDefault().book.title,
-                          university = fn.FirstOrDefault().book.universityname,
-                          numberofpages = fn.FirstOrDefault().book.numberofpages,
-                          country = fn.FirstOrDefault().country.countryname,
-                          displaypicture = fn.FirstOrDefault().book.displaypicture,
-                          categoryname = fn.FirstOrDefault().category.categoryname,
-                          typename = fn.FirstOrDefault().type.typename,
-                          coursename = fn.FirstOrDefault().book.coursename,
-                          avgeragerating = fn.Average(m=>m.r.ratingstar),
-                          totalrating = fn.Count(),
-                          totalspam = fn.FirstOrDefault().book.totalspam
+                          noteid = book.id,
+                          date = book.createddate,
+                          title = book.title,
+                          university = book.universityname,
+                          numberofpages = book.numberofpages,
+                          country = country.countryname,
+                          displaypicture = book.displaypicture,
+                          categoryname = category.categoryname,
+                          typename = type.typename,
+                          coursename = book.coursename,
+                          avgeragerating = context.reviews.Where(x=>x.noteid == book.id).Average(m=>m.ratingstar),
+                          totalrating = context.reviews.Where(x => x.noteid == book.id).Count(),
+                          totalspam = book.totalspam
                       });
 
-            
-            var onlysearch = sn;
-            int s = 0;
-            int d = 0;
-
-            if (searchbook != null && searchbook !="")
+            if (!string.IsNullOrEmpty(searchbook))
             {
-                s = 1;
-                onlysearch = sn.Where(x => x.title.Contains(searchbook) || searchbook==null);
+                sn = sn.Where(x => x.title.Contains(searchbook) || x.categoryname.Contains(searchbook) || x.country.Contains(searchbook) || x.typename.Contains(searchbook)||x.coursename.Contains(searchbook)||x.university.Contains(searchbook));
             }
-            
-            if (bycategory != null || bycountry != null || bycourse!=null || bytype!=null || byuniversity!=null || byrating!=null)
+            if(!string.IsNullOrEmpty(bycategory))
             {
-                
-                bool a = false;
-            
-                string catn = null;
-                if (bycategory != null)
-                {
-                    if (bycategory != "")
-                    {
-                        var cat = context.category.Where(x => x.id.ToString() == (bycategory)).FirstOrDefault();
-                        catn = cat.categoryname;
-                        a = true;
-                    }
-                }
-                string coun = null;
-                if (bycountry != null)
-                {
-                    if (bycountry != "")
-                    {
-                        var cat = context.country.Where(x => x.id.ToString() == (bycountry)).FirstOrDefault();
-                        coun = cat.countryname;
-                        a = true;
-                    }
-                }
-                string typn = null;
-                if (bytype != null)
-                {
-                    if (bytype != "")
-                    {
-                        var cat = context.notetype.Where(x => x.id.ToString() == (bytype)).FirstOrDefault();
-                        typn = cat.typename;
-                        a = true;
-                    }
-                }
-                string courn = null;
-                if (bycourse != null)
-                {
-                    if (bycourse != "")
-                    {
-                        courn = bycourse;
-                        a = true;
-                    }
-                }
-                string unin = null;
-                if (byuniversity != null)
-                {
-                    if (byuniversity != "")
-                    {
-                        unin = byuniversity;
-                        a = true;
-                    }
-                }
-
-                int getrating = 0;
-                if(!string.IsNullOrEmpty(byrating))
-                {
-                    getrating = Convert.ToInt32(byrating);
-                    a = true;
-                }
-                
-                if (a == true)
-                {
-                    d = 1;
-                    if (!String.IsNullOrEmpty(searchbook))
-                    {
-                        if (getrating != 0)
-                        {
-                            sn = sn.Where(x => x.categoryname == catn || x.country == coun || x.typename == typn || x.university == unin || x.coursename == courn || x.avgeragerating >= getrating);
-                        }
-                        else
-                        {
-                            sn = sn.Where(x => x.categoryname == catn || x.country == coun || x.typename == typn || x.university == unin || x.coursename == courn);
-                        }
-                        sn = onlysearch.Union(sn);
-                    }
-                    else
-                    {
-                        if (getrating != 0)
-                        {
-                            sn = sn.Where(x => x.categoryname.ToLower() == catn.ToLower() || x.country.ToLower() == coun.ToLower() || x.typename.ToLower() == typn.ToLower() || x.university.ToLower() == unin.ToLower() || x.coursename.ToLower() == courn.ToLower() || x.avgeragerating >= getrating);
-                        }
-                        else
-                        {
-                            sn = sn.Where(x => x.categoryname.ToLower() == catn.ToLower() || x.country.ToLower() == coun.ToLower() || x.typename.ToLower() == typn.ToLower() || x.university.ToLower() == unin.ToLower() || x.coursename.ToLower() == courn.ToLower());
-                        }
-                    }
-                } 
+                sn = sn.Where(x => x.categoryname == bycategory);
+            }
+            if (!string.IsNullOrEmpty(bycountry))
+            {
+                sn = sn.Where(x => x.country == bycountry);
+            }
+            if (!string.IsNullOrEmpty(bytype))
+            {
+                sn = sn.Where(x => x.typename == bytype);
+            }
+            if (!string.IsNullOrEmpty(bycourse))
+            {
+                sn = sn.Where(x => x.coursename == bycourse);
+            }
+            if (!string.IsNullOrEmpty(byuniversity))
+            {
+                sn = sn.Where(x => x.university == byuniversity);
+            }
+            if (!string.IsNullOrEmpty(byrating))
+            {
+                var getrating = Convert.ToInt32(byrating);
+                sn = sn.Where(x => x.avgeragerating >= getrating);
             }
 
-            
-            if(s==1 && d==0)
-            {
-                ViewBag.count = onlysearch.Count();
-                snotes.ssn = onlysearch.OrderByDescending(x => x.date).ToList().ToPagedList(i ?? 1, 9);
-                return View(snotes);
-            }
+
+            dynamic snotes = new ss();
             ViewBag.count = sn.Count();
             snotes.ssn = sn.OrderByDescending(x=>x.date).ToList().ToPagedList(i ?? 1, 9);
+            ViewBag.defaultnoteimage = context.systemconfig.FirstOrDefault().defaultnotepicture;
             return View(snotes);
         }
 
@@ -204,17 +122,17 @@ namespace notesplace.Controllers
 
         public SelectList categorylist()
         {
-            var category = new SelectList(context.category.Where(x => x.isActive == true), "id", "categoryname");
+            var category = new SelectList(context.category.Where(x => x.isActive == true), "categoryname", "categoryname");
             return category;
         }
         public SelectList typelistlist()
         {
-            var types = new SelectList(context.notetype.Where(x => x.isActive == true), "id", "typename");
+            var types = new SelectList(context.notetype.Where(x => x.isActive == true), "typename", "typename");
             return types;
         }
         public SelectList countrylist()
         {
-            var countries = new SelectList(context.country.Where(x => x.isActive == true), "id", "countryname");
+            var countries = new SelectList(context.country.Where(x => x.isActive == true), "countryname", "countryname");
             return countries;
         }
         public SelectList universitylist()

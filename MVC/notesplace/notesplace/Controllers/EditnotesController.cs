@@ -26,50 +26,50 @@ namespace notesplace.Controllers
             {
                 ViewBag.image = userprofilestatus.profilepicture;
                 editbooks ebook = new editbooks();
-            ViewBag.category = categorylist();
-            ViewBag.notetype = typelistlist();
-            ViewBag.country = countrylist();
+                ViewBag.category = categorylist();
+                ViewBag.notetype = typelistlist();
+                ViewBag.country = countrylist();
 
-            var ebooks = (from book in context.notedetails
-                         join category in context.category
-                         on book.categoryid equals category.id
-                         join type in context.notetype
-                         on book.typeid equals type.id
-                         join country in context.country
-                         on book.countryid equals country.id
-                         join status in context.statustype
-                         on book.statusid equals status.id
-                         join notesa in context.noteattachment
-                         on book.id equals notesa.noteid
+                var ebooks = (from book in context.notedetails
+                             join category in context.category
+                             on book.categoryid equals category.id
+                             join type in context.notetype
+                             on book.typeid equals type.id
+                             join country in context.country
+                             on book.countryid equals country.id
+                             join status in context.statustype
+                             on book.statusid equals status.id
+                             join notesa in context.noteattachment
+                             on book.id equals notesa.noteid
 
-                         where book.id == nid
+                             where book.id == nid
 
-                         select new editbooks
-                         {
-                             nid = nid,
-                             title = book.title,
-                             typeid = type.id,
-                             categoryid = category.id,
-                             description = book.description,
-                             sellprice = book.sellprice,
-                             institutename = book.universityname,
-                             countryid = country.id,
-                             coursename = book.coursename,
-                             coursecode = book.coursecode,
-                             professor = book.professor,
-                             isp=book.ispaid,
-                             numberofpages = book.numberofpages,
-                         }).ToList().FirstOrDefault();
-            if(ebooks.isp==true)
-            {
-                ebooks.ispaid = 1;
-            }
-            else
-            {
-                ebooks.ispaid = 0;
-            }
-            ebook = (editbooks)ebooks;
-            return View(ebook);
+                             select new editbooks
+                             {
+                                 nid = nid,
+                                 title = book.title,
+                                 typeid = type.id,
+                                 categoryid = category.id,
+                                 description = book.description,
+                                 sellprice = book.sellprice,
+                                 institutename = book.universityname,
+                                 countryid = country.id,
+                                 coursename = book.coursename,
+                                 coursecode = book.coursecode,
+                                 professor = book.professor,
+                                 isp=book.ispaid,
+                                 numberofpages = book.numberofpages,
+                             }).ToList().FirstOrDefault();
+                if(ebooks.isp==true)
+                {
+                    ebooks.ispaid = 1;
+                }
+                else
+                {
+                    ebooks.ispaid = 0;
+                }
+                ebook = (editbooks)ebooks;
+                return View(ebook);
             }
             return RedirectToAction("userprofile", "userprofile");
         }
@@ -79,33 +79,37 @@ namespace notesplace.Controllers
         [ValidateAntiForgeryToken]
 
         public ActionResult editnotes(editbooks book, string save)
-            {
-
+        {
             var getuser = context.users.Where(x => x.email == HttpContext.User.Identity.Name).FirstOrDefault();
             var userprofilestatus = context.userdetails.Where(x => x.usserid == getuser.id).FirstOrDefault();
             ViewBag.image = userprofilestatus.profilepicture;
+
+            ViewBag.category = categorylist();
+            ViewBag.notetype = typelistlist();
+            ViewBag.country = countrylist();
+
             
-            if (book.ispaid == 1)
-            {
-                if (book.previewfile == null)
-                {
-                    ModelState.AddModelError("previewfile", "Please add preview file");
-                    return View();
-                }
-            }
-            if (book.displaypicture != null)
-            {
-                var ext = Path.GetExtension(book.displaypicture.FileName).ToLower();
-                if (ext != ".jpg" || ext != ".jpeg" || ext != ".png")
-                {
-                    ModelState.AddModelError("imgfile", "Pleade add display picture with proper extension");
-                    return View();
-                }
-            }
 
             if (ModelState.IsValid)
+            {
+                if (book.ispaid == 1)
                 {
-                    string status = "draft";
+                    if (book.previewfile == null)
+                    {
+                        ModelState.AddModelError("previewfile", "Please add preview file");
+                        return View();
+                    }
+                }
+                if (book.displaypicture != null)
+                {
+                    var ext = Path.GetExtension(book.displaypicture.FileName).ToLower();
+                    if (ext != ".jpg" || ext != ".jpeg" || ext != ".png")
+                    {
+                        ModelState.AddModelError("imgfile", "Pleade add display picture with proper extension");
+                        return View();
+                    }
+                }
+                string status = "draft";
                     if (save == null)
                     {
                         status = "submittedforreview";

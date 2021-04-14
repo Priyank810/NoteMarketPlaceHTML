@@ -15,10 +15,9 @@ namespace notesplace.Models
         [Required]
         public string categoryid { get; set; }
 
-     
         public HttpPostedFileBase displaypicture { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Upload Notes is Required")]
         public HttpPostedFileBase[] notes { get; set; }
 
         [Required]

@@ -108,7 +108,7 @@
                             <td class="table-content"><a href="@Url.Action("memberdetails","member",new { userid = n.buyerid })"><i class="fa fa-eye"></i></a></td>
                             <td class="table-content">@n.sellername</td>
                             <td class="table-content"><a href="@Url.Action("memberdetails","member",new { userid = n.sellerid })"><i class="fa fa-eye"></i></a></td>
-                            @if (n.selltype == true)
+                            @if (n.price!=0)
                             {
                                 <td class="table-content">Paid</td>
                             }

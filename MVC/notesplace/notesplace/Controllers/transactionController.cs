@@ -76,7 +76,7 @@ namespace notesplace.Controllers
                 notedownload.title = note.title;
                 notedownload.category = category.categoryname;
                 notedownload.purchaseprice = (int)note.sellprice;
-                notedownload.purchaseprice = 100;
+                notedownload.purchaseprice = (int)note.sellprice;
                 notedownload.createddate = DateTime.Now;
                 notedownload.isActive = true;
 
